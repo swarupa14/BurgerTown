@@ -1,0 +1,335 @@
+
+body
+{
+  /* color: #ffd1bd; */
+  margin: 0;
+  position: relative;
+}
+/* NAVBAR */
+.headerdiv
+{
+  background-color: #323232;
+  height:130px;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  /* position: relative; */
+
+  font-family: 'Merriweather Sans', sans-serif;
+
+
+}
+.pc
+{
+  color: #ffd1bd;
+}
+@media (max-width:1000px) {
+  .pc
+  {
+    visibility: hidden;
+  }
+
+}
+@media (min-width:1000px) {
+  .phone
+  {
+    visibility: hidden;
+  }
+
+}
+.phone
+{
+  position: absolute;
+  right:50px;
+  bottom:10px;
+}
+.dropdown-item
+{
+  background-color: #323232;
+  color: black;
+
+}
+.headerdiv a{
+    font-size: 125%;
+      display: inline-block;
+      padding : 1.5% 0;
+      text-decoration: none;
+      /* color: #ffd1bd; */
+      bottom:0;
+}
+
+ .home{
+  position: absolute;
+  right:670px;
+
+      color: #ffd1bd;
+}
+.offers{
+
+    color: #ffd1bd;
+  position: absolute;
+  right:590px;
+}
+.location{
+
+    color: #ffd1bd;
+  position: absolute;
+  right:480px;
+}
+.menu{
+
+    color: #ffd1bd;
+  position: absolute;
+  right: 400px;
+}
+.con{
+      color: #ffd1bd;
+  position: absolute;
+  right:270px;
+}
+.location:hover,.home:hover,.offers:hover,.menu:hover,.con:hover
+{
+  font-size: 156.25%;
+  color: #ffd1bd;
+  text-decoration: none;
+
+}
+.BT
+{
+
+  height:150px;
+  width: 150px;
+  border-radius: 100%;
+  position: absolute;
+  left:6.25rem;
+  top: 60px;
+}
+.fb
+{
+  height:30px;
+  width: 30px;
+  position: absolute;
+  right:200px;
+  bottom: 20px;
+}
+.tweet
+{
+  height:30px;
+  width: 30px;
+  position: absolute;
+  right:150px;
+  bottom: 20px;
+}
+.user
+{
+  height:30px;
+  width: 30px;
+  position: absolute;
+  right:100px;
+  bottom: 20px;
+}
+
+/* BODY OF HOme Page */
+.body-sec{
+  position:relative;
+  top:130px;
+}
+.container1
+{
+
+  position: relative;
+  height: 500px;
+  /* background-image: url("https://images3.alphacoders.com/922/922680.jpg"); */
+  background-image: url('food1.jpg');
+
+  background-attachment: fixed;
+ background-size: 120% 100%;
+
+
+
+}
+.container2
+{
+
+  position: relative;
+  height: 500px;
+
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgmN1l8p18cHk2VRitQQfh-pBmWh6V-2tR2BSzHHr9SBXDiuMp&usqp=CAU"); */
+  background-image: url('food2.jpg');
+
+  background-attachment: fixed;
+ background-size: 100% 100%;
+
+}
+.container3
+{
+
+  position: relative;
+  height: 500px;
+
+background-image: url('food3.jpg');
+  background-attachment: fixed;
+ background-size: 100% 100%;
+
+}
+.container5
+{
+
+  position: relative;
+  height: 500px;
+
+background-image: url('food4.jpg');
+  background-attachment: fixed;
+ background-size: 100% 100%;
+
+}
+.container4
+{
+
+  position: absolute;
+   top: 0;
+   /* height: 500px; */
+  width:100%;
+
+
+}
+.slogan
+{
+
+  position: relative;
+  top:12.5rem;
+  margin-left: 2.8rem;
+  line-height: 2rem;
+  color: white;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 270%;
+}
+.orderbtn
+{
+    font-family: 'Merriweather Sans', sans-serif;
+
+  margin: auto;
+  position: relative;
+  top: 230px;
+  left:18%;
+
+}
+
+/* MENU */
+
+.menu1                /*Section containing our menu */
+{
+
+  background-color: #1b262c;
+  color: #ffd1bd;
+  font-family: 'Merriweather Sans', sans-serif;
+    background-image: url("burger.jpg");
+  background-size: cover;
+
+}
+ .our-menu{  /* DIV CONTAINING OUR MENU */
+    padding:7% 16% 3%;
+    text-align: left;
+    font-size: 145%;
+
+}
+
+.menu2               /*Section containing pricings of menu */
+{
+  position: relative;
+  top:130px;
+  background-color: #1b262c;
+  color: #ffd1bd;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+.menu-section-header
+{
+    text-align: center;
+    padding:5% 16%;
+
+  font-size: 165%;
+  line-height: 3;
+}
+
+.h                     /*hr used under menu section header */
+{
+  border-style: dotted none none;
+  border-width: 5px;
+  border-color: #ffd1bd;
+  width: 10%;
+}
+div.Addons
+{
+  background-color: #1b262c;
+  text-align: center;
+  width: 30rem;
+  border: 1px solid;
+
+  padding-right: 3px;
+  text-align: center;
+}
+ul .Addons
+{
+  background-color: #1b262c;
+  text-align: center;
+  width: 30rem;
+  padding: 1% 5%;
+  width:90%;
+  /* border: 1px solid; */
+
+
+  text-align: center;
+
+}
+.badge.badge-primary
+{
+  line-height: 2;
+  background-color: #F5AA13;
+}
+.addoncard
+{
+  width:30rem;
+  padding:5% 30%;
+  /* border: 1px solid; */
+}
+.cardhr
+{
+  border-style: solid none none;
+  border-width: 2px;
+  border-color: #ffd1bd;
+  width: 30%;
+}
+.card-body
+{
+  background-color: #1b262c;
+
+}
+.card
+{
+  background-color: #1b262c;
+
+}
+.pricetags
+{
+  font-size: 150%;
+}
+.price-cards
+{
+  text-align: center;
+
+  color: #ffd1bd;
+  padding: 0 5% 5%;
+  font-family: 'Merriweather Sans', sans-serif;
+
+}
+
+
+/* OFFERS */
+.offers-section{
+  background-color: #1b262c;
+}
+.comingsoon-logo{
+  padding: 3% 20%;
+  height: 500px;
+  /* transform: rotateY(45deg); */
+}
