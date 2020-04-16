@@ -5,6 +5,11 @@ body
   margin: 0;
   position: relative;
 }
+section
+{
+    background-color: #1b262c;
+      font-family: 'Merriweather Sans', sans-serif;
+}
 /* NAVBAR */
 .headerdiv
 {
@@ -128,6 +133,36 @@ body
   right:100px;
   bottom: 20px;
 }
+/* Cart with number */
+.shoppingbag{
+  position: relative;
+  top:60px;
+  left:93%;
+
+  /* font-size: 2rem; */
+  color: grey;
+  cursor: pointer;
+}
+.shoppingbaglogo
+{
+  height:35px;
+  width: 35px;
+}
+.fa-comment {
+  position: absolute;
+  font-size: 2rem;
+  top: -7px;
+  color: red;
+  right: -7px;
+}
+.num {
+  position: absolute;
+  font-size: 1rem;
+  top: 0;
+  color: #fff;
+  right: 2px;
+}
+
 
 /* BODY OF HOme Page */
 .body-sec{
@@ -285,7 +320,9 @@ ul .Addons
 {
   line-height: 2;
   background-color: #F5AA13;
+
 }
+
 .addoncard
 {
   width:30rem;
@@ -312,6 +349,7 @@ ul .Addons
 .pricetags
 {
   font-size: 150%;
+  line-height: 2;
 }
 .price-cards
 {
@@ -322,8 +360,9 @@ ul .Addons
   font-family: 'Merriweather Sans', sans-serif;
 
 }
-
-
+.hide{
+  visibility: hidden;
+}
 /* OFFERS */
 .offers-section{
   background-color: #1b262c;
@@ -333,3 +372,116 @@ ul .Addons
   height: 500px;
   /* transform: rotateY(45deg); */
 }
+
+
+/* order page */
+
+
+#BurgerModal .modal-content,#FriesModal .modal-content
+{
+  background-color: black;
+
+}
+.modal-body .container
+{
+  text-align: center;
+  line-height: 2;
+}
+
+.modal-body .btn,.modal-body h5
+{
+  margin:3% 6% 3% 0;
+  text-align: center;
+}
+
+
+/* Intermediate page */
+.container.intermediatepage
+{
+  height:15rem;
+}
+
+.twobuttons,.Takeaway
+{
+
+  position:relative;
+  top: 8rem;
+  padding: 10%;
+  text-align: center;
+}
+.twobuttons .btn
+{
+  line-height: 2;
+  padding: 1% 5%;
+    background-color: #F5AA13;
+
+}
+
+
+
+/* Takeaway */
+.Takeaway-form,.Signup-form
+{
+  position: relative;
+  left:10%;
+  width: 75%;
+  border: 1px solid;
+  color: white;
+  border-radius: .75rem;
+  padding:  3%;
+  text-align: left;
+}
+.Takeaway h5
+{
+  text-align: center;
+  color: white;
+
+}
+.form-control
+{
+  margin: 1% 0 3%;
+}
+.Takeaway-form a,.SignIn a
+{
+  color: #F5AA13;
+}
+
+/* Signup Page */
+.SignIn
+{
+  border: .5px solid;
+  width:35%;
+  padding: 3%;
+  text-align: center;
+  margin: 2% auto;
+  background-color: #272727;
+
+}
+.Signup-form small{
+  padding: 3%;
+  color: #dbdbdb;
+}
+.Signup-form label,.Signup-form h6{
+  margin: 5%;
+
+}
+.Signup-form button
+{
+  margin: 0 45%;
+}
+
+
+/* Location */
+.location-card
+{
+  padding:  10%;
+}
+
+.location-card .price-cards{
+  margin: 3%;
+}
+
+
+
+
+/* TEST */
