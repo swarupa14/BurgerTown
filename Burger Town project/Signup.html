@@ -25,9 +25,9 @@
       <img class="BT" src="Logo.png" alt="Burger">
       <!-- above 100px -->
       <div class="pc">
-        <a class="home" href="Home.html">Home</a>
+        <a class="home" href="index.html">Home</a>
         <a class="offers" href="Offers.html">Offers</a>
-        <a class="location" href="Location.html">Location</a>
+        <a class="location" href="">Location</a>
         <a class="menu" href="Menu.html">Menu</a>
         <a class="con" href="">ContactUs</a>
         <a href="https://www.facebook.com/"><img class="fb" src="facebook.png" alt=""></a>
@@ -44,10 +44,10 @@
       <div class="phone">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            SEE MORE
+              <img class="menu-logo" src="menu.png" alt="">
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="Hme.html">Home</a>
+            <a class="dropdown-item" href="index.html">Home</a>
             <a class="dropdown-item" href="Offers.html">Offers</a>
             <a class="dropdown-item" href="#">LocationMenu</a>
             <a class="dropdown-item" href="Menu.html">Menu</a>
@@ -56,17 +56,16 @@
             <a class="dropdown-item" href="http://twitter.com/"><i class="fab fa-twitter"></i></a>
             <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i></a>
 
-          </a>
 
           </div>
         </div>
+        <a href="" class="shoppingbag">
+          <img class="shoppingbaglogo" src="bag.png" alt="">
+        <span class="fa fa-comment"></span>
+        <span class="num">0</span>
+      </a>
 
       </div>
-      <a href="" class="shoppingbag">
-        <img class="shoppingbaglogo" src="bag.png" alt="">
-      <span class="fa fa-comment"></span>
-      <span class="num">0</span>
-    </a>
 
 
     </div>
@@ -78,29 +77,60 @@
       </section>
 
       <section class="Takeaway">
-        <h5>Enter the following information to place an order</h5>s
-        <form class="Takeaway-form">
+        <h5>Create an account to get started</h5>
+        <form class="Signup-form">
       <div class="form-group">
 
-        <label for="exampleInputEmail1">Name</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        <div class="row">
+           <div class="col">
+               <input type="text" class="form-control" placeholder="First name*">
+           </div>
+           <div class="col">
+                 <input type="text" class="form-control" placeholder="Last name*">
+           </div>
+       </div>
+        <input type="text" class="form-control" placeholder="Email Adress*">
+        <input type="text" class="form-control" placeholder="Address*">
 
-      <label for="exampleInputEmail1">Phone Number</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <label for="exampleInputEmail1">Branch</label>
-      <select class="form-control">
-  <option>Dhanmondi</option>
-  <option>Banani</option>
-  <option>Uttara</option>
-</select
-<label for="exampleInputEmail1">Address</label>
-<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-<p>Have an Account? <a href="#">Sign In</a></p>
-    </div>
-      <button type="submit" class="btn btn-warning">Proceed</button>
+        <div class="form-row align-items-center">
+            <h6>Payment Method:</h6>
+            <div class="col-auto">
+
+              <div class="checkbox">
+                <label><input type="checkbox" value="">Cash on Delivery</label>
+              </div>
+              <div class="checkbox ">
+                <label><input type="checkbox" value="credit-info">Credit Card</label>
+              </div>
+            </div>
+            <div class="col-auto">
+              <input type="text" class="form-control credit-info hide" placeholder="Credit Card Number*">
+
+            </div>
+            <input type="password" class="form-control" placeholder="Password*">
+
+
+            <div class="checkbox">
+            <small><input type="checkbox"> I want to be notifies about updates through emails</small>
+          </div>
+          <div class="checkbox">
+          <small><input type="checkbox"> I agree with the terms and conditions of Burger Town</small>
+
+        </div>
+        </div>
+<div class="SignIn">
+  <p>Have an Account? <a href="#">Sign In</a></p>
+      </div>
+
+
+      <button type="submit" class="btn btn-warning">Signup</button>
     </form>
       </section>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.15.0/d3.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <script src="behav.js" charset="utf-8"></script>
 
   </body>
 </html>

@@ -7,13 +7,14 @@ body
 }
 section
 {
-    background-color: #1b262c;
+  background-color: #1b262c;
+
       font-family: 'Merriweather Sans', sans-serif;
 }
 /* NAVBAR */
 .headerdiv
 {
-  background-color: #323232;
+  background-color: #0E1319;
   height:130px;
   width: 100%;
   position: fixed;
@@ -33,6 +34,11 @@ section
   {
     visibility: hidden;
   }
+  .shoppingbag
+  {
+    top: 10%;
+
+  }
 
 }
 @media (min-width:1000px) {
@@ -40,17 +46,29 @@ section
   {
     visibility: hidden;
   }
+  .shoppingbag
+  {
+    top: 60px;
+  }
 
 }
 .phone
 {
   position: absolute;
-  right:50px;
+  right:100px;
   bottom:10px;
+}
+.dropdown button
+{
+  padding: 0;
+  border: 0;
+  background-color: #0E1319;
+  position: absolute;
+  top:30%;
+  right: 30%;
 }
 .dropdown-item
 {
-  background-color: #323232;
   color: black;
 
 }
@@ -136,14 +154,14 @@ section
 /* Cart with number */
 .shoppingbag{
   position: relative;
-  top:60px;
+
   left:93%;
 
   /* font-size: 2rem; */
   color: grey;
   cursor: pointer;
 }
-.shoppingbaglogo
+.shoppingbaglogo,.menu-logo
 {
   height:35px;
   width: 35px;
@@ -175,7 +193,7 @@ section
   position: relative;
   height: 500px;
   /* background-image: url("https://images3.alphacoders.com/922/922680.jpg"); */
-  background-image: url('food1.jpg');
+  background-image: url('img/food1.jpg');
 
   background-attachment: fixed;
  background-size: 120% 100%;
@@ -190,7 +208,7 @@ section
   height: 500px;
 
   /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgmN1l8p18cHk2VRitQQfh-pBmWh6V-2tR2BSzHHr9SBXDiuMp&usqp=CAU"); */
-  background-image: url('food2.jpg');
+  background-image: url('img/food2.jpg');
 
   background-attachment: fixed;
  background-size: 100% 100%;
@@ -202,7 +220,7 @@ section
   position: relative;
   height: 500px;
 
-background-image: url('food3.jpg');
+background-image: url('img/food3.jpg');
   background-attachment: fixed;
  background-size: 100% 100%;
 
@@ -213,7 +231,7 @@ background-image: url('food3.jpg');
   position: relative;
   height: 500px;
 
-background-image: url('food4.jpg');
+background-image: url('img/food4.jpg');
   background-attachment: fixed;
  background-size: 100% 100%;
 
@@ -258,7 +276,7 @@ background-image: url('food4.jpg');
   background-color: #1b262c;
   color: #ffd1bd;
   font-family: 'Merriweather Sans', sans-serif;
-    background-image: url("burger.jpg");
+    background-image: url("img/burger.jpg");
   background-size: cover;
 
 }
@@ -382,6 +400,11 @@ ul .Addons
   background-color: black;
 
 }
+.modalbuttonstyle
+{
+  background-color: #F5AA13;
+  color: #000;
+}
 .modal-body .container
 {
   text-align: center;
@@ -465,7 +488,7 @@ ul .Addons
   margin: 5%;
 
 }
-.Signup-form button
+.Signup-form button,.Takeaway-form button
 {
   margin: 0 45%;
 }

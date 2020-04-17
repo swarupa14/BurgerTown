@@ -19,6 +19,8 @@ $(".plus").click(function()    //Clicking the minus button
 
 $(".card").click(function()    //Clicking the addtocart button
 {
+
+
   if(add)
   {
     totalorder++;
@@ -32,6 +34,8 @@ $(".card").click(function()    //Clicking the addtocart button
 
     }
   }
+
+
 
     $(".addtocart", this).text("Added to Cart");
 
@@ -50,9 +54,24 @@ $(".card").click(function()    //Clicking the addtocart button
 
 // Modal JS
 
-$("#BurgerModal button").click(function()
+$("#BurgerModal .modal-body button").click(function()
 {
-  $(this).css("background-color","#F5AA13");
-  $(this).css("color","#000");
-
+  $(this).removeClass("btn-outline-warning");
+  $(this).addClass("btn-warning");
 });
+$("#BurgerModal .modal-footer button").click(function()
+{
+  $("#BurgerModal .modal-body button").addClass("btn-outline-warning");
+  $("#BurgerModal .modal-body button").removeClass("btn-warning");
+});
+
+
+
+// SignUp FOrm
+
+$('input[type="checkbox"]').click(function(){
+
+  var inputValue = $(this).attr("value");
+ $("." + inputValue).toggleClass("hide");
+
+    });
