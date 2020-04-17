@@ -48,7 +48,7 @@ section
   }
   .shoppingbag
   {
-    top: 60px;
+    top: 40px;
   }
 
 }
@@ -155,7 +155,7 @@ section
 .shoppingbag{
   position: relative;
 
-  left:93%;
+  left:95%;
 
   /* font-size: 2rem; */
   color: grey;
@@ -186,6 +186,8 @@ section
 .body-sec{
   position:relative;
   top:130px;
+  width: 120%;
+ height: 16%;
 }
 .container1
 {
@@ -252,7 +254,7 @@ background-image: url('img/food4.jpg');
   position: relative;
   top:12.5rem;
   margin-left: 2.8rem;
-  line-height: 2rem;
+  line-height: 2;
   color: white;
   font-family: 'Montserrat Alternates', sans-serif;
   font-size: 270%;
@@ -319,7 +321,6 @@ div.Addons
   border: 1px solid;
 
   padding-right: 3px;
-  text-align: center;
 }
 ul .Addons
 {
