@@ -77,3 +77,31 @@ $('input[type="checkbox"]').click(function(){
  $("." + inputValue).toggleClass("hide");
 
     });
+
+
+$(".Signup-form .sign-up").click(function(){
+  let f_name= $(".f_name").val();
+  let l_name= $(".l_name").val();
+  let email= $(".email").val();
+  let address= $(".address").val();
+  let phone= $(".phone").val();
+  let pass= $(".pass").val();
+  let c_pass=$(".c_pass").val();
+  if (f_name === "")
+    alert("You must enter your first name!");
+  if (l_name === "")
+    alert("You must enter your last name!");
+  if(email==="")
+    alert("You must enter an email address!");
+  if (address === "")
+    alert("You must enter your home address!");
+  if (phone.length != 11)
+    alert("You must enter a valid phone number!");
+  if(pass === "")
+    alert("You must enter a password!");
+  if(c_pass === "")
+    alert("You must confirm your password!");
+  if (pass !=c_pass)
+    alert("Passwords do not match");
+
+});

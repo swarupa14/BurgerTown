@@ -460,7 +460,7 @@ ul .Addons {
 
 }
 
-.Takeaway h5 {
+.Takeaway h5{
   font-family: 'Aclonica', sans-serif;
   text-align: center;
   color: white;
@@ -471,7 +471,7 @@ ul .Addons {
   margin: 1% 0 3%;
 }
 
-.Takeaway-form a, .SignIn a {
+.Takeaway-form a, .SignIn a, .SignUp a {
   color: #F5AA13;
 }
 
@@ -506,15 +506,41 @@ ul .Addons {
   margin-right: -15px !important;
 }
 
-.order-button button{
-  margin: 2% 45%;
+.Signin-form {
+  position: relative;
+  width: 400px;
+  border: 1px solid;
+  color: white;
+  padding: 45px;
+  border-radius: 2%;
+  text-align: center;
+  margin: auto;
+
+}
+.Signin-form input,.Signin-form button{
+  margin : 25px 0;
 }
 
-.SignIn p{
-  margin-bottom: 0px;
-
+.SignUp {
+  border: .5px solid;
+  /* width: 35%; */
+  padding: 3%;
+  text-align: center;
+  margin: 2% auto;
+  background-color: #272727;
 }
 
-.checkbox-pay{
-   text-align: left;
+.Signin-form h2,.Signin-form h6{
+font-family: 'Aclonica', sans-serif;
+}
+.Signin-form .btn-primary{
+  background-color: #fff;
+  color: grey;
+}
+.Signin-form .btn-warning{
+  font-weight: bold;
+  color: grey;
+}
+.Signin-form img{
+  margin-right: 10px;
 }

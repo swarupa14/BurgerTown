@@ -1,0 +1,87 @@
+﻿!========_ Version 1.1.0 _========!
+
+°Fixed the position of the ripple when the document is scrolled
+°Made the javascript more library-like: It now returns a ripple object with the registerRipples function
+
+
+
+
+!========_ Version 1.1.1 _========!
+
+°Updated the demo
+
+
+
+
+!========_ Version 1.1.2 _========!
+
+°Added the event section to the README
+
+
+
+
+!========_ Version 1.2.0 _========!
+
+°Scrolling now gets disabled while a ripple element is being pressed
+°Improved the README
+
+
+
+
+!========_ Version 1.2.1 _========!
+
+°Scrolling no longer gets disabled
+
+
+
+
+!========_ Version 1.3.0 _========!
+
+°Bug with wrong ripple position fixed
+°Performance improvements
+°Added the ripple-cancel-on-move attribute
+°You can unregister a ripple now by removing the ripple class
+
+
+
+
+!========_ Version 1.3.1 _========!
+
+°Bug where ripples would not start fixed
+
+
+
+
+!========_ Version 1.4.0 _========!
+
+°Added the function ripple(). Call it to start a ripple without user input
+°Bug where ripple with the ripple-cancel-on-move attribute would cancel automatically fixed
+°Changed Readme a bit
+
+
+
+
+!========_ Version 1.4.1 _========!
+
+°One can now specify an onrippleclick attribute, which works just like onclick.
+
+
+
+
+!========_ Version 1.4.2 _========!
+
+°All event handlers now prevent the default behavior
+
+
+
+
+!========_ Version 1.4.3 _========!
+
+°The event listeners are now passive and therefore don't call preventDafault() anymore
+
+
+
+
+!========_ Version 1.4.4 _========!
+
+°Removed debugging message :€
