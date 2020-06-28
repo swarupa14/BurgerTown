@@ -17,50 +17,44 @@
 
 <section class="Takeaway">
   <h5>Create an account to get started</h5>
-  <form class="Signup-form">
+  <form class="Signup-form" action="/signup" method="post">
     <div class="form-group">
 
       <div class="row">
         <div class="col">
-          <input type="text" class="form-control" placeholder="First name*">
+          <input type="text" class="form-control f_name" placeholder="First name*" name="f_name">
         </div>
         <div class="col">
-          <input type="text" class="form-control" placeholder="Last name*">
+          <input type="text" class="form-control l_name" placeholder="Last name*" name="l_name">
         </div>
       </div>
-      <input type="text" class="form-control" placeholder="Email Adress*">
-      <input type="text" class="form-control" placeholder="Address*">
+      <input type="text" class="form-control email" placeholder="Email Adress*" name="email">
+      <input type="text" class="form-control address" placeholder="Address*" name="address">
+      <input type="text" class="form-control phone" placeholder="Phone Number*" name="phone">
+      <div class="row">
+        <div class="col">
+          <input type="password" class="form-control pass" placeholder="Password*" name="pass">
+        </div>
+        <div class="col">
+          <input type="password" class="form-control c_pass" placeholder="Confirm Password*" name="c_pass">
+        </div>
+      </div>
 
       <div class="form-row align-items-center">
-        <h6>Payment Method:</h6>
-        <div class="col-auto">
-
-          <div class="checkbox-pay">
-            <label><input type="checkbox" value="">Cash on Delivery</label>
-          </div>
-          <div class="checkbox-pay">
-            <label><input type="checkbox" value="credit-info">Credit Card</label>
-          </div>
-        </div>
-        <div class="col-auto">
-          <input type="text" class="form-control credit-info hide" placeholder="Credit Card Number*">
-
-        </div>
-        <input type="password" class="form-control" placeholder="Password*">
 
         <div class="checkbox">
-          <small><input type="checkbox"> I want to be notifies about updates through emails</small>
+          <small><input type="checkbox" name="notify"> I want to be notifies about updates through emails</small>
         </div>
         <div class="checkbox">
-          <small><input type="checkbox"> I agree with the terms and conditions of Burger Town</small>
+          <small><input type="checkbox" class="agree" name="agree"> I agree with the terms and conditions of Burger Town</small>
         </div>
       </div>
       <div class="SignIn">
-        <p>Have an Account? <a href="#">Sign In</a></p>
+        <p>Have an Account? <a href="/signin">Sign In</a></p>
       </div>
 
 
-      <button type="submit" class="btn btn-warning">SIGN UP</button>
+      <button type="submit" class="btn btn-warning sign-up">SIGN UP</button>
   </form>
 </section>
 

@@ -87,6 +87,7 @@ $(".Signup-form .sign-up").click(function(){
   let phone= $(".phone").val();
   let pass= $(".pass").val();
   let c_pass=$(".c_pass").val();
+  let agree=$(".agree:checked").val();
   if (f_name === "")
     alert("You must enter your first name!");
   if (l_name === "")
@@ -103,5 +104,7 @@ $(".Signup-form .sign-up").click(function(){
     alert("You must confirm your password!");
   if (pass !=c_pass)
     alert("Passwords do not match");
+  if(agree!='on')
+    alert("You must agree to our terms and conditions to create an account!");
 
 });

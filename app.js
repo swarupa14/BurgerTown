@@ -5,6 +5,7 @@ const app = express();
 const mysql = require("mysql");
 const _ = require("lodash");
 let status = ["", "", "", "", "", ""];
+
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
@@ -69,46 +70,61 @@ app.get("/:lnk", function(req, res) {
   });
 });
 
+
 app.post("/signup", function(req, res) {
-    let go = 1;
-    const userData = {
-      f_name: req.body.f_name,
-      l_name: req.body.l_name,
-      email: req.body.email,
-      address: req.body.address,
-      phone: req.body.phone,
-      pass: req.body.pass,
-    };
-    if (userData.f_name === "") {
-      go = 0;
-    }
-    if (userData.l_name === "") {
-      go = 0;
-    }
-    if (userData.email === "") {
-      go = 0;
-    }
-    if (userData.address === "") {
-      go = 0;
-    }
-    if (userData.phone.length != 11) {
-      go = 0;
-    }
-    if(userData.pass === "")
-      go=0;
-    if(req.body.c_pass === "")
-      go=0;
-    if (userData.pass != req.body.c_pass) {
-      go = 0;
-    }
-    if(go===1) {
-      let sql = 'insert into user set ?';
-      let query = db.query(sql, userData, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-      });
-      res.redirect("/signin");
-    }
+  var go = 1;
+  const userData = {
+    f_name: req.body.f_name,
+    l_name: req.body.l_name,
+    email: req.body.email,
+    address: req.body.address,
+    phone: req.body.phone,
+    pass: req.body.pass,
+  };
+  if (userData.f_name === "") {
+    go = 0;
+  }
+  if (userData.l_name === "") {
+    go = 0;
+  }
+  if (userData.email === "") {
+    go = 0;
+  }
+
+  if (userData.address === "") {
+    go = 0;
+  }
+  if (userData.phone.length != 11) {
+    go = 0;
+  }
+  if (userData.pass === "")
+    go = 0;
+  if (req.body.c_pass === "")
+    go = 0;
+  if (userData.pass != req.body.c_pass) {
+    go = 0;
+  }
+  if(req.body.agree!='on')
+    go=0;
+  if (go === 1) {
+    let sql1 = 'select email from user where email =' + mysql.escape(userData.email);
+    let query1 = db.query(sql1, (err, result) => {
+      if (err) throw err;
+      if (result.length === 1){
+        console.log("Same email address");
+        res.redirect("/signup");
+      }
+      else {
+        let sql = 'insert into user set ?';
+        let query = db.query(sql, userData, (err, result) => {
+          if (err) throw err;
+          console.log(result);
+        });
+        res.redirect("/signin");
+      }
+
+    });
+  }
 });
 
 app.listen(3000, function() {
