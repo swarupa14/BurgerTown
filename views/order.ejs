@@ -24,14 +24,17 @@
     </div>
     <div class="row">
 
+
+        <%  signatureitems.forEach(function(item){%>
+
       <div class="col-lg-3 col-md-6 price-cards">
         <div class="card"  >
           <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=85" class="card-img-top" alt="">
           <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
+            <h5 class="card-title"><%= item.Name %></h5>
             <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT <span class="prices">250</span></h6>
+            <p class="card-text"><%= item.Ingredients %></p>
+            <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
             <!-- Add to cart button -->
             <div class="btn-group">
     <button  class="btn btn-success hide minus">-</button>
@@ -42,113 +45,7 @@
           </div>
         </div>
       </div>
-
-
-
-
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=85" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT <span class="prices">250</span></h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-    <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=85" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=85" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=85" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=85" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
+      <%  });%>
     </div>
 
 
@@ -161,133 +58,30 @@
 
     </div>
     <div class="row">
+      <%  regularitems.forEach(function(item){%>
 
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
+    <div class="col-lg-3 col-md-6 price-cards">
+      <div class="card"  >
+        <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
+
+        <div class="card-body">
+          <h5 class="card-title"><%= item.Name %></h5>
+          <hr class="cardhr">
+          <p class="card-text"><%= item.Ingredients %></p>
+          <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
+          <!-- Add to cart button -->
+          <div class="btn-group">
+  <button  class="btn btn-success hide minus">-</button>
   <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
+  <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
 </div>
 
-
-
-
-          </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
+    </div>
+    <%  });%>
 
 
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Chef's Specials -->
@@ -300,130 +94,29 @@
     </div>
     <div class="row">
 
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
+      <%  chefsitems.forEach(function(item){%>
 
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
+    <div class="col-lg-3 col-md-6 price-cards">
+      <div class="card"  >
+        <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
+
+        <div class="card-body">
+          <h5 class="card-title"><%= item.Name %></h5>
+          <hr class="cardhr">
+          <p class="card-text"><%= item.Ingredients %></p>
+          <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
+          <!-- Add to cart button -->
+          <div class="btn-group">
+  <button  class="btn btn-success hide minus">-</button>
+  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
+  <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
 </div>
 
-
-          </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
+    </div>
+    <%  });%>
 
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Beef Cheese Burger</h5>
-            <hr class="cardhr">
-            <p class="card-text">Beef Patty, Cheese, Lettuce, Mayonnaise</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-  <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Fries -->
@@ -436,75 +129,28 @@
     </div>
     <div class="row">
 
-      <div class="col-lg-4 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJFV3g3lGM8gayjBVLAjiHJxc6wH5QOBmaE_1a9ePTVOWs5THm&usqp=CAU" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Fries</h5>
-            <hr class="cardhr">
-            <p class="card-text">With sauce</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-<span data-toggle="modal" data-target="#FriesModal">   <button class="btn btn-success addtocart" >Add to Cart</button></span>
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#FriesModal">+</button>
+      <%  fries.forEach(function(item){%>
+
+    <div class="col-lg-4 col-md-6 price-cards">
+      <div class="card"  >
+        <img src="https://cms.splendidtable.org/sites/default/files/styles/w2000/public/french-fries.jpg?itok=FS-YwUYH" class="card-img-top" alt="">
+
+        <div class="card-body">
+          <h5 class="card-title"><%= item.Name %></h5>
+          <hr class="cardhr">
+          <p class="card-text"><%= item.Ingredients %></p>
+          <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
+          <!-- Add to cart button -->
+          <div class="btn-group">
+  <button  class="btn btn-success hide minus">-</button>
+  <span data-toggle="modal" data-target="#FriesModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
+  <button class="btn btn-success hide plus" data-toggle="modal" data-target="#FriesModal">+</button>
 </div>
 
-
-          </div>
         </div>
       </div>
-
-
-
-
-      <div class="col-lg-4 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJFV3g3lGM8gayjBVLAjiHJxc6wH5QOBmaE_1a9ePTVOWs5THm&usqp=CAU" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Curly Fries</h5>
-            <hr class="cardhr">
-            <p class="card-text">With sauce</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-    <span data-toggle="modal" data-target="#FriesModal">   <button class="btn btn-success addtocart" >Add to Cart</button></span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#FriesModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-lg-4 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJFV3g3lGM8gayjBVLAjiHJxc6wH5QOBmaE_1a9ePTVOWs5THm&usqp=CAU" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Curly Fries</h5>
-            <hr class="cardhr">
-            <p class="card-text">With sauce</p>
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-    <span data-toggle="modal" data-target="#FriesModal">   <button class="btn btn-success addtocart" >Add to Cart</button></span>
-
-    <button class="btn btn-success hide plus" data-toggle="modal" data-target="#FriesModal">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-
-
+    </div>
+    <%  });%>
     </div>
 
 
@@ -519,96 +165,32 @@
 
     <div class="row lastrow">
 
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSNc2hUwUTE6g77ACiUiKhk991lfF-_7rWB3JDE5FNHhVqIfWi&usqp=CAU" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Oreo Shake</h5>
-            <hr class="cardhr">
 
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
+      <%  shakes.forEach(function(item){%>
+
+    <div class="col-lg-4 col-md-6 price-cards">
+      <div class="card"  >
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSNc2hUwUTE6g77ACiUiKhk991lfF-_7rWB3JDE5FNHhVqIfWi&usqp=CAU" class="card-img-top" alt="">
+
+        <div class="card-body">
+          <h5 class="card-title"><%= item.Name %></h5>
+          <hr class="cardhr">
+          <p class="card-text"><%= item.Ingredients %></p>
+          <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
+          <!-- Add to cart button -->
+          <div class="btn-group">
     <button  class="btn btn-success hide minus">-</button>
-    <button class="btn btn-success addtocart">Add to Cart</button>
-    <button class="btn btn-success hide plus">+</button>
-</div>
-
-
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSNc2hUwUTE6g77ACiUiKhk991lfF-_7rWB3JDE5FNHhVqIfWi&usqp=CAU" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Velvet Strawberry</h5>
-            <hr class="cardhr">
-
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-    <button class="btn btn-success addtocart ">Add to Cart</button>
-    <button class="btn btn-success hide plus ">+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSNc2hUwUTE6g77ACiUiKhk991lfF-_7rWB3JDE5FNHhVqIfWi&usqp=CAU" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Sundae</h5>
-            <hr class="cardhr">
-
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-    <button class="btn btn-success addtocart" >Add to Cart</button>
-    <button class="btn btn-success hide plus" >+</button>
-</div>
-
-
-
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card"  >
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSNc2hUwUTE6g77ACiUiKhk991lfF-_7rWB3JDE5FNHhVqIfWi&usqp=CAU" class="card-img-top" alt="">
-          <div class="card-body">
-            <h5 class="card-title">Chocolate Wafer</h5>
-            <hr class="cardhr">
-
-            <h6 class="pricetags">BDT 250</h6>
-            <!-- Add to cart button -->
-            <div class="btn-group">
-    <button  class="btn btn-success hide minus">-</button>
-    <button class="btn btn-success addtocart" >Add to Cart</button>
-    <button class="btn btn-success hide plus" >+</button>
-</div>
-
-
-          </div>
-        </div>
-      </div>
-
+    <span data-toggle="modal" data-target=""><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
+    <button class="btn btn-success hide plus" data-toggle="modal" data-target="">+</button>
     </div>
+
+        </div>
+      </div>
+    </div>
+    <%  });%>
+
+
+
 
 
 
@@ -685,6 +267,8 @@
 
   </section>
 
-
+  <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.15.0/d3.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="views/behav.js" charset="utf-8"></script>
 
   <%- include("partials/footer") -%>
