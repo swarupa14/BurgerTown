@@ -251,21 +251,29 @@ position: relative;
   text-align: center;
 }
 
+.card .burger{
+  height:17rem;
+}
 
 .card-body {
   background-color: #1b262c;
   text-align: center;
+
+
+
 }
 
 .card {
   background-color: #1b262c;
   text-align: center;
   width: 17rem;
+
   margin: auto;
 }
 .price-cards {
   text-align: center;
   color: #F5AA13;
+
   padding: 5% 0 0 0;
   font-family: 'Merriweather Sans', sans-serif;
 }
@@ -275,7 +283,11 @@ position: relative;
     height: 120px;
   }
 }
+.addtocartbtn
+{
+  margin: 5%;
 
+}
 /* MENU PAGE */
 
 .menu-section-header {
@@ -460,7 +472,7 @@ ul .Addons {
 
 }
 
-.Takeaway h5{
+.Takeaway h5 {
   font-family: 'Aclonica', sans-serif;
   text-align: center;
   color: white;
@@ -471,7 +483,7 @@ ul .Addons {
   margin: 1% 0 3%;
 }
 
-.Takeaway-form a, .SignIn a, .SignUp a {
+.Takeaway-form a, .SignIn a {
   color: #F5AA13;
 }
 
@@ -506,43 +518,17 @@ ul .Addons {
   margin-right: -15px !important;
 }
 
-.Signin-form {
-  position: relative;
-  width: 400px;
-  border: 1px solid;
-  color: white;
-  padding: 45px;
-  border-radius: 2%;
-  text-align: center;
-  margin: auto;
-
-}
-.Signin-form input,.Signin-form button{
-  margin : 25px 0;
+.order-button button{
+  margin: 2% 45%;
 }
 
-.SignUp {
-  border: .5px solid;
-  /* width: 35%; */
-  padding: 3%;
-  text-align: center;
-  margin: 2% auto;
-  background-color: #272727;
+.SignIn p{
+  margin-bottom: 0px;
+
 }
 
-.Signin-form h2,.Signin-form h6{
-font-family: 'Aclonica', sans-serif;
-}
-.Signin-form .btn-primary{
-  background-color: #fff;
-  color: grey;
-}
-.Signin-form .btn-warning{
-  font-weight: bold;
-  color: grey;
-}
-.Signin-form img{
-  margin-right: 10px;
+.checkbox-pay{
+   text-align: left;
 }
 
 #dropdownMenuButton.btn{
