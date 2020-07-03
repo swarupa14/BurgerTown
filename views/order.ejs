@@ -30,13 +30,13 @@
       <div class="col-lg-3 col-md-6 price-cards">
         <div class="card"  >
           <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=85" class="card-img-top" alt="">
-          <div class="card-body">
+          <div class="card-body burger d-flex flex-column">
             <h5 class="card-title"><%= item.Name %></h5>
             <hr class="cardhr">
             <p class="card-text"><%= item.Ingredients %></p>
             <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
             <!-- Add to cart button -->
-            <div class="btn-group">
+            <div class="btn-group mt-auto">
     <button  class="btn btn-success hide minus">-</button>
     <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
     <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
@@ -64,13 +64,13 @@
       <div class="card"  >
         <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
 
-        <div class="card-body">
+        <div class="card-body burger d-flex flex-column">
           <h5 class="card-title"><%= item.Name %></h5>
           <hr class="cardhr">
           <p class="card-text"><%= item.Ingredients %></p>
           <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
           <!-- Add to cart button -->
-          <div class="btn-group">
+          <div class="btn-group mt-auto">
   <button  class="btn btn-success hide minus">-</button>
   <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
   <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
@@ -100,13 +100,13 @@
       <div class="card"  >
         <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
 
-        <div class="card-body">
+        <div class="card-body burger d-flex flex-column">
           <h5 class="card-title"><%= item.Name %></h5>
           <hr class="cardhr">
           <p class="card-text"><%= item.Ingredients %></p>
           <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
           <!-- Add to cart button -->
-          <div class="btn-group">
+          <div class="btn-group mt-auto">
   <button  class="btn btn-success hide minus">-</button>
   <span data-toggle="modal" data-target="#BurgerModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
   <button class="btn btn-success hide plus" data-toggle="modal" data-target="#BurgerModal">+</button>
@@ -135,13 +135,13 @@
       <div class="card"  >
         <img src="https://cms.splendidtable.org/sites/default/files/styles/w2000/public/french-fries.jpg?itok=FS-YwUYH" class="card-img-top" alt="">
 
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title"><%= item.Name %></h5>
           <hr class="cardhr">
           <p class="card-text"><%= item.Ingredients %></p>
           <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
           <!-- Add to cart button -->
-          <div class="btn-group">
+          <div class="btn-group mt-auto">
   <button  class="btn btn-success hide minus">-</button>
   <span data-toggle="modal" data-target="#FriesModal"><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
   <button class="btn btn-success hide plus" data-toggle="modal" data-target="#FriesModal">+</button>
@@ -172,13 +172,13 @@
       <div class="card"  >
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSNc2hUwUTE6g77ACiUiKhk991lfF-_7rWB3JDE5FNHhVqIfWi&usqp=CAU" class="card-img-top" alt="">
 
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title"><%= item.Name %></h5>
           <hr class="cardhr">
           <p class="card-text"><%= item.Ingredients %></p>
           <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
           <!-- Add to cart button -->
-          <div class="btn-group">
+          <div class="btn-group mt-auto">
     <button  class="btn btn-success hide minus">-</button>
     <span data-toggle="modal" data-target=""><button type="button" class="btn btn-success addtocart"> Add to Cart</button> </span>
     <button class="btn btn-success hide plus" data-toggle="modal" data-target="">+</button>
@@ -199,17 +199,17 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-body">
-            <div class="container">
+            <div class="container spice">
 
 
             <h5>Flavour</h5>
             <hr class="cardhr">
-          <button type="button" class="btn btn-outline-warning">Regular</button>
-          <button type="button" class="btn btn-outline-warning">Spicy</button>
-          <button type="button" class="btn btn-outline-warning">Extra Spicy</button>
+          <button type="button" class="btn b1 btn-outline-warning">Regular</button>
+          <button type="button" class="btn b2 btn-outline-warning">Spicy</button>
+          <button type="button" class="btn b3 btn-outline-warning">Extra Spicy</button>
           </div>
 
-          <div class="container">
+          <div class="container adds">
               <h5>Add Ons</h5>
               <hr class="cardhr">
         <button type="button" class="btn btn-outline-warning fixbtn">Patty</button> BDT 90
@@ -238,17 +238,13 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-body">
-
-
-
-
-          <div class="container">
-              <h5>Size</h5>
-              <hr class="cardhr">
-        <button type="button" class="btn btn-outline-warning">Regular</button> BDT 50
+          <div class="container spice">
+              <h5 > Size </h5>
+              <hr class="cardhr" >
+        <button type="button" class="btn btn-outline-warning" >Regular</button> BDT 50
         <br>
-        <button type="button" class="btn btn-outline-warning">Large</button>  BDT 100
-        </div>
+        <button type="button" class="btn btn-outline-warning" >Large</button>  BDT 100
+        </div >
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -269,6 +265,6 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.15.0/d3.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="views/behav.js" charset="utf-8"></script>
+  <script src="public/behav.js" charset="utf-8"></script>
 
   <%- include("partials/footer") -%>
