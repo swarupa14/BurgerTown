@@ -155,6 +155,30 @@ app.post("/signup", function(req, res) {
   }
 });
 
+app.post("/:lnk", function(req, res) {
+
+  const userData = {
+    phoneOremail: req.body.phoneOremail,
+    passWord: req.body.passWord,
+  };
+  let sql = 'select email,phone,pass from user';
+  let query = db.query(sql, (err, result) => {
+    if (err) throw err;
+    else {
+      for (var i = 0; i < result.length; i++) {
+        if (((userData.phoneOremail === result[i].phone) || (userData.phoneOremail === result[i].email)) && (userData.passWord === result[i].pass)) {
+          res.redirect("/");
+          console.log("Signed in successfully");
+          break;
+        }
+      }
+    }
+
+
+  });
+});
+
+
 app.listen(3000, function() {
   console.log("Server started on port 3000.");
 });

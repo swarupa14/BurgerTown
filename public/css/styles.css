@@ -544,3 +544,16 @@ font-family: 'Aclonica', sans-serif;
 .Signin-form img{
   margin-right: 10px;
 }
+
+#dropdownMenuButton.btn{
+  color: rgba(255,255,255,0.5);
+}
+
+#dropdownMenuButton.btn:hover{
+  color: rgba(255,255,255,3);
+}
+
+#dropdownMenuButton.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(255,255,255,0.5);
+}
