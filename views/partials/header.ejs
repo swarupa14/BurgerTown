@@ -29,6 +29,121 @@
 
 <body>
 
+
+  <!-- CART SECTION -->
+  <div id="mySidenav" class="sidenav">
+    <a  href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="cart-caption">0 items <i class="fas fa-shopping-bag"></i> </div>
+    <div class="cd-item">
+    <ul class="cd-cart-items">
+      <li>
+        <a href="#0" class="cd-item-remove">&times;</a>
+        <div class="">
+          <span class="cd-qty">1x</span> BBQ Chicken Cheese Burger
+        </div>
+        <div class="cd-flav">
+          Favour: Regular
+          <br>
+          Addons:
+          <div class="">
+            <span>Patty</span>
+            <span class="cd-price">BDT. 90</span>
+          </div>
+        </div>
+        <div class="tot">TOTAL
+        </div>
+        <div class="cd-price"> BDT. 245</div>
+      </li>
+
+      <li>
+        <a href="#0" class="cd-item-remove">&times;</a>
+        <div class="">
+          <span class="cd-qty">1x</span> BBQ Chicken Cheese Burger
+        </div>
+        <div class="cd-flav">
+          Favour: Regular
+          <br>
+          Addons:
+          <div class="">
+            <span>Patty</span>
+            <span class="cd-price">BDT. 90</span>
+          </div>
+        </div>
+        <div class="tot">TOTAL
+        </div>
+        <div class="cd-price"> BDT. 245</div>
+      </li>
+
+      <li>
+        <a href="#0" class="cd-item-remove">&times;</a>
+        <div class="">
+          <span class="cd-qty">1x</span> BBQ Chicken Cheese Burger
+        </div>
+        <div class="cd-flav">
+          Favour: Regular
+          <br>
+          Addons:
+          <div class="">
+            <span>Patty</span>
+            <span class="cd-price">BDT. 90</span>
+          </div>
+        </div>
+        <div class="tot">TOTAL
+        </div>
+        <div class="cd-price"> BDT. 245</div>
+      </li>
+
+      <li>
+        <a href="#0" class="cd-item-remove">&times;</a>
+        <div class="">
+          <span class="cd-qty">1x</span> BBQ Chicken Cheese Burger
+        </div>
+        <div class="cd-flav">
+          Favour: Regular
+          <br>
+          Addons:
+          <div class="">
+            <span>Patty</span>
+            <span class="cd-price">BDT. 90</span>
+          </div>
+        </div>
+        <div class="tot">TOTAL
+        </div>
+        <div class="cd-price"> BDT. 245</div>
+      </li>
+
+      <li>
+        <a href="#0" class="cd-item-remove">&times;</a>
+        <div class="">
+          <span class="cd-qty">1x</span> BBQ Chicken Cheese Burger
+        </div>
+        <div class="cd-flav">
+          Favour: Regular
+          <br>
+          Addons:
+          <div class="">
+            <span>Patty</span>
+            <span class="cd-price">BDT. 90</span>
+          </div>
+        </div>
+        <div class="tot">TOTAL
+        </div>
+        <div class="cd-price"> BDT. 245</div>
+      </li>
+
+
+
+    </ul>
+    </div>
+
+      <div class="cart-footer">
+        <div class="total-price">
+          BDT 80576.00
+        </div>
+      <button type="button" class="btn btn-success btn-block">CHECKOUT</button>
+  </div>
+  </div>
+
   <!-- NAVBAR -->
   <section class="header-div">
     <div class="">
@@ -74,18 +189,20 @@
                         Remember me
                       </label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <div class="signinbtndiv">
+                    <button type="submit" class="btn btn-outline-success ">Sign in</button>
+                    </div>
                   </form>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/signup">New around here? Sign up</a>
-                  <a class="dropdown-item" href="#">Forgot password?</a>
+                  <p class="dropdown-item">New around here? <a href="/signup"> <i>Sign up </i></a></p>
+                  <a class="dropdown-item" href="#"> <i>Forgot password?</i></a>
                 </div>
 
 
               </li>
             </div>
             <li class="nav-item <%=status_cart%>">
-              <a class="nav-link" href="/cart"><i class="fas fa-shopping-bag"></i></a>
+              <a href="javascript:void(0)" class="nav-link" onclick="openNav()"><i class="fas fa-shopping-bag"></i></a>
             </li>
           </ul>
         </div>

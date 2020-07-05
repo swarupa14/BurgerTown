@@ -543,3 +543,146 @@ ul .Addons {
     outline: 0;
     box-shadow: 0 0 0 0.1rem rgba(255,255,255,0.5);
 }
+
+.navbar-nav .dropdown-menu{
+  padding: 15px;
+  background-color: #222831;
+  opacity: .8;
+  color: #fff;
+}
+.navbar-nav .dropdown-item{
+  color: #fff;
+}
+.navbar-nav .dropdown-item:hover{
+  color: #fff;
+  background-color: transparent;
+  text-decoration: none;
+}
+.navbar-nav .dropdown-item a{
+  color: #fff;
+}
+.navbar-nav .dropdown-item i:hover{
+  color: #fff;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.signinbtndiv{
+  text-align: right;
+  padding-top: 8px;
+}
+
+
+/* SLIDING CART */
+.sidenav {
+  font-family: 'Montserrat', sans-serif;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1050;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  opacity: 0.8;
+  overflow-x: hidden;
+  transition: right 0.5s;
+  -moz-transition: right 0.5s;
+  -webkit-transition: right  0.5s;
+  padding-top: 60px;
+
+}
+
+.sidenav a, .cart-caption {
+  padding: 8px 8px 8px 8px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #fff;
+  display: block;
+  transition: right 0.5s;
+  text-align: center;
+}
+
+.sidenav a:hover {
+  color: red;
+}
+.sidenav .btn{
+  padding: 5%;
+  bottom: 0;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+.total-price
+{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: #F5AA13;
+  position: relative;
+  padding: 3%;
+}
+
+
+#mySidenav h2 {
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 1em 0;
+}
+#mySidenav .cd-cart-items {
+  padding: 0;
+  color: #F5AA13;
+}
+#mySidenav .cd-cart-items li {
+  position: relative;
+  padding: 1em;
+  border-top: 1px solid #e0e6ef;
+}
+#mySidenav .cd-cart-items li:last-child {
+  border-bottom: 1px solid #e0e6ef;
+}
+#mySidenav .cd-qty, #mySidenav .cd-price {
+  color: #fff;
+  padding-right: 10px;
+}
+#mySidenav .cd-flav{
+  color: #a6aa9c;
+}
+.tot{
+  color: #fff;
+  display: inline;
+}
+#mySidenav .cd-price {
+  position: absolute;
+  right: 10px;
+  display: inline;
+  margin-top: .4em;
+}
+#mySidenav .cd-item-remove {
+  position: absolute;
+  right: 1em;
+}
+.cd-item{
+  height:70%;
+  overflow-y: scroll;
+}
+.cart-footer{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+
+}
