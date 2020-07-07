@@ -549,6 +549,7 @@ ul .Addons {
   background-color: #222831;
   opacity: .8;
   color: #fff;
+  padding-left: 0px;
 }
 .navbar-nav .dropdown-item{
   color: #fff;

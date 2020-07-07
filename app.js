@@ -38,38 +38,11 @@ app.get("/", function(req, res) {
     status_cart: ""
   });
 });
-app.get("/:lnk",function(req,res){
-  const dest= _.lowerCase(req.params.lnk);
 
-  status=["","","active","","",""];
-
-let sql='CALL Getmenuitems(?,?,?,?,?);';
-let query = db.query(sql,['Signature','Regulars',"Chef's Special","Fries","Shakes"],function(err,results,fields){
-  if(err)
-  {
-    console.log(err);
-  }
-  else{
-    console.log(results);
-    res.render(dest,{status_home: status[0],
-     status_location: status[1],
-     status_menu: status[2],
-     status_contact: status[3],
-     status_signup: status[4],
-     status_cart: status[5],
-    signatureitems:results[0],
-    regularitems:results[1],
-    chefsitems:results[2],
-    fries:results[3],
-    shakes:results[4]
-     });
-
-  }
-});
-});
 app.get("/:lnk", function(req, res) {
+  const dest = _.lowerCase(req.params.lnk);
   status = ["", "", "", "", "", ""];
-  const dest = _.lowerCase(req.params.lnk)
+
   switch (dest) {
     case "location":
       status[1] = "active";
@@ -88,15 +61,31 @@ app.get("/:lnk", function(req, res) {
       break;
     default:
   }
-  res.render(dest, {
-    status_home: status[0],
-    status_location: status[1],
-    status_menu: status[2],
-    status_contact: status[3],
-    status_signup: status[4],
-    status_cart: status[5]
+
+  let sql = 'CALL Getmenuitems(?,?,?,?,?);';
+  let query = db.query(sql, ['Signature', 'Regulars', "Chef's Special", "Fries", "Shakes"], function(err, results, fields) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(results);
+      res.render(dest, {
+        status_home: status[0],
+        status_location: status[1],
+        status_menu: status[2],
+        status_contact: status[3],
+        status_signup: status[4],
+        status_cart: status[5],
+        signatureitems: results[0],
+        regularitems: results[1],
+        chefsitems: results[2],
+        fries: results[3],
+        shakes: results[4]
+      });
+
+    }
   });
 });
+
 
 
 app.post("/signup", function(req, res) {
@@ -132,17 +121,16 @@ app.post("/signup", function(req, res) {
   if (userData.pass != req.body.c_pass) {
     go = 0;
   }
-  if(req.body.agree!='on')
-    go=0;
+  if (req.body.agree != 'on')
+    go = 0;
   if (go === 1) {
     let sql1 = 'select email from user where email =' + mysql.escape(userData.email);
     let query1 = db.query(sql1, (err, result) => {
       if (err) throw err;
-      if (result.length === 1){
+      if (result.length === 1) {
         console.log("Same email address");
         res.redirect("/signup");
-      }
-      else {
+      } else {
         let sql = 'insert into user set ?';
         let query = db.query(sql, userData, (err, result) => {
           if (err) throw err;
