@@ -3,6 +3,7 @@ body{
 }
 section{
   background-color: #0E1319;
+  /* background-image: url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX26810236.jpg'); */
 }
 /* HOMEPAGE */
 
@@ -686,4 +687,99 @@ ul .Addons {
   width: 100%;
   bottom: 0;
 
+}
+
+
+/* CHECKOUT PAGE */
+#checkout
+{
+  background-color: #0E1319;
+  text-align: center;
+  padding: 5%;
+}
+div#checkout{
+  background-image: url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX26810236.jpg');
+
+}
+.information {
+text-align: center;
+
+}
+.checkout-block{
+  margin: 5% auto;
+  padding: 3%;
+  width: 550px;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  text-align: left;
+  box-shadow: 3px 3px 5px #888888;
+  color: #fff;
+  /* background-color: #252525; */
+  background-color: #1d1919;
+}
+.info-block{
+}
+
+.ht{
+  padding: 2% 2% 1% 2%;
+  font-weight: bold;
+  color: #fff;
+}
+.vt {
+  padding: 1% 2%;
+
+}
+.checkout-block table{
+  width: 100%;
+}
+td{
+  padding: 2% 2%;
+}
+.val{
+  text-align: right;
+}
+.checkout-block hr{
+  color: #fff;
+  border: 1px;
+  border-style: dotted none none;
+}
+
+.checkout-inputs{
+  text-align: left;
+  font-style: italic;
+  border: none;
+  width: 100%;
+background: transparent;
+color: #ebebe3;
+margin-bottom: 10px;
+}
+.information input[type="text"]:focus {
+  outline: none;
+  color: #fff;
+  box-shadow:inset 0 -2px 0 0 #fff;
+}
+
+.due{
+  right: 0;
+}
+input[type="radio"] {
+  margin: 3px;
+
+}
+
+.payment label{
+  display: inline;
+}
+.payment h5{
+  padding: 20px 5% 10px;
+font-weight: bold;
+color: blueviolet;
+}
+/* .payment-option{
+  width: 55%;
+} */
+.order-summary h4, .payment-option h4{
+  color:  #F5AA13;
+  text-align: center;
+  padding-bottom: 10px;
 }

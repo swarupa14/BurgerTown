@@ -1,0 +1,94 @@
+<%- include("partials/header") -%>
+<!-- PAGE TITLE SECTION -->
+
+<!-- <div class="body-sec">
+  <div class="">
+    <img class="burger-body" src="img/Burger.jpg" alt="">
+  </div>
+
+  <div class="container4 titlepage">
+  </div>
+</div> -->
+<div id="checkout">
+  <div class="information">
+    <div class="checkout-block">
+      <div class="info-block">
+        <div class="ht">
+          <i class="fas fa-user-circle"></i>  Name
+        </div>
+        <div class="vt">
+          <input type="text" name="username" placeholder="Enter your name" class="checkout-inputs" autocomplete="off" />
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="ht">
+          <i class="fas fa-phone-alt"></i>  Contact Number
+        </div>
+        <div class="vt">
+          <input type="text" name="usernumber" placeholder="Enter your Contact Number" class="checkout-inputs" autocomplete="off" />
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="ht">
+        <i class="fas fa-map-marker-alt"></i>   Delivery Address
+        </div>
+        <div class="vt">
+          <input type="text" name="useraddress" placeholder="Enter your address" class="checkout-inputs" autocomplete="off" />
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="checkout-block order-summary">
+      <h4>Order Summary</h4>
+      <hr>
+      <table>
+        <tr>
+          <td>Subtotal</td>
+          <td class="val">BDT 780.00</td>
+        </tr>
+        <tr>
+          <td>Delivery Charge</td>
+          <td class="val">BDT 60.00</td>
+        </tr>
+        <tr>
+          <td>Order Total</td>
+          <td class="val">BDT 840.00</td>
+        </tr>
+
+        <tr>
+          <td>Amount Paid</td>
+          <td class="val">BDT 00.00</td>
+        </tr>
+      </table>
+      <hr>
+      <span>Due</span>
+      <!-- <span class="due">BDT 00.00</span> -->
+
+    </div>
+
+    <div class="checkout-block payment-option">
+      <h4>Choose Payment Method</h4>
+      <div class="payment">
+        <label><input type="radio" name="optradio" >Cash on Delivery</label>
+        <h5>Mobile Banking</h5>
+        <label><input type="radio" name="optradio"><img src="img/bkash.jpg" alt=""></label>
+        <label><input type="radio" name="optradio"><img src="img/rocket.png" alt=""></label>
+        <h5>Cards</h5>
+        <label><input type="radio" name="optradio"> <img src="img/visacard.png" alt=""> </label>
+        <label><input type="radio" name="optradio"> <img src="img/mastercard.png" alt=""> </label>
+        <label><input type="radio" name="optradio"> <img src="img/amex-card.jpg" alt=""> </label>
+
+      </div>
+
+    </div>
+
+    <div class="confirm-order-button">
+      <a href=" "><button type="button" class="btn btn-success btn-lg">CONFIRM ORDER</button></a>
+
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") -%>
