@@ -1,3 +1,4 @@
+//Packages
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 app.use("/public", express.static('./public/'));
 
+//Database connection
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -27,7 +29,7 @@ db.connect(function(err) {
   console.log("MYSQL connected...");
 })
 
-
+//Get home page
 app.get("/", function(req, res) {
   res.render("index", {
     status_home: "active",
@@ -39,6 +41,7 @@ app.get("/", function(req, res) {
   });
 });
 
+//Get any page
 app.get("/:lnk", function(req, res) {
   const dest = _.lowerCase(req.params.lnk);
   status = ["", "", "", "", "", ""];
@@ -62,6 +65,7 @@ app.get("/:lnk", function(req, res) {
     default:
   }
 
+  //Loadup Menu and Orders page from Database
   let sql = 'CALL Getmenuitems(?,?,?,?,?);';
   let query = db.query(sql, ['Signature', 'Regulars', "Chef's Special", "Fries", "Shakes"], function(err, results, fields) {
     if (err) {
@@ -87,7 +91,7 @@ app.get("/:lnk", function(req, res) {
 });
 
 
-
+//Signup module
 app.post("/signup", function(req, res) {
   var go = 1;
   const userData = {
@@ -98,37 +102,15 @@ app.post("/signup", function(req, res) {
     phone: req.body.phone,
     pass: req.body.pass,
   };
-  if (userData.f_name === "") {
+  if (userData.f_name === "" || userData.l_name === "" || userData.email === "" || userData.address === "" || userData.phone.length != 11 || userData.pass === "" || req.body.c_pass === "" || userData.pass != req.body.c_pass || req.body.agree != 'on') {
     go = 0;
   }
-  if (userData.l_name === "") {
-    go = 0;
-  }
-  if (userData.email === "") {
-    go = 0;
-  }
-
-  if (userData.address === "") {
-    go = 0;
-  }
-  if (userData.phone.length != 11) {
-    go = 0;
-  }
-  if (userData.pass === "")
-    go = 0;
-  if (req.body.c_pass === "")
-    go = 0;
-  if (userData.pass != req.body.c_pass) {
-    go = 0;
-  }
-  if (req.body.agree != 'on')
-    go = 0;
   if (go === 1) {
     let sql1 = 'select email from user where email =' + mysql.escape(userData.email);
     let query1 = db.query(sql1, (err, result) => {
       if (err) throw err;
       if (result.length === 1) {
-        console.log("Same email address");
+        console.log("This email is already in use");
         res.redirect("/signup");
       } else {
         let sql = 'insert into user set ?';
@@ -136,13 +118,14 @@ app.post("/signup", function(req, res) {
           if (err) throw err;
           console.log(result);
         });
-        res.redirect("/signin");
+        res.redirect("/");
       }
 
     });
   }
 });
 
+//Signin module
 app.post("/:lnk", function(req, res) {
 
   const userData = {
@@ -167,6 +150,8 @@ app.post("/:lnk", function(req, res) {
 });
 
 
+
+//Listening to server on port 3000
 app.listen(3000, function() {
   console.log("Server started on port 3000.");
 });
