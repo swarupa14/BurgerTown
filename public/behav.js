@@ -29,7 +29,7 @@ $(".plus").click(function() //Clicking the minus button
 
   });
 
-$(".card").click(function() //Clicking the addtocart button
+$(".addtocart").click(function() //Clicking the addtocart button
   {
 
 
@@ -45,10 +45,10 @@ $(".card").click(function() //Clicking the addtocart button
 
 
 
-    $(".addtocart", this).text("Added to Cart");
+    $(this).text("Added to Cart");
 
     $(".hide", this).removeClass("hide");
-    $(".addtocart", this).attr("disabled", true);
+    $(this).attr("disabled", true);
 
     var price = $(".prices", this).text();
     totalprice += parseInt(price);
