@@ -3,7 +3,7 @@ body{
 }
 section{
   background-color: #0E1319;
-  /* background-image: url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX26810236.jpg'); */
+  background-image: url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX26810236.jpg');
 }
 /* HOMEPAGE */
 
@@ -743,7 +743,13 @@ td{
   border: 1px;
   border-style: dotted none none;
 }
-
+.amount-input{
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: #ebebe3;
+  margin-bottom: 10px;
+}
 .checkout-inputs{
   text-align: left;
   font-style: italic;
