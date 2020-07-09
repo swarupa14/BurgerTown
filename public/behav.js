@@ -45,10 +45,10 @@ $(".addtocart").click(function() //Clicking the addtocart button
 
 
 
-    $(this).text("Added to Cart");
+    //$(this).text("Added to Cart");
 
     $(".hide", this).removeClass("hide");
-    $(this).attr("disabled", true);
+    //$(this).attr("disabled", true);
 
     var price = $(".prices", this).text();
     totalprice += parseInt(price);
