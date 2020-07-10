@@ -35,6 +35,7 @@ db.connect(function(err) {
 //Get item data from behav.js
 app.post("/item",function(req,res){
   allItems.push(req.body.itemData);
+  console.log(allItems);
 });
 
 //Get home page

@@ -12,7 +12,7 @@ function closeNav() {
 // Order Page Activities
 
 let name="";
-var price="";
+let price=0;
 let spiceLvl = "";
 let addon = [];
 function Item (name,price,spiceLvl,addon){
@@ -24,7 +24,7 @@ function Item (name,price,spiceLvl,addon){
 $(".addtocart").click(function() //Clicking the addtocart button
   {
     name= $(this).siblings("h5").text();
-    price=$(this).siblings("h6").find("span").text();
+    price=parseInt($(this).siblings("h6").find("span").text());
 
   });
 
@@ -73,9 +73,9 @@ $("#BurgerModal .modal-footer button").click(function() {
   }
   else{
     $(this).attr("data-dismiss","modal");
+    let itemData=new Item(name,price,spiceLvl,addon);
+    $.post('/item', { itemData: itemData });
   }
-  var itemData=new Item(name,price,spiceLvl,addon);
-  $.post('/item', { itemData: itemData });
 });
 
 // SignUp FOrm
