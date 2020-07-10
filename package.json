@@ -16,7 +16,7 @@
     "lodash": "^4.17.15",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
-    "npm": "^6.14.5"
+    "npm": "^6.14.6"
   },
   "devDependencies": {}
 }
