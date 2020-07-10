@@ -1,4 +1,5 @@
 //Packages
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -6,6 +7,7 @@ const app = express();
 const mysql = require("mysql");
 const _ = require("lodash");
 let status = ["", "", "", "", "", ""];
+let allItems=[];
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
@@ -29,6 +31,12 @@ db.connect(function(err) {
   console.log("MYSQL connected...");
 })
 
+
+//Get item data from behav.js
+app.post("/item",function(req,res){
+  allItems.push(req.body.itemData);
+});
+
 //Get home page
 app.get("/", function(req, res) {
   res.render("index", {
@@ -39,6 +47,7 @@ app.get("/", function(req, res) {
     status_signup: "",
     status_cart: ""
   });
+  console.log(x);
 });
 
 //Get any page
@@ -148,8 +157,6 @@ app.post("/:lnk", function(req, res) {
 
   });
 });
-
-
 
 //Listening to server on port 3000
 app.listen(3000, function() {

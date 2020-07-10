@@ -1,7 +1,7 @@
 // CART SECTION
 
 function openNav() {
-  document.getElementById("mySidenav").style.width = "375px";
+  document.getElementById("mySidenav").style.width = "380px";
 }
 
 function closeNav() {
@@ -9,82 +9,73 @@ function closeNav() {
 }
 
 
-
-var totalorder = 0;
-var totalprice = 0;
-var add = true;
-
 // Order Page Activities
 
-$(".minus").click(function() //Clicking the minus button
-  {
-    add = false;
-
-
-  });
-$(".plus").click(function() //Clicking the minus button
-  {
-    add = true;
-
-
-  });
-
+let name="";
+var price="";
+let spiceLvl = "";
+let addon = [];
+function Item (name,price,spiceLvl,addon){
+  this.name = name;
+  this.price= price;
+  this.spiceLvl= spiceLvl;
+  this.addon= addon;
+}
 $(".addtocart").click(function() //Clicking the addtocart button
   {
-
-
-    if (add) {
-      totalorder++;
-    } else {
-      totalorder--;
-      if (totalorder < 0) {
-        totalorder = 0;
-
-      }
-    }
-
-
-
-    //$(this).text("Added to Cart");
-
-    $(".hide", this).removeClass("hide");
-    //$(this).attr("disabled", true);
-
-    var price = $(".prices", this).text();
-    totalprice += parseInt(price);
-    $(".num").text(totalorder);
-
+    name= $(this).siblings("h5").text();
+    price=$(this).siblings("h6").find("span").text();
 
   });
-
-
-
 
 // Modal JS
 
 $("#BurgerModal .adds button").click(function() {
-  $(this).removeClass("btn-outline-warning");
-  $(this).addClass("btn-warning");
+  if ($(this).hasClass("btn-warning")) {
+    $(this).removeClass("btn-warning");
+    $(this).addClass("btn-outline-warning");
+    for (var i = 0; i < addon.length; i++) {
+      if (addon[i] === $(this).text()) {
+        addon.splice(i, 1);
+      }
+    }
+  } else {
+    $(this).removeClass("btn-outline-warning");
+    $(this).addClass("btn-warning");
+    addon.push($(this).text());
+  }
 });
-$("#BurgerModal .modal-footer button").click(function() {
-  $("#BurgerModal .modal-body button").addClass("btn-outline-warning");
-  $("#BurgerModal .modal-body button").removeClass("btn-warning");
-});
-
 
 $("#BurgerModal .spice button").click(function() {
   $(this).removeClass("btn-outline-warning");
   $(this).addClass("btn-warning");
   $("#BurgerModal .spice button").not(this).removeClass("btn-warning");
   $("#BurgerModal .spice button").not(this).addClass("btn-outline-warning");
-
+  spiceLvl = $(this).text();
 });
+
+
+
 $("#FriesModal .spice button").click(function() {
   $(this).removeClass("btn-outline-warning");
   $(this).addClass("btn-warning");
   $("#FriesModal .spice button").not(this).removeClass("btn-warning");
   $("#FriesModal .spice button").not(this).addClass("btn-outline-warning");
 
+});
+
+$("#BurgerModal .modal-footer button").click(function() {
+  $("#BurgerModal .modal-body button").addClass("btn-outline-warning");
+  $("#BurgerModal .modal-body button").removeClass("btn-warning");
+  if(spiceLvl===""){
+    alert("Please select your desired spice level.");
+    $(this).removeAttr("data-dismiss");
+  }
+  else{
+    $(this).attr("data-dismiss","modal");
+  }
+  var itemData=new Item(name,price,spiceLvl,addon);
+  $.post('/item', { itemData: itemData });
 });
 
 // SignUp FOrm
