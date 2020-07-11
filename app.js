@@ -8,6 +8,8 @@ const mysql = require("mysql");
 const _ = require("lodash");
 let status = ["", "", "", "", "", ""];
 let allItems=[];
+let userDataSignIn={};
+let orderId=0;
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
@@ -48,7 +50,6 @@ app.get("/", function(req, res) {
     status_signup: "",
     status_cart: ""
   });
-  console.log(x);
 });
 
 //Get any page
@@ -138,7 +139,7 @@ app.post("/signup", function(req, res) {
 //Signin module
 app.post("/:lnk", function(req, res) {
 
-  const userData = {
+  userDataSignIn = {
     phoneOremail: req.body.phoneOremail,
     passWord: req.body.passWord,
   };
@@ -147,7 +148,7 @@ app.post("/:lnk", function(req, res) {
     if (err) throw err;
     else {
       for (var i = 0; i < result.length; i++) {
-        if (((userData.phoneOremail === result[i].phone) || (userData.phoneOremail === result[i].email)) && (userData.passWord === result[i].pass)) {
+        if (((userDataSignIn.phoneOremail === result[i].phone) || (userDataSignIn.phoneOremail === result[i].email)) && (userDataSignIn.passWord === result[i].pass)) {
           res.redirect("/");
           console.log("Signed in successfully");
           break;
@@ -159,6 +160,23 @@ app.post("/:lnk", function(req, res) {
   });
 });
 
+app.post("/checkout", function(req,res){
+  orderId++;
+  let userEmail=userDataSignIn.phoneOremail;
+  let itemName=allItems[0].name;
+  let addonName=allItems[0].addon.toString();
+  let itemPrice=allItems[0].price;
+  let itemSpiceLvl=allItems[0].spiceLvl;
+  let sql3="CALL calc_tot_price(?,?,?,?,?,?);";
+  let query = db.query(sql3, [orderId,userEmail, itemName, addonName, itemPrice, itemSpiceLvl], function(err, results, fields) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("UPDATE SUCCESSFUL");
+    }
+  });
+    
+});
 //Listening to server on port 3000
 app.listen(3000, function() {
   console.log("Server started on port 3000.");
