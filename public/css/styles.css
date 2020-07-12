@@ -4,6 +4,7 @@ body{
 section{
   background-color: #0E1319;
   background-image: url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX26810236.jpg');
+  background-attachment: fixed;
 }
 /* HOMEPAGE */
 
@@ -46,6 +47,49 @@ position: relative;
   display: inline;
 }
 
+.side-cart{
+  /* width: 80px;
+  color:#f9d56e ; */
+   position: fixed;
+  right: 0;
+  top: 250px;
+  z-index: 1050;
+  background-color: #fff;
+  text-align: center;
+  background-color: #888888;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: -3px 2px 5px #888888;
+}
+
+
+/* .itemstocart{
+  background-color: #888888;
+  font-size: 12px;
+} */
+.side-cart p{
+    padding: 5% 0;
+    margin-bottom: 0;
+}
+/* .side-cart p:hover{
+  background-color: #5e6073;
+} */
+
+.side-cart div:hover{
+  background-color: #5e6073;
+}
+.side-cart a{
+  color:#f9d56e ;
+}
+.side-cart a:hover{
+  text-decoration: none;
+  color:#f9d56e ;
+}
+
+
+
+
+
 /* IMAGE SECTION */
 #image-sec{
   position: relative;
@@ -82,7 +126,6 @@ position: relative;
 #about-section
 {
   position: relative;
-  background-color: #0e1319;
   color: #f7f7f7;
   text-align: center;
   font-family: 'Aclonica', sans-serif;
@@ -92,14 +135,23 @@ position: relative;
 #about-section p{
   margin-top: 0;
   margin-bottom: 0;
+  background-color: #111;
+
 }
 .about-heading{
-  padding: 5% 2% 0 2%;
+  padding: 5% 0 0;
   font-size: 3vw;
 
 }
+.a-head{
+  margin: 0 22%;
+}
+.a-desc{
+  padding: 5% 3% 10%;
+}
 .about-description{
-  padding: 5% 25% 10% 25%;
+  margin:0 22%;
+  /* background-color: #000; */
 }
 
 /* ORDER SECTION */
@@ -296,9 +348,13 @@ position: relative;
   padding: 5% 16% 0;
   font-size: 2rem;
   font-family: 'Aclonica', sans-serif;
-  line-height: 3;
-}
+  line-height: 2;
 
+}
+.menu-section-header p{
+  background-color: #1e0411;
+  margin: 0 5%;
+}
 .h
 
 /*hr used under menu section header */
@@ -576,31 +632,63 @@ ul .Addons {
 
 /* SLIDING CART */
 .sidenav {
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
   height: 100%;
   width: 0;
   position: fixed;
   z-index: 1050;
   top: 0;
   right: 0;
+
+  transition: right 0.5s;
+  -moz-transition: right 0.5s;
+  -webkit-transition: right  0.5s;
+  /* box-shadow: -3px 2px 5px #393e46; */
+
+}
+
+.close-drawer{
+  position: absolute;
+  background-color: #F5AA13;
+  display: inline-block;
+  top: 47%;
+  z-index: 1060;
+  border-radius: 20% 0 0 20%;
+  /* box-shadow: -3px 2px 5px #393e46; */
+}
+#carttt{
   background-color: #111;
-  opacity: 0.8;
+  overflow-x: hidden;
+  height: 100%;
+  width:0;
+  position: absolute;
+  right: 0;
+  box-shadow: -6px 2px 5px #393e46;
+
+  /* font-family: 'Montserrat', sans-serif;
+  height: 100%;
+  position: fixed;
+  z-index: 1050;
+  top: 0;
+  right: 0;
+  background-color: #111;
   overflow-x: hidden;
   transition: right 0.5s;
   -moz-transition: right 0.5s;
   -webkit-transition: right  0.5s;
   padding-top: 60px;
-
+  box-shadow: -3px 2px 5px #393e46; */
+  display: inline-block;
 }
 
-.sidenav a, .cart-caption {
-  padding: 8px 8px 8px 8px;
+.cart-caption {
+  padding: 8px 15px 8px 55px;
   text-decoration: none;
-  font-size: 25px;
-  color: #fff;
+  font-size: 20px;
+  color: #cb3737;
   display: block;
   transition: right 0.5s;
-  text-align: center;
+  text-align: left;
 }
 
 .sidenav a:hover {
@@ -611,6 +699,12 @@ ul .Addons {
   bottom: 0;
 }
 
+.cart-caption .btn{
+  padding: .25rem .75rem;
+}
+.cart-caption i{
+  padding-right: 115px;
+}
 .sidenav .closebtn {
   position: absolute;
   top: 0;
@@ -647,7 +741,7 @@ ul .Addons {
 }
 #mySidenav .cd-cart-items {
   padding: 0;
-  color: #F5AA13;
+  color: #fff;;
 }
 #mySidenav .cd-cart-items li {
   position: relative;
@@ -665,8 +759,7 @@ ul .Addons {
   color: #a6aa9c;
 }
 .tot{
-  color: #fff;
-  display: inline;
+  font-weight: bold;
 }
 #mySidenav .cd-price {
   position: absolute;
@@ -674,9 +767,52 @@ ul .Addons {
   display: inline;
   margin-top: .4em;
 }
-#mySidenav .cd-item-remove {
-  position: absolute;
-  right: 1em;
+.item-quantity{
+    display: inline;
+
+}
+.item-desc{
+}
+.item-desc td{
+  padding: 0;
+}
+td.bname{
+  color: #F5AA13;
+}
+.item-desc table{
+  width: 100%;
+  margin: 0;
+}
+.item-discard{
+  display: inline;
+float: right;
+}
+
+input[type="number"]{
+  text-align: center;
+}
+
+input[type="number"]:focus{
+  outline: none;
+}
+
+/* input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+
+   opacity: .3;
+
+} */
+
+input.col-2{
+  flex: 0 0 18%;
+  max-width: 18%;
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+
+ #mySidenav .cd-item-remove {
+  font-size: 20px;
 }
 .cd-item{
   height:70%;

@@ -1,11 +1,13 @@
 // CART SECTION
 
 function openNav() {
-  document.getElementById("mySidenav").style.width = "380px";
+  document.getElementById("mySidenav").style.width = "400px";
+  document.getElementById("carttt").style.width = "375px";
 }
 
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("carttt").style.width = "0";
 }
 
 
