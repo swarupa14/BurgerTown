@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2020 at 12:39 PM
+-- Generation Time: Jul 13, 2020 at 05:38 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -26,23 +26,24 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_tot_price` (IN `order_id` INT, IN `user_email` VARCHAR(50), IN `item_name` VARCHAR(255), IN `addon_name` VARCHAR(100), IN `item_price` INT, IN `item_spice` VARCHAR(20))  MODIFIES SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_tot_price` (IN `order_id` INT, IN `item_name` VARCHAR(255), IN `addon_name` VARCHAR(100), IN `item_price` INT, IN `item_spice` VARCHAR(20))  MODIFIES SQL DATA
 BEGIN
 DECLARE tot_price int;
 DECLARE item_id int;
 DECLARE addon_id int;
 DECLARE addon_price int;
-insert into orders values(order_id,NULL,CURRENT_DATE,user_email);
+
 SELECT ItemID into item_id from menu
 WHERE Name=item_name;
 
 select addonID,price into addon_id,addon_price from addon
 where name=addon_name;
+IF addon_name is NULL THEN
+SET tot_price=item_price;
+ELSE
 SET tot_price=item_price+addon_price;
-insert into combined_order values (order_id,item_id,addon_id,item_spice);
-update orders
-set total_price=tot_price
-where orderID=order_id;
+END IF;
+insert into combined_order values (order_id,item_id,addon_id,item_spice,tot_price);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Getmenuitems` (IN `input1` VARCHAR(100), IN `input2` VARCHAR(100), IN `input3` VARCHAR(100), IN `input4` VARCHAR(100), IN `input5` VARCHAR(100))  BEGIN
@@ -53,6 +54,24 @@ select * from menu where Section = input3;
 select * from menu where Section = input4;
 select * from menu where Section = input5;
 
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_name_and_orderid` ()  BEGIN
+
+select count(*) as Y from orders;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_order` (IN `order_id` INT, IN `user_name` VARCHAR(100), IN `user_phone` VARCHAR(50), IN `user_address` VARCHAR(100))  MODIFIES SQL DATA
+BEGIN
+insert into orders values(order_id,NULL,CURRENT_DATE,user_phone,user_name,user_address);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_order` (IN `order_id` INT)  MODIFIES SQL DATA
+BEGIN
+update orders 
+set total_price=(select sum(price) from combined_order where orderID=order_id) 
+where orderID=order_id;
 END$$
 
 DELIMITER ;
@@ -79,32 +98,34 @@ INSERT INTO `addon` (`addonID`, `name`, `price`) VALUES
 (3, 'Beef Bacon', 50),
 (4, 'Pepperoni', 30),
 (5, 'BBQ Sauce', 20),
-(6, 'Patty,Cheese', 110),
-(7, 'Patty,Beef Bacon', 140),
+(6, 'Cheese,Patty', 110),
+(7, 'Beef Bacon,Patty', 140),
 (8, 'Patty,Pepperoni', 120),
-(9, 'Patty,BBQ Sauce', 110),
-(10, 'Cheese,Beef Bacon', 70),
+(9, 'BBQ Sauce,Patty', 110),
+(10, 'Beef Bacon,Cheese', 70),
 (11, 'Cheese,Pepperoni', 50),
-(12, 'Cheese,BBQ Sauce', 40),
+(12, 'BBQ Sauce,Cheese', 40),
 (13, 'Beef Bacon,Pepperoni', 80),
-(14, 'Beef Bacon,BBQ Sauce', 70),
-(15, 'Pepperoni,BBQ Sauce ', 50),
-(16, 'Patty,Cheese,Beef Bacon', 160),
-(17, 'Patty,Cheese,Pepperoni', 140),
-(18, 'Patty,Cheese,BBQ Sauce', 130),
-(19, 'Patty,Beef Bacon,Pepperoni', 170),
-(20, 'Patty,Beef Bacon,BBQ Sauce', 160),
-(21, 'Patty,Pepperoni,BBQ Sauce', 140),
-(22, 'Cheese,Beef Bacon,Pepperoni', 100),
-(23, 'Cheese,Beef Bacon,BBQ Sauce', 90),
-(24, 'Cheese,Pepperoni,BBQ Sauce', 70),
-(25, 'Beef Bacon,Pepperoni,BBQ Sauce', 100),
-(26, 'Patty,Cheese,Beef Bacon,Pepperoni', 190),
-(27, 'Patty,Cheese,Beef Bacon,BBQ Sauce', 180),
-(28, 'Patty,Cheese,Pepperoni,BBQ Sauce', 160),
-(29, 'Patty,Beef Bacon,Pepperoni,BBQ Sauce', 190),
-(30, 'Cheese,Beef Bacon,Pepperoni,BBQ Sauce', 120),
-(31, 'Patty,Cheese,Beef Bacon,Pepperoni,BBQ Sauce', 210);
+(14, 'BBQ Sauce,Beef Bacon', 70),
+(15, 'BBQ Sauce,Pepperoni', 50),
+(16, 'Beef Bacon,Cheese,Patty', 160),
+(17, 'Cheese,Patty,Pepperoni', 140),
+(18, 'BBQ Sauce,Cheese,Patty', 130),
+(19, 'Beef Bacon,Patty,Pepperoni', 170),
+(20, 'BBQ Sauce,Beef Bacon,Patty', 160),
+(21, 'BBQ Sauce,Patty,Pepperoni', 140),
+(22, 'Beef Bacon,Cheese,Pepperoni', 100),
+(23, 'BBQ Sauce,Beef Bacon,Cheese', 90),
+(24, 'BBQ Sauce,Cheese,Pepperoni', 70),
+(25, 'BBQ Sauce,Beef Bacon,Pepperoni', 100),
+(26, 'Beef Bacon,Cheese,Patty,Pepperoni', 190),
+(27, 'BBQ Sauce,Beef Bacon,Cheese,Patty', 180),
+(28, 'BBQ Sauce,Cheese,Patty,Pepperoni', 160),
+(29, 'BBQ Sauce,Beef Bacon,Patty,Pepperoni', 190),
+(30, 'BBQ Sauce,Beef Bacon,Cheese,Pepperoni', 120),
+(31, 'BBQ Sauce,Beef Bacon,Cheese,Patty,Pepperoni', 210),
+(33, 'Regular', 0),
+(34, 'Large', 20);
 
 -- --------------------------------------------------------
 
@@ -115,16 +136,17 @@ INSERT INTO `addon` (`addonID`, `name`, `price`) VALUES
 CREATE TABLE `combined_order` (
   `orderID` int(11) NOT NULL,
   `itemID` int(11) NOT NULL,
-  `addonID` int(11) NOT NULL,
-  `spiceLvl` varchar(20) NOT NULL
+  `addonID` int(11) DEFAULT NULL,
+  `spiceLvl` varchar(20) DEFAULT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `combined_order`
 --
 
-INSERT INTO `combined_order` (`orderID`, `itemID`, `addonID`, `spiceLvl`) VALUES
-(56, 1, 1, 'Regular');
+INSERT INTO `combined_order` (`orderID`, `itemID`, `addonID`, `spiceLvl`, `price`) VALUES
+(0, 2, 16, 'Spicy', 340);
 
 -- --------------------------------------------------------
 
@@ -180,15 +202,17 @@ CREATE TABLE `orders` (
   `orderID` int(11) NOT NULL,
   `total_price` int(11) DEFAULT NULL,
   `date` date NOT NULL,
-  `email` varchar(50) NOT NULL
+  `phone` varchar(50) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
+  `address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`orderID`, `total_price`, `date`, `email`) VALUES
-(56, 340, '2020-07-11', 'ert');
+INSERT INTO `orders` (`orderID`, `total_price`, `date`, `phone`, `user_name`, `address`) VALUES
+(0, 340, '2020-07-13', '12345678903', 'Swarupa Islam', 'Akiber Basha');
 
 -- --------------------------------------------------------
 
@@ -197,8 +221,7 @@ INSERT INTO `orders` (`orderID`, `total_price`, `date`, `email`) VALUES
 --
 
 CREATE TABLE `user` (
-  `f_name` varchar(50) NOT NULL,
-  `l_name` varchar(50) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
   `phone` varchar(50) NOT NULL,
@@ -209,31 +232,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`f_name`, `l_name`, `email`, `address`, `phone`, `pass`) VALUES
-('asd', 'sda', 'akib@yahoo.com', 'asd', '12345678901', 'asd'),
-('Akib', 'Khan', 'akibkhanrt@gmail.com', 'Shantibagh', '01758544804', 'test123'),
-('asd', 'asd', 'asdasd@czxsa', 'sdf', '12345678901', 'q'),
-('sad', 'asf', 'asdsad@d', 'asd', '12345678901', 'asd'),
-('asd', 'sadsa', 'bvvvb', 'asd', '12345678901', 'as'),
-('ff', 'sadsa', 'bvvvbc', 'asd', '12345678901', 'as'),
-('ff', 'sadsa', 'bvvvbcz', 'asd', '12345678901', 'a'),
-('ff', 'sadsa', 'bvvvbczzaa', 'asd', '12345678901', 'a'),
-('asdg', 'asdf', 'ert', 'asdsaf', '12345678901', 'a'),
-('c', 'dc', 'kjuh', 'sad', '12345678901', 'x'),
-('c', 'dc', 'kjuhc', 'sad', '12345678901', 'a'),
-('c', 'dc', 'kjuhcz', 'sad', '12345678901', 's'),
-('c', 'dc', 'kjuhczcc', 'sad', '12345678901', 's'),
-('c', 'dc', 'kjuhczcccs', 'sad', '12345678901', 's'),
-('c', 'dc', 'kjuhczcccsww', 'sadd', '12345678901', 'a'),
-('c', 'dc', 'kjuhczcccswwet', 'sadd', '12345678901', 'w'),
-('c', 'dc', 'kjuhczcccswwetz', 'sadd', '12345678901', 'w'),
-('asd', 'sadsa', 'kljc', 'asd', '12345678901', 'a'),
-('asd', 'sadsa', 'kljcvvv', 'asd', '12345678901', 'a'),
-('asd', 'sadsa', 'kljcvvvz', 'asd', '12345678901', 'a'),
-('asd', 'sadsa', 'kljcvvvzvv', 'asd', '12345678901', 'a'),
-('asd', 'sadsa', 'kljcvvvzvvzz', 'asd', '12345678901', 'a'),
-('Swarupa', 'Islam', 'swarupaislam@gmail.com', 'Airport', '12345678901', 'asd'),
-('f', 's', 'zxczxz', 'ef', '12345678901', 'a');
+INSERT INTO `user` (`user_name`, `email`, `address`, `phone`, `pass`) VALUES
+('Akib Khan', 'abc@gmail.com', 'Shantibag', '12345678901', 'a');
 
 --
 -- Indexes for dumped tables
@@ -263,14 +263,13 @@ ALTER TABLE `menu`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`orderID`),
-  ADD KEY `email` (`email`);
+  ADD PRIMARY KEY (`orderID`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`email`);
+  ADD PRIMARY KEY (`phone`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -290,15 +289,9 @@ ALTER TABLE `menu`
 -- Constraints for table `combined_order`
 --
 ALTER TABLE `combined_order`
-  ADD CONSTRAINT `combined_order_ibfk_2` FOREIGN KEY (`addonID`) REFERENCES `addon` (`AddonID`),
+  ADD CONSTRAINT `combined_order_ibfk_2` FOREIGN KEY (`addonID`) REFERENCES `addon` (`addonID`),
   ADD CONSTRAINT `combined_order_ibfk_3` FOREIGN KEY (`itemID`) REFERENCES `menu` (`ItemID`),
   ADD CONSTRAINT `combined_order_ibfk_4` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`);
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -134,6 +134,9 @@
           <hr class="cardhr">
           <p class="card-text"><%= item.Ingredients %></p>
           <h6 class="pricetags">BDT <span class="prices"><%= item.Price %></span></h6>
+          <p>
+            (LARGE BDT <%= item.Price + 20 %>)
+            </p>
           <!-- Add to cart button -->
           <div class="mt-auto addtocart">
             <span data-toggle="modal" data-target="#FriesModal"><button type="button" class="btn btn-success"> Add to Cart</button> </span>
@@ -170,7 +173,7 @@
           <p class="card-text"><%= item.Ingredients %></p>
           <h6 class="pricetags">BDT <span class="prices"> <%= item.Price %></span></h6>
           <!-- Add to cart button -->
-          <div class="mt-auto addtocart">
+          <div class="mt-auto shakes addtocart">
             <span data-toggle="modal" data-target=""><button type="button" class="btn btn-success"> Add to Cart</button> </span>
           </div>
 
@@ -216,7 +219,7 @@
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success .add" data-dismiss="modal">ADD</button>
+              <button type="button" class="btn btn-success .add" data-dismiss="modal">ADD</button>
             </div>
 
         </div>
@@ -232,14 +235,14 @@
             <div class="container spice">
               <h5> Size </h5>
               <hr class="cardhr">
-              <button type="button" class="btn btn-outline-warning">Regular</button> BDT 50
+              <button type="button" class="btn btn-outline-warning">Regular</button>
               <br>
-              <button type="button" class="btn btn-outline-warning">Large</button> BDT 100
+              <button type="button" class="btn btn-outline-warning">Large</button>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary">ADD</button>
           </div>
         </div>
       </div>

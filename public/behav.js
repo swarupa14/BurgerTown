@@ -12,12 +12,14 @@ function closeNav() {
 
 
 // Order Page Activities
-
+//var allItems=[];
 let name="";
 let price=0;
 let spiceLvl = "";
 let addon = [];
-function Item (name,price,spiceLvl,addon){
+let type;
+function Item (type,name,price,spiceLvl,addon){
+  this.type=type;
   this.name = name;
   this.price= price;
   this.spiceLvl= spiceLvl;
@@ -28,11 +30,19 @@ $(".addtocart").click(function() //Clicking the addtocart button
     name= $(this).siblings("h5").text();
     price=parseInt($(this).siblings("h6").find("span").text());
 
+    if ($(this).hasClass("shakes")){
+      type=3;
+      addon.sort();
+      let itemData=new Item(type,name,price,spiceLvl,addon);
+      $.post('/item', { itemData: itemData });
+      addon=[];
+    }
+
   });
 
 // Modal JS
 
-$("#BurgerModal .adds button").click(function() {
+$("#BurgerModal .adds button").click(function() { //Clicking the addon buttons in BurgerModal
   if ($(this).hasClass("btn-warning")) {
     $(this).removeClass("btn-warning");
     $(this).addClass("btn-outline-warning");
@@ -48,7 +58,7 @@ $("#BurgerModal .adds button").click(function() {
   }
 });
 
-$("#BurgerModal .spice button").click(function() {
+$("#BurgerModal .spice button").click(function() { //Clicking the spice-level buttons in BurgerModal
   $(this).removeClass("btn-outline-warning");
   $(this).addClass("btn-warning");
   $("#BurgerModal .spice button").not(this).removeClass("btn-warning");
@@ -58,15 +68,21 @@ $("#BurgerModal .spice button").click(function() {
 
 
 
-$("#FriesModal .spice button").click(function() {
-  $(this).removeClass("btn-outline-warning");
-  $(this).addClass("btn-warning");
-  $("#FriesModal .spice button").not(this).removeClass("btn-warning");
-  $("#FriesModal .spice button").not(this).addClass("btn-outline-warning");
+$("#FriesModal .spice button").click(function() { //Clicking the size buttons in FriesModal
+  type=2;
+  if ($(this).hasClass("btn-warning")) {
+    $(this).removeClass("btn-warning");
+    $(this).addClass("btn-outline-warning");
+    addon=[];
+  } else {
+    $(this).removeClass("btn-outline-warning");
+    $(this).addClass("btn-warning");
+    addon.push($(this).text());
+  }
 
 });
 
-$("#BurgerModal .modal-footer button").click(function() {
+$("#BurgerModal .modal-footer button").click(function() { //Clicking the add button in BurgerModal
   $("#BurgerModal .modal-body button").addClass("btn-outline-warning");
   $("#BurgerModal .modal-body button").removeClass("btn-warning");
   if(spiceLvl===""){
@@ -75,10 +91,40 @@ $("#BurgerModal .modal-footer button").click(function() {
   }
   else{
     $(this).attr("data-dismiss","modal");
-    let itemData=new Item(name,price,spiceLvl,addon);
-    $.post('/item', { itemData: itemData });
+    if(addon.length==0)
+      type=4;
+    else type=1;
+    addon.sort();
+    let itemData=new Item(type,name,price,spiceLvl,addon);
+    $.post('/item', { itemData:itemData });
+    addon=[];
+    spiceLvl="";
   }
 });
+
+$("#FriesModal .modal-footer button").click(function() { //Clicking the add button in FriesModal
+  $("#FriesModal .modal-body button").addClass("btn-outline-warning");
+  $("#FriesModal .modal-body button").removeClass("btn-warning");
+  if(addon.length==0){
+    alert("Please select the size of your fries.");
+    $(this).removeAttr("data-dismiss");
+  }
+  else{
+    $(this).attr("data-dismiss","modal");
+    let itemData=new Item(type,name,price,spiceLvl,addon);
+    $.post('/item', { itemData:itemData });
+    addon=[];
+    spiceLvl="";
+  }
+});
+
+// $("#checkout .information .confirm-order-button button").click(function(){ //Clicking the confirm order button in checkout page
+//   $.get("/items",function(data){
+//     $.post('/itemz', { allItems:data.allItems });
+//     console.log(data.allItems);
+//   });
+// });
+
 
 // SignUp FOrm
 
