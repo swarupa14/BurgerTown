@@ -814,11 +814,12 @@ input.col-2{
  #mySidenav .cd-item-remove {
   font-size: 20px;
 }
-.cd-item{
-  height:70%;
+#carttt .cd-cart-items{
+  height:500px;
   overflow-y: scroll;
 }
 .cart-footer{
+
   position: absolute;
   width: 100%;
   bottom: 0;

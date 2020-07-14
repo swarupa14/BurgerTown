@@ -48,7 +48,7 @@
         <table>
           <tr>
             <td>Subtotal</td>
-            <td class="val">BDT 780.00</td>
+            <td class="val">BDT <%=totalprice%></td>
           </tr>
           <tr>
             <td>Delivery Charge</td>
@@ -56,7 +56,7 @@
           </tr>
           <tr>
             <td>Order Total</td>
-            <td class="val">BDT 840.00</td>
+            <td class="val">BDT <%=parseInt(totalprice)+parseInt(60)%></td>
           </tr>
 
           <tr>
@@ -65,8 +65,12 @@
           </tr>
         </table>
         <hr>
-        <span>Due</span>
-        <!-- <span class="due">BDT 00.00</span> -->
+        <table>
+        <tr>
+          <td>Due</td>
+          <td class="val">BDT <%=parseInt(totalprice)+parseInt(60)%></td>
+        </tr>
+          </table>
 
       </div>
 

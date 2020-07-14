@@ -20,6 +20,8 @@ var user_data = {
 //let orderId=0;
 //let order_id=5;
 var i = 0;
+var flag=0;
+
 let addonName = [];
 let itemSpiceLvl = [];
 app.set('view engine', 'ejs');
@@ -36,6 +38,9 @@ const db = mysql.createConnection({
   password: '',
   database: 'burgertown'
 });
+let x="Regular";
+let tempprice=0;
+let totprice=0;
 
 db.connect(function(err) {
   if (err) {
@@ -52,17 +57,30 @@ app.post("/item", function(req, res) {
   if (allItems[i].type == 1) {
     addonName.push(allItems[i].addon.toString());
     itemSpiceLvl.push(allItems[i].spiceLvl);
+    x=allItems[i].addon.toString();
+    flag=1;
+
+
   } else if (allItems[i].type == 2) {
     addonName.push(allItems[i].addon.toString());
     itemSpiceLvl.push(null);
+    x=allItems[i].addon.toString();
+    flag=2;
   } else if (allItems[i].type == 4) {
     addonName.push(null);
     itemSpiceLvl.push(allItems[i].spiceLvl);
+    flag=3;
+
   } else {
     addonName.push(null);
     itemSpiceLvl.push(null);
+    flag=3;
+
   }
+
+  tempprice=parseInt(allItems[i].price);
   i++;
+
 
 });
 
@@ -124,6 +142,11 @@ app.post("/checkout", function(req, res) {
 //Get home page
 app.get("/", function(req, res) {
   res.render("index", {
+    itemnumber:allItems.length,
+   cartitems:allItems,
+   // itemamount:itemnum,
+   addonprice:resultprice,
+   totalprice:totprice,
     status_home: "active",
     status_location: "",
     status_menu: "",
@@ -133,6 +156,7 @@ app.get("/", function(req, res) {
   });
 });
 
+var resultprice=[];
 //Get any page
 app.get("/:lnk", function(req, res) {
   const dest = _.lowerCase(req.params.lnk);
@@ -163,8 +187,36 @@ app.get("/:lnk", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log(results);
+      let sql1 = 'Select * from addon where name=?';
+
+      let query1 = db.query(sql1, [x], function(err, results1, fields) {
+        if (err) {
+          console.log(err);
+        }else{
+
+    if(flag!=3 && x!=""){
+      console.log(results1[0]);
+
+      resultprice.push(results1[0].price);
+      console.log(flag);
+      totprice=tempprice+parseInt(totprice)+parseInt(results1[0].price);
+
+    }
+    else if (flag==3){
+      resultprice.push(0);
+      totprice=tempprice+parseInt(totprice)+parseInt(0);
+    }
+
+    console.log(resultprice);
+    x="";
+    flag=0;
+    tempprice=0
       res.render(dest, {
+        itemnumber:allItems.length,
+       cartitems:allItems,
+       // itemamount:itemnum,
+       addonprice:resultprice,
+       totalprice:totprice,
         status_home: status[0],
         status_location: status[1],
         status_menu: status[2],
@@ -181,6 +233,8 @@ app.get("/:lnk", function(req, res) {
         useraddress:user_data.useraddress
       });
 
+    }
+      });
     }
   });
 });
@@ -269,6 +323,11 @@ app.post("/:lnk", function(req, res) {
               } else {
                 console.log(results);
                 res.render(dest, {
+                  itemnumber:allItems.length,
+                 cartitems:allItems,
+                 // itemamount:itemnum,
+                 addonprice:resultprice,
+                 totalprice:totprice,
                   status_home: status[0],
                   status_location: status[1],
                   status_menu: status[2],

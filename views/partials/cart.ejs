@@ -5,10 +5,10 @@
       <img src="img/slidecart.jpg" alt="">
     </div>
     <div class="itemstocart">
-      <p>0 ITEMS</p>
+      <p><%=itemnumber%> ITEMS</p>
     </div>
     <div class="cart-value">
-      <p>BDT 0.00</p>
+      <p>BDT  <%=totalprice%></p>
     </div>
   </a>
 </div>
@@ -18,20 +18,22 @@
 <!-- CART SECTION -->
 <div id="mySidenav" class="sidenav">
 
-
-
   <div class="close-drawer" onclick="closeNav()">
     <img src="img/backcart.png" alt="">
   </div>
+  <!-- <div class="cartitems"> -->
+
+<div id="carttt" class="cartitems">
 
 
-  <div id="carttt">
+  <div  class="cartitems">
     <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-    <div class="cart-caption">0 items <i class="fas fa-shopping-bag"></i> <button type="button" class="btn btn-danger btn-sm" onclick="closeNav()">CLOSE</button></div>
+    <div class="cart-caption"><%=itemnumber%> items <i class="fas fa-shopping-bag"></i> <button type="button" class="btn btn-danger btn-sm" onclick="closeNav()">CLOSE</button></div>
 
     <div class="cd-item">
       <ul class="cd-cart-items">
 
+        <%for(var i=0;i<cartitems.length;i++){%>
 
 
         <li>
@@ -44,115 +46,66 @@
             </div>
             <div class="item-desc">
               <table>
-                <tr>
-                  <td class="bname">BBQ Chicken Cheese Burger</td><td> BDT 245</td>
-                </tr>
-                <tr>
-                  <td>Favour</td><td>Regular</td>
-                </tr>
-                <tr>
-                  <td>Addons:</td><td></td>
-                </tr>
-                <tr>
-                  <td>Patty</td><td>BDT 90</td>
-                </tr>
-                <tr class="tot">
-                  <td>TOTAL</td><td>BDT 335</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </li>
+                <% if(cartitems[i].type==1){%>
 
-        <li>
-          <div class="idk-yet">
-            <div class="item-quantity">
-              <input class="quantity col-2 amount-input" min="1" name="quantity" value="1" type="number" id="qty">
-            </div>
-            <div class="item-discard">
-              <div class="cd-item-remove" role="button">&times;</div>
-            </div>
-            <div class="item-desc">
-              <table>
                 <tr>
-                  <td class="bname">BBQ Chicken Cheese Burger</td><td> BDT 245</td>
+                  <td class="bname"><%= cartitems[i].name %></td><td> BDT <%=cartitems[i].price%></td>
                 </tr>
                 <tr>
-                  <td>Favour</td><td>Regular</td>
+                  <td>Flavour:</td><td><%= cartitems[i].spiceLvl %></td>
                 </tr>
                 <tr>
                   <td>Addons:</td><td></td>
                 </tr>
                 <tr>
-                  <td>Patty</td><td>BDT 90</td>
+                  <td><%= cartitems[i].addon %></td><td>BDT <%= addonprice[i+1]%></td>
                 </tr>
                 <tr class="tot">
-                  <td>TOTAL</td><td>BDT 335</td>
+                  <td>TOTAL</td><td>BDT <%= (parseInt(cartitems[i].price)+parseInt(addonprice[i+1]))%></td>
                 </tr>
-              </table>
-            </div>
-          </div>
-        </li>
+                  <%}%>
+                  <% if(cartitems[i].type==2){%>
 
-        <li>
-          <div class="idk-yet">
-            <div class="item-quantity">
-              <input class="quantity col-2 amount-input" min="1" name="quantity" value="1" type="number" id="qty">
-            </div>
-            <div class="item-discard">
-              <div class="cd-item-remove" role="button">&times;</div>
-            </div>
-            <div class="item-desc">
-              <table>
-                <tr>
-                  <td class="bname">BBQ Chicken Cheese Burger</td><td> BDT 245</td>
-                </tr>
-                <tr>
-                  <td>Favour</td><td>Regular</td>
-                </tr>
-                <tr>
-                  <td>Addons:</td><td></td>
-                </tr>
-                <tr>
-                  <td>Patty</td><td>BDT 90</td>
-                </tr>
-                <tr class="tot">
-                  <td>TOTAL</td><td>BDT 335</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </li>
+                  <tr>
+                    <td class="bname"><%= cartitems[i].name %></td><td> BDT <%=cartitems[i].price%></td>
+                  </tr>
+                  <tr>
+                    <td>Size:</td><td></td>
+                  </tr>
+                  <tr>
+                    <td><%= cartitems[i].addon %></td><td>BDT <%= addonprice[i+1]%></td>
+                  </tr>
+                  <tr class="tot">
+                    <td>TOTAL</td><td>BDT <%= (parseInt(cartitems[i].price)+parseInt(addonprice[i+1]))%></td>
+                  </tr>
+                    <%}%>
+                    <% if(cartitems[i].type==3){%>
 
-        <li>
-          <div class="idk-yet">
-            <div class="item-quantity">
-              <input class="quantity col-2 amount-input" min="1" name="quantity" value="1" type="number" id="qty">
-            </div>
-            <div class="item-discard">
-              <div class="cd-item-remove" role="button">&times;</div>
-            </div>
-            <div class="item-desc">
-              <table>
-                <tr>
-                  <td class="bname">BBQ Chicken Cheese Burger</td><td> BDT 245</td>
-                </tr>
-                <tr>
-                  <td>Favour</td><td>Regular</td>
-                </tr>
-                <tr>
-                  <td>Addons:</td><td></td>
-                </tr>
-                <tr>
-                  <td>Patty</td><td>BDT 90</td>
-                </tr>
-                <tr class="tot">
-                  <td>TOTAL</td><td>BDT 335</td>
-                </tr>
+                    <tr>
+                      <td class="bname"><%= cartitems[i].name %></td><td> BDT <%=cartitems[i].price%></td>
+                    </tr>
+
+                    <tr class="tot">
+                      <td>TOTAL</td><td>BDT <%= (parseInt(cartitems[i].price)+parseInt(addonprice[i+1]))%></td>
+                    </tr>
+                      <%}%>
+                      <% if(cartitems[i].type==4){%>
+
+                      <tr>
+                        <td class="bname"><%= cartitems[i].name %></td><td> BDT <%=cartitems[i].price%></td>
+                      </tr>
+                      <tr>
+                        <td>Flavour:</td><td><%= cartitems[i].spiceLvl %></td>
+                      </tr>
+                      <tr class="tot">
+                        <td>TOTAL</td><td>BDT <%= (parseInt(cartitems[i].price)+parseInt(addonprice[i+1]))%></td>
+                      </tr>
+                        <%}%>
               </table>
             </div>
           </div>
         </li>
+<%  }%>
 
 
       </ul>
@@ -160,11 +113,12 @@
 
     <div class="cart-footer">
       <div class="total-price">
-        BDT 80576.00
+        BDT  <%=totalprice%>
       </div>
       <a href="/checkout"><button type="button" class="btn btn-success btn-block">CHECKOUT</button></a>
 
     </div>
-  </div>
-
+  <!-- </div> -->
+</div>
+</div>
 </div>

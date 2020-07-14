@@ -36,6 +36,9 @@ $(".addtocart").click(function() //Clicking the addtocart button
       let itemData=new Item(type,name,price,spiceLvl,addon);
       $.post('/item', { itemData: itemData });
       addon=[];
+      $('#carttt').load('/order .cartitems');
+      $('.side-cart').load('/order .side-cart');
+
     }
 
   });
@@ -99,6 +102,10 @@ $("#BurgerModal .modal-footer button").click(function() { //Clicking the add but
     $.post('/item', { itemData:itemData });
     addon=[];
     spiceLvl="";
+    $('#carttt').load('/order .cartitems');
+    $('.side-cart').load('/order .side-cart');
+
+
   }
 });
 
@@ -115,6 +122,8 @@ $("#FriesModal .modal-footer button").click(function() { //Clicking the add butt
     $.post('/item', { itemData:itemData });
     addon=[];
     spiceLvl="";
+    $('#carttt').load('/order .cartitems');
+    $('.side-cart').load('/order .side-cart');
   }
 });
 
