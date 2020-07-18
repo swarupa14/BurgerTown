@@ -2,9 +2,9 @@ body{
   background-color: #07031a;
 }
 section{
-  background-color: #0E1319;
-  background-image: url('https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX26810236.jpg');
-  background-attachment: fixed;
+  background-color: #0b0b0d;
+  background-image: url('img/burg-bg.jpg');
+  /* background-attachment: fixed; */
 }
 /* HOMEPAGE */
 
@@ -17,7 +17,7 @@ position: relative;
   padding: 0 0 4.5rem;
 }
 .navbg{
-  /* background-color: #0E1319; */
+  /* background-color: #0b0b0d; */
   background-color: #000;
 }
 
@@ -126,16 +126,17 @@ position: relative;
 #about-section
 {
   position: relative;
+  background-color: #0b0b0d;
   color: #f7f7f7;
   text-align: center;
   font-family: 'Aclonica', sans-serif;
+
 
 
 }
 #about-section p{
   margin-top: 0;
   margin-bottom: 0;
-  background-color: #111;
 
 }
 .about-heading{
@@ -144,13 +145,14 @@ position: relative;
 
 }
 .a-head{
-  margin: 0 22%;
+  padding: 0 22%;
 }
 .a-desc{
-  padding: 5% 3% 10%;
+  padding: 5% 0 10%;
+  font-size: 22px;
 }
 .about-description{
-  margin:0 22%;
+  padding: 0 15%;
   /* background-color: #000; */
 }
 
@@ -158,7 +160,7 @@ position: relative;
 #order-section
 {
   position: relative;
-  background-color: #0E1319;
+  background-color: #0b0b0d;
   color: #f7f7f7;
 
 }
@@ -202,7 +204,7 @@ position: relative;
 #offer-carousel
 {
   position: relative;
-  background-color: #0e1319;
+  background-color: #0b0b0d;
   color: #f7f7f7;
   text-align: center;
   font-family: 'Aclonica', sans-serif;
@@ -261,7 +263,7 @@ position: relative;
 .burger-body{
   position: relative;
   width: 100%;
-  height: 300px;
+  /* height: 300px; */
 }
 
 .body-sec{
@@ -275,7 +277,7 @@ position: relative;
 
 .titlepage{
   /* position: absolute; */
-  padding: 7% 0 3% 7%;
+  padding: 5% 0 0 7%;
   text-align: left;
   font-size: 3vw;
 }
@@ -288,7 +290,7 @@ position: relative;
 /*Section containing pricings of menu */
   {
   position: relative;
-  background-color: #0e1319;
+  background-color: #0b0b0d;
   color: #F5AA13;
   font-family: 'Merriweather Sans', sans-serif;
 }
@@ -296,6 +298,9 @@ position: relative;
 .location-card {
   padding: 0 6% 5%;
   text-align:center;
+}
+iframe{
+  width: 100%;
 }
 
 .location-card .price-cards {
@@ -305,8 +310,11 @@ position: relative;
 }
 
 .card .burger{
-  height:17rem;
+  height:17.5rem;
 }
+/* .menucard-height{
+  height: 12rem;
+} */
 
 .card-body {
   background-color: #1b262c;
@@ -319,9 +327,12 @@ position: relative;
 .card {
   background-color: #1b262c;
   text-align: center;
-  width: 17rem;
+  /* width: 17rem; */
 
   margin: auto;
+}
+.menu-card{
+  width: 20vw;
 }
 .price-cards {
   text-align: center;
@@ -352,7 +363,8 @@ position: relative;
 
 }
 .menu-section-header p{
-  background-color: #1e0411;
+  background-color: #f4f4f4;
+  color: #f5841a ;
   margin: 0 5%;
 }
 .h
@@ -396,6 +408,7 @@ ul .Addons {
   border-width: 2px;
   border-color: #F5AA13;
   width: 30%;
+  margin-top: 5px;
 }
 
 .twobuttons a{
@@ -405,7 +418,7 @@ ul .Addons {
 .twobuttons {
   position: relative;
   padding: 10% 0 5%;
-  background-color: #0e1319;
+  background-color: #0b0b0d;
   font-family: 'Aclonica', sans-serif;
   text-align: center;
 }
@@ -451,7 +464,7 @@ ul .Addons {
 .timings{
   font-family: 'Aclonica', sans-serif;
   text-align: left;
-  background-color: #0e1319;
+  background-color: #0b0b0d;
   color: #fff;
 
 }
@@ -477,7 +490,7 @@ ul .Addons {
   font-family: 'Aclonica', sans-serif;
   color: #F5AA13;
   text-align: left;
-  background-color: #0e1319;
+  background-color: #0b0b0d;
 
 
 }
@@ -682,6 +695,7 @@ ul .Addons {
 }
 
 .cart-caption {
+  height:7vh;
   padding: 8px 15px 8px 55px;
   text-decoration: none;
   font-size: 20px;
@@ -695,7 +709,7 @@ ul .Addons {
   color: red;
 }
 .sidenav .btn{
-  padding: 5%;
+  height:5vh;
   bottom: 0;
 }
 
@@ -728,6 +742,7 @@ ul .Addons {
   text-align: center;
   background-color: #F5AA13;
   position: relative;
+  height: 5vh;
   padding: 3%;
 }
 
@@ -809,13 +824,15 @@ input.col-2{
   padding-right: 0;
   padding-left: 10px;
 }
-
+#mySidenav .cd-item{
+  height: 83vh;
+}
 
  #mySidenav .cd-item-remove {
   font-size: 20px;
 }
 #carttt .cd-cart-items{
-  height:500px;
+  height:100%;
   overflow-y: scroll;
 }
 .cart-footer{
@@ -830,7 +847,7 @@ input.col-2{
 /* CHECKOUT PAGE */
 #checkout
 {
-  background-color: #0E1319;
+  background-color: #0b0b0d;
   text-align: center;
   padding: 5%;
 }
@@ -845,7 +862,7 @@ text-align: center;
 .checkout-block{
   margin: 5% auto;
   padding: 3%;
-  width: 550px;
+  width: 50vw;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
   text-align: left;
@@ -906,7 +923,7 @@ margin-bottom: 10px;
   right: 0;
 }
 input[type="radio"] {
-  margin: 3px;
+  margin: 10px;
 
 }
 

@@ -20,16 +20,18 @@
     <!-- Signature Burgers -->
     <div class="container menu-con menu-section-header">
       <p>Signature Burgers</p>
-      <hr class="h">
+     <!-- <hr class="h"> -->
 
     </div>
     <div class="row">
 
   <%  signatureitems.forEach(function(item){%>
       <div class="col-lg-3 col-md-6 price-cards">
-        <div class="card">
-        <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=8" class="card-img-top" alt="">
-          <div class="card-body burger">
+        <div class="card menu-card">
+        <!-- <img src="https://images.photowall.com/products/55415/burger.jpg?h=699&q=85" class="card-img-top" alt=""> -->
+        <img src="https://www.seriouseats.com/recipes/images/2015/07/20150728-homemade-whopper-food-lab-35-1500x1125.jpg" class="card-img-top" alt="">
+
+           <div class="card-body menucard-height">
             <h5 class="card-title"><%= item.Name %></h5>
             <hr class="cardhr">
             <p class="card-text"><%= item.Ingredients %></p>
@@ -46,16 +48,16 @@
 
     <div class="container  menu-con menu-section-header">
       <p>Regulars</p>
-      <hr class="h">
+      <!-- <hr class="h"> -->
 
     </div>
     <div class="row">
 
       <%  regularitems.forEach(function(item){%>
           <div class="col-lg-3 col-md-6 price-cards">
-            <div class="card">
+            <div class="card menu-card">
               <img src="https://simply-delicious-food.com/wp-content/uploads/2018/11/spicy-chicken-burgers-3.jpg" class="card-img-top" alt="">
-              <div class="card-body burger">
+               <div class="card-body menucard-height">
                 <h5 class="card-title"><%= item.Name %></h5>
                 <hr class="cardhr">
                 <p class="card-text"><%= item.Ingredients %></p>
@@ -73,16 +75,16 @@
 
     <div class="container menu-con menu-section-header">
       <p>Chef's Specials</p>
-      <hr class="h">
+      <!-- <hr class="h"> -->
 
     </div>
     <div class="row">
 
       <%  chefsitems.forEach(function(item){%>
           <div class="col-lg-3 col-md-6 price-cards">
-            <div class="card">
+            <div class="card menu-card">
               <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/e8/05/f5/chef-toddzilla-s-gourmet.jpg" class="card-img-top" alt="">
-              <div class="card-body burger">
+               <div class="card-body menucard-height">
                 <h5 class="card-title"><%= item.Name %></h5>
                 <hr class="cardhr">
                 <p class="card-text"><%= item.Ingredients %></p>
@@ -100,17 +102,18 @@
 
     <div class="container menu-con menu-section-header">
       <p>Fries</p>
-      <hr class="h">
+      <!-- <hr class="h"> -->
 
     </div>
     <div class="row">
 
       <%  fries.forEach(function(item){%>
           <div class="col-lg-6 col-md-6 price-cards">
-            <div class="card">
-              <img src="https://cms.splendidtable.org/sites/default/files/styles/w2000/public/french-fries.jpg?itok=FS-YwUYH" class="card-img-top" alt="">
+            <div class="card menu-card">
+              <!-- <img src="https://cms.splendidtable.org/sites/default/files/styles/w2000/public/french-fries.jpg?itok=FS-YwUYH" class="card-img-top" alt=""> -->
+              <img src="https://static.toiimg.com/thumb/54659021.cms?width=1200&height=1200" class="card-img-top" alt="">
 
-              <div class="card-body">
+               <div class="card-body menucard-height">
                 <h5 class="card-title"><%= item.Name %></h5>
                 <hr class="cardhr">
                 <p class="card-text"><%= item.Ingredients %></p>
@@ -126,7 +129,7 @@
 
     <div class="container menu-con menu-section-header">
       <p>Shakes</p>
-      <hr class="h">
+      <!-- <hr class="h"> -->
 
     </div>
 
@@ -134,9 +137,11 @@
 
       <%  shakes.forEach(function(item){%>
           <div class="col-lg-3 col-md-6 price-cards">
-            <div class="card">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSNc2hUwUTE6g77ACiUiKhk991lfF-_7rWB3JDE5FNHhVqIfWi&usqp=CAU" class="card-img-top" alt="">
-              <div class="card-body">
+            <div class="card menu-card">
+              <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSNc2hUwUTE6g77ACiUiKhk991lfF-_7rWB3JDE5FNHhVqIfWi&usqp=CAU" class="card-img-top" alt=""> -->
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRnm00MevoBvUeNcr_9ndl5UfA5PGqnUEq63Q&usqp=CAU" class="card-img-top" alt="">
+
+               <div class="card-body menucard-height">
                 <h5 class="card-title"><%= item.Name %></h5>
                 <hr class="cardhr">
                 <p class="card-text"><%= item.Ingredients %></p>
@@ -152,9 +157,9 @@
 
     <div class="addoncard">
       <div class="card Addons">
-        <div class="card-body">
+         <div class="card-body menucard-height">
           <h5 class="card-title">Add Ons</h5>
-          <hr class="h">
+          <!-- <hr class="h"> -->
         </div>
         <ul class="list-group   ">
 
