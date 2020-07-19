@@ -12,7 +12,9 @@ section{
 .header-div{
 position: relative;
 }
-
+.fixed-top{
+  height: 9vh;
+}
 .navbar{
   padding: 0 0 4.5rem;
 }
@@ -93,7 +95,7 @@ position: relative;
 /* IMAGE SECTION */
 #image-sec{
   position: relative;
-  margin-top: 4.5%;
+  margin-top: 9vh;
 }
 
 .flavor-down{
@@ -271,7 +273,7 @@ position: relative;
   color: #fff;
   font-family: 'Aclonica', sans-serif;
   font-size: 2vw;
-  margin-top: 70px;
+  margin-top: 9vh;
 
 }
 
@@ -646,7 +648,8 @@ ul .Addons {
 /* SLIDING CART */
 .sidenav {
   /* font-family: 'Montserrat', sans-serif; */
-  height: 100%;
+  margin-top: 9vh;
+  height: 91vh;
   width: 0;
   position: fixed;
   z-index: 1050;
@@ -695,22 +698,31 @@ ul .Addons {
 }
 
 .cart-caption {
-  height:7vh;
-  padding: 8px 15px 8px 55px;
+  height:6vh;
   text-decoration: none;
   font-size: 20px;
   color: #cb3737;
+  background-color: #F5AA13;
   display: block;
   transition: right 0.5s;
-  text-align: left;
+  text-align: center;
 }
+.caption{
+  height: 100%;
+  padding: auto 0;
+  display: inline-block;
+  margin: auto !important;
 
+}
 .sidenav a:hover {
   color: red;
 }
 .sidenav .btn{
-  height:5vh;
+
   bottom: 0;
+}
+.sidenav .btn-block{
+height:5vh;
 }
 
 .cart-caption .btn{
@@ -825,7 +837,7 @@ input.col-2{
   padding-left: 10px;
 }
 #mySidenav .cd-item{
-  height: 83vh;
+  height: 75vh;
 }
 
  #mySidenav .cd-item-remove {
