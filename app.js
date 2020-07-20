@@ -20,7 +20,7 @@ var user_data = {
 //let orderId=0;
 //let order_id=5;
 var i = 0;
-var flag=0;
+var flag = 0;
 
 let addonName = [];
 let itemSpiceLvl = [];
@@ -38,9 +38,9 @@ const db = mysql.createConnection({
   password: '',
   database: 'burgertown'
 });
-let x="Regular";
-let tempprice=0;
-let totprice=0;
+let x = "Regular";
+let tempprice = 0;
+let totprice = 0;
 
 db.connect(function(err) {
   if (err) {
@@ -57,29 +57,31 @@ app.post("/item", function(req, res) {
   if (allItems[i].type == 1) {
     addonName.push(allItems[i].addon.toString());
     itemSpiceLvl.push(allItems[i].spiceLvl);
-    x=allItems[i].addon.toString();
-    flag=1;
+    x = allItems[i].addon.toString();
+    flag = 1;
 
 
   } else if (allItems[i].type == 2) {
     addonName.push(allItems[i].addon.toString());
     itemSpiceLvl.push(null);
-    x=allItems[i].addon.toString();
-    flag=2;
+    x = allItems[i].addon.toString();
+    flag = 2;
   } else if (allItems[i].type == 4) {
     addonName.push(null);
     itemSpiceLvl.push(allItems[i].spiceLvl);
-    flag=3;
+    flag = 3;
 
   } else {
     addonName.push(null);
     itemSpiceLvl.push(null);
-    flag=3;
+    flag = 3;
 
   }
 
-  tempprice=parseInt(allItems[i].price);
+  tempprice = parseInt(allItems[i].price);
   i++;
+
+  res.end();
 
 
 });
@@ -87,9 +89,9 @@ app.post("/item", function(req, res) {
 //Get data from behav js through clicking confirm order button
 app.post("/checkout", function(req, res) {
   //let userPhone = userDataSignIn.phone;
-  let userName=req.body.username;
-  let userPhone=req.body.usernumber;
-  let userAddress= req.body.useraddress;
+  let userName = req.body.username;
+  let userPhone = req.body.usernumber;
+  let userAddress = req.body.useraddress;
   let sql6 = "CALL get_name_and_orderid();";
   let query = db.query(sql6, function(err, results) {
     if (err)
@@ -97,7 +99,7 @@ app.post("/checkout", function(req, res) {
     else {
       let order_id = results[0][0].Y;
       let sql5 = "CALL insert_order(?,?,?,?);";
-      query = db.query(sql5, [order_id, userName, userPhone,userAddress], function(err, results) {
+      query = db.query(sql5, [order_id, userName, userPhone, userAddress], function(err, results) {
         if (err) {
           console.log(err);
         } else {
@@ -142,11 +144,11 @@ app.post("/checkout", function(req, res) {
 //Get home page
 app.get("/", function(req, res) {
   res.render("index", {
-    itemnumber:allItems.length,
-   cartitems:allItems,
-   // itemamount:itemnum,
-   addonprice:resultprice,
-   totalprice:totprice,
+    itemnumber: allItems.length,
+    cartitems: allItems,
+    // itemamount:itemnum,
+    addonprice: resultprice,
+    totalprice: totprice,
     status_home: "active",
     status_location: "",
     status_menu: "",
@@ -156,7 +158,7 @@ app.get("/", function(req, res) {
   });
 });
 
-var resultprice=[];
+var resultprice = [];
 //Get any page
 app.get("/:lnk", function(req, res) {
   const dest = _.lowerCase(req.params.lnk);
@@ -192,48 +194,47 @@ app.get("/:lnk", function(req, res) {
       let query1 = db.query(sql1, [x], function(err, results1, fields) {
         if (err) {
           console.log(err);
-        }else{
+        } else {
 
-    if(flag!=3 && x!=""){
-      console.log(results1[0]);
+          if (flag != 3 && x != "") {
+            console.log(results1[0]);
 
-      resultprice.push(results1[0].price);
-      console.log(flag);
-      totprice=tempprice+parseInt(totprice)+parseInt(results1[0].price);
+            resultprice.push(results1[0].price);
+            console.log(flag);
+            totprice = tempprice + parseInt(totprice) + parseInt(results1[0].price);
 
-    }
-    else if (flag==3){
-      resultprice.push(0);
-      totprice=tempprice+parseInt(totprice)+parseInt(0);
-    }
+          } else if (flag == 3) {
+            resultprice.push(0);
+            totprice = tempprice + parseInt(totprice) + parseInt(0);
+          }
 
-    console.log(resultprice);
-    x="";
-    flag=0;
-    tempprice=0
-      res.render(dest, {
-        itemnumber:allItems.length,
-       cartitems:allItems,
-       // itemamount:itemnum,
-       addonprice:resultprice,
-       totalprice:totprice,
-        status_home: status[0],
-        status_location: status[1],
-        status_menu: status[2],
-        status_contact: status[3],
-        status_signup: status[4],
-        status_cart: status[5],
-        signatureitems: results[0],
-        regularitems: results[1],
-        chefsitems: results[2],
-        fries: results[3],
-        shakes: results[4],
-        username:user_data.username,
-        usernumber:user_data.usernumber,
-        useraddress:user_data.useraddress
-      });
+          console.log(resultprice);
+          x = "";
+          flag = 0;
+          tempprice = 0;
+          res.render(dest, {
+            itemnumber: allItems.length,
+            cartitems: allItems,
+            // itemamount:itemnum,
+            addonprice: resultprice,
+            totalprice: totprice,
+            status_home: status[0],
+            status_location: status[1],
+            status_menu: status[2],
+            status_contact: status[3],
+            status_signup: status[4],
+            status_cart: status[5],
+            signatureitems: results[0],
+            regularitems: results[1],
+            chefsitems: results[2],
+            fries: results[3],
+            shakes: results[4],
+            username: user_data.username,
+            usernumber: user_data.usernumber,
+            useraddress: user_data.useraddress
+          });
 
-    }
+        }
       });
     }
   });
@@ -323,11 +324,11 @@ app.post("/:lnk", function(req, res) {
               } else {
                 console.log(results);
                 res.render(dest, {
-                  itemnumber:allItems.length,
-                 cartitems:allItems,
-                 // itemamount:itemnum,
-                 addonprice:resultprice,
-                 totalprice:totprice,
+                  itemnumber: allItems.length,
+                  cartitems: allItems,
+                  // itemamount:itemnum,
+                  addonprice: resultprice,
+                  totalprice: totprice,
                   status_home: status[0],
                   status_location: status[1],
                   status_menu: status[2],
@@ -339,9 +340,9 @@ app.post("/:lnk", function(req, res) {
                   chefsitems: results[2],
                   fries: results[3],
                   shakes: results[4],
-                  username:user_data.username,
-                  usernumber:user_data.usernumber,
-                  useraddress:user_data.useraddress
+                  username: user_data.username,
+                  usernumber: user_data.usernumber,
+                  useraddress: user_data.useraddress
                 });
 
               }

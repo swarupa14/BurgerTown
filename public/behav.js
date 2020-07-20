@@ -13,29 +13,32 @@ function closeNav() {
 
 // Order Page Activities
 //var allItems=[];
-let name="";
-let price=0;
+let name = "";
+let price = 0;
 let spiceLvl = "";
 let addon = [];
 let type;
-function Item (type,name,price,spiceLvl,addon){
-  this.type=type;
+
+function Item(type, name, price, spiceLvl, addon) {
+  this.type = type;
   this.name = name;
-  this.price= price;
-  this.spiceLvl= spiceLvl;
-  this.addon= addon;
+  this.price = price;
+  this.spiceLvl = spiceLvl;
+  this.addon = addon;
 }
 $(".addtocart").click(function() //Clicking the addtocart button
   {
-    name= $(this).siblings("h5").text();
-    price=parseInt($(this).siblings("h6").find("span").text());
+    name = $(this).siblings("h5").text();
+    price = parseInt($(this).siblings("h6").find("span").text());
 
-    if ($(this).hasClass("shakes")){
-      type=3;
+    if ($(this).hasClass("shakes")) {
+      type = 3;
       addon.sort();
-      let itemData=new Item(type,name,price,spiceLvl,addon);
-      $.post('/item', { itemData: itemData });
-      addon=[];
+      let itemData = new Item(type, name, price, spiceLvl, addon);
+      $.post('/item', {
+        itemData: itemData
+      });
+      addon = [];
       $('#carttt').load('/order .cartitems');
       $('.side-cart').load('/order .side-cart');
 
@@ -72,11 +75,11 @@ $("#BurgerModal .spice button").click(function() { //Clicking the spice-level bu
 
 
 $("#FriesModal .spice button").click(function() { //Clicking the size buttons in FriesModal
-  type=2;
+  type = 2;
   if ($(this).hasClass("btn-warning")) {
     $(this).removeClass("btn-warning");
     $(this).addClass("btn-outline-warning");
-    addon=[];
+    addon = [];
   } else {
     $(this).removeClass("btn-outline-warning");
     $(this).addClass("btn-warning");
@@ -88,20 +91,22 @@ $("#FriesModal .spice button").click(function() { //Clicking the size buttons in
 $("#BurgerModal .modal-footer button").click(function() { //Clicking the add button in BurgerModal
   $("#BurgerModal .modal-body button").addClass("btn-outline-warning");
   $("#BurgerModal .modal-body button").removeClass("btn-warning");
-  if(spiceLvl===""){
+  if (spiceLvl === "") {
     alert("Please select your desired spice level.");
     $(this).removeAttr("data-dismiss");
-  }
-  else{
-    $(this).attr("data-dismiss","modal");
-    if(addon.length==0)
-      type=4;
-    else type=1;
+    addon = [];
+  } else {
+    $(this).attr("data-dismiss", "modal");
+    if (addon.length == 0)
+      type = 4;
+    else type = 1;
     addon.sort();
-    let itemData=new Item(type,name,price,spiceLvl,addon);
-    $.post('/item', { itemData:itemData });
-    addon=[];
-    spiceLvl="";
+    let itemData = new Item(type, name, price, spiceLvl, addon);
+    $.post('/item', {
+      itemData: itemData
+    });
+    addon = [];
+    spiceLvl = "";
     $('#carttt').load('/order .cartitems');
     $('.side-cart').load('/order .side-cart');
 
@@ -112,16 +117,18 @@ $("#BurgerModal .modal-footer button").click(function() { //Clicking the add but
 $("#FriesModal .modal-footer button").click(function() { //Clicking the add button in FriesModal
   $("#FriesModal .modal-body button").addClass("btn-outline-warning");
   $("#FriesModal .modal-body button").removeClass("btn-warning");
-  if(addon.length==0){
+  if (addon.length == 0) {
     alert("Please select the size of your fries.");
     $(this).removeAttr("data-dismiss");
-  }
-  else{
-    $(this).attr("data-dismiss","modal");
-    let itemData=new Item(type,name,price,spiceLvl,addon);
-    $.post('/item', { itemData:itemData });
     addon=[];
-    spiceLvl="";
+  } else {
+    $(this).attr("data-dismiss", "modal");
+    let itemData = new Item(type, name, price, spiceLvl, addon);
+    $.post('/item', {
+      itemData: itemData
+    });
+    addon = [];
+    spiceLvl = "";
     $('#carttt').load('/order .cartitems');
     $('.side-cart').load('/order .side-cart');
   }
