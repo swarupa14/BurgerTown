@@ -314,9 +314,9 @@ iframe{
 .card .burger{
   height:17.5rem;
 }
-/* .menucard-height{
+.menucard-height{
   height: 12rem;
-} */
+}
 
 .card-body {
   background-color: #1b262c;
@@ -336,6 +336,7 @@ iframe{
 .menu-card{
   width: 20vw;
 }
+
 .price-cards {
   text-align: center;
   color: #F5AA13;
