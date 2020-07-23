@@ -490,6 +490,10 @@ ul .Addons {
 
 /* CONTACT US PAGE */
 .contactus-section{
+  background-image: url('img/contact-bg.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   font-family: 'Aclonica', sans-serif;
   color: #F5AA13;
   text-align: left;
@@ -497,12 +501,18 @@ ul .Addons {
 
 
 }
+.non-bg-contact{
+  width: 50%;
+  background-color: #0b0b0d;
+  margin : auto;
+  box-shadow: -3px 2px 5px #888888,3px 2px 5px #888888;
+}
 .contact-info{
-    padding: 5% 10% 3%;
+    padding: 5% 0 3% 20%;
     /* font-size: 1.5rem; */
 }
 .contact-hours{
-    padding: 0 10% 5%;
+    padding: 0 0 5% 20%;
     /* font-size: 1.5rem; */
 }
 /* .contact-hours{
@@ -518,7 +528,7 @@ ul .Addons {
 }
 .contact-info-heading{
   text-align: left;
-  font-size: 3rem;
+  font-size: 2rem;
   font-family: 'Aclonica', sans-serif;
   line-height: 2;
 }
@@ -533,7 +543,7 @@ ul .Addons {
   text-align: center;
 
 }
-.Takeaway-form, .Signup-form {
+.Takeaway-form{
   position: relative;
   width: 75%;
   border: 1px solid;
@@ -552,8 +562,9 @@ ul .Addons {
   padding-bottom: 10px;
 }
 
-.form-control {
-  margin: 1% 0 3%;
+.Signup-form .form-control {
+  margin: 1% auto 3%;
+  width: 85%;
 }
 
 .Takeaway-form a, .SignIn a {
@@ -570,6 +581,28 @@ ul .Addons {
   background-color: #272727;
 }
 
+.Signup-form {
+ position: relative;
+ padding: 3%;
+ text-align: center;
+ margin: auto;
+ width: 48vw;
+ font-size: 16px;
+ font-family: 'Montserrat', sans-serif;
+ box-shadow: 3px 3px 5px #888888;
+ color: #fff;
+ background-color: #1d1919;
+ opacity: .99;
+
+}
+.Signup-form input{
+  color: #000;
+}
+.checkbox{
+  text-align: left;
+  padding: 0 0 1% 10%;
+}
+
 .Signup-form small {
   padding: 3%;
   color: #dbdbdb;
@@ -577,7 +610,9 @@ ul .Addons {
 .Signup-form button{
   color: #fff;
 }
-
+.Signup-form h5 {
+  padding-bottom:   3%;
+}
 .Signup-form label, .Signup-form h6 {
   margin: 5%;
 }

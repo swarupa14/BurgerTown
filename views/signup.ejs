@@ -16,45 +16,35 @@
 </div>
 
 <section class="Takeaway">
-  <h5>Create an account to get started</h5>
+  <!-- <h5>Create an account to get started</h5> -->
   <form class="Signup-form" action="/signup" method="post">
     <div class="form-group">
+<h5>Create an account to get started</h5>
 
-      <div class="row">
-        <div class="col">
           <input type="text" class="form-control f_name" placeholder="First name*" name="f_name" required oninvalid="this.setCustomValidity('Please enter your first name')"
        oninput="this.setCustomValidity('')" autocomplete="off">
-        </div>
-        <div class="col">
+
           <input type="text" class="form-control l_name" placeholder="Last name*" name="l_name" required oninvalid="this.setCustomValidity('Please enter your last name')"
        oninput="this.setCustomValidity('')" autocomplete="off">
-        </div>
-      </div>
+
       <input type="email" class="form-control email" placeholder="Email Adress*" name="email" autocomplete="off" required>
       <input type="text" class="form-control address" placeholder="Address*" name="address" required oninvalid="this.setCustomValidity('Please enter your address')"
        oninput="this.setCustomValidity('')" autocomplete="off">
       <input type="tel" class="form-control phone" placeholder="Phone Number*" name="phone" pattern="[0-9]{11}" required autocomplete="off">
-      <div class="row">
-        <div class="col">
           <input type="password" class="form-control pass" placeholder="Password*" name="pass" required oninvalid="this.setCustomValidity('Please enter a password')"
        oninput="this.setCustomValidity('')">
-        </div>
-        <div class="col">
           <input type="password" class="form-control c_pass" placeholder="Confirm Password*" name="c_pass" required oninvalid="this.setCustomValidity('Please confirm your password')"
        oninput="this.setCustomValidity('')">
-        </div>
-      </div>
 
-      <div class="form-row align-items-center">
+
 
         <div class="checkbox">
-          <small><input type="checkbox" name="notify"> I want to be notifies about updates through emails</small>
-        </div>
-        <div class="checkbox">
+          <small><input type="checkbox" name="notify"> I want to be notified about updates through emails</small>
+          <br>
           <small><input type="checkbox" class="agree" name="agree" required oninvalid="this.setCustomValidity('You must agree with the terms and conditions to sign up')"
        oninput="this.setCustomValidity('')"> I agree with the terms and conditions of BurgerTown</small>
         </div>
-      </div>
+
       <div class="SignIn">
         <p>Have an Account? <a href="/signin">Sign In</a></p>
       </div>
