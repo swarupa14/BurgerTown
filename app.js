@@ -129,6 +129,8 @@ app.post("/checkout", function(req, res) {
       });
       res.redirect("/");
       res.end();
+      allItems=[];
+      totprice=0;
     }
   });
 });

@@ -55,7 +55,7 @@ position: relative;
    position: fixed;
   right: 0;
   top: 250px;
-  z-index: 1050;
+  z-index: 1000;
   background-color: #fff;
   text-align: center;
   background-color: #888888;
@@ -658,6 +658,7 @@ ul .Addons {
   opacity: .8;
   color: #fff;
   padding-left: 0px;
+  z-index: 1050;
 }
 .navbar-nav .dropdown-item{
   color: #fff;
