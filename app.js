@@ -24,6 +24,7 @@ var flag = 0;
 
 let addonName = [];
 let itemSpiceLvl = [];
+let user_flag=0;
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
@@ -49,6 +50,18 @@ db.connect(function(err) {
   console.log("MYSQL connected...");
 })
 
+app.post("/signout", function(req,res){
+  user_data = {
+    username: "",
+    usernumber: "",
+    useraddress: ""
+  };
+  user_flag=0;
+  allItems=[];
+  totprice=0;
+  res.redirect("back");
+
+});
 
 //Get item data from behav.js by clicking add to cart button
 app.post("/item", function(req, res) {
@@ -137,9 +150,10 @@ app.post("/checkout", function(req, res) {
 
 
 //Send data back to behav js
-// app.get("/items", function(req, res) {
+// app.get("/signout", function(req, res) {
 //   res.json({
-//     allItems: allItems
+//     user_data: user_data,
+//     user_flag: user_flag
 //   });
 // });
 
@@ -156,7 +170,12 @@ app.get("/", function(req, res) {
     status_menu: "",
     status_contact: "",
     status_signup: "",
-    status_cart: ""
+    status_cart: "",
+    username: user_data.username,
+    usernumber: user_data.usernumber,
+    useraddress: user_data.useraddress,
+    user_flag: user_flag
+
   });
 });
 
@@ -233,7 +252,8 @@ app.get("/:lnk", function(req, res) {
             shakes: results[4],
             username: user_data.username,
             usernumber: user_data.usernumber,
-            useraddress: user_data.useraddress
+            useraddress: user_data.useraddress,
+            user_flag: user_flag
           });
 
         }
@@ -254,8 +274,11 @@ app.post("/signup", function(req, res) {
     phone: req.body.phone,
     pass: req.body.pass,
   };
-  if (userData.user_name === "" || userData.email === "" || userData.address === "" || userData.phone.length != 11 || userData.pass === "" || req.body.c_pass === "" || userData.pass != req.body.c_pass || req.body.agree != 'on') {
+  if (userData.user_name === "" || userData.email === "" || userData.address === "" || userData.phone.length != 11 || userData.pass === "" || req.body.c_pass === "" || req.body.agree != 'on') {
     go = 0;
+  }
+  if(userData.pass != req.body.c_pass){
+    go=0;
   }
   if (go === 1) {
     let sql1 = 'select phone from user where phone =' + mysql.escape(userData.phone);
@@ -263,7 +286,7 @@ app.post("/signup", function(req, res) {
       if (err) throw err;
       if (result.length === 1) {
         console.log("This phone number is already in use");
-        res.end();
+        res.redirect("back");
       } else {
         let sql = 'insert into user set ?';
         let query = db.query(sql, userData, (err, result) => {
@@ -279,7 +302,6 @@ app.post("/signup", function(req, res) {
 
 //Signin module
 app.post("/:lnk", function(req, res) {
-
   userDataSignIn.phone = req.body.phone;
   userDataSignIn.passWord = req.body.passWord;
   let sql = 'select * from user';
@@ -295,6 +317,7 @@ app.post("/:lnk", function(req, res) {
             usernumber: result[i].phone,
             useraddress: result[i].address
           };
+          user_flag=1;
           app.get("/:lnk", function(req, res) {
             const dest = _.lowerCase(req.params.lnk);
             status = ["", "", "", "", "", ""];
@@ -344,13 +367,14 @@ app.post("/:lnk", function(req, res) {
                   shakes: results[4],
                   username: user_data.username,
                   usernumber: user_data.usernumber,
-                  useraddress: user_data.useraddress
+                  useraddress: user_data.useraddress,
+                  user_flag: user_flag
                 });
 
               }
             });
           });
-          res.redirect("/");
+          res.redirect("back");
           break;
         }
       }
@@ -358,6 +382,8 @@ app.post("/:lnk", function(req, res) {
     }
   });
 });
+
+
 
 //Listening to server on port 3000
 app.listen(3000, function() {

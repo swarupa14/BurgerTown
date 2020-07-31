@@ -155,7 +155,21 @@ $('input[type="checkbox"]').click(function() {
 $(".Signup-form .sign-up").click(function() {
   let pass = $(".pass").val();
   let c_pass = $(".c_pass").val();
-  if (pass != c_pass)
+  if (pass != c_pass){
     alert("Passwords do not match!");
+  }
 
+});
+
+//ADMin
+$(document).on('click','.add-item',function(){
+    $('#admin-section .view-block').load('/additemtomenu');
+      $(".dash-items p").removeClass("dash-active");
+      $(".add-item").addClass("dash-active");
+
+});
+$(".order-status").click(function(){
+    $('#admin-section .view-block').load('/orderstatus');
+    $(".dash-items p").removeClass("dash-active");
+    $(".order-status").addClass("dash-active");
 });

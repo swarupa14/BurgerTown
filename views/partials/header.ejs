@@ -58,14 +58,16 @@
               <a class="nav-link" href="/contact">Contact Us</a>
             </li>
             <li class="nav-item <%=status_cart%>">
-              <a href="/order" class="nav-link">Order Now</a>
+              <a class="nav-link" href="/order">Order Now</a>
             </li>
             <div class="dropdown">
               <li class="nav-item <%=status_signup%>">
-                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-user-circle username"></i></button>
-                <%- include("dropdowntosignin") -%>
-
-
+                <div class="<%=user_flag%>"></div>
+                <% if( user_flag ) { %>
+                <%- include("dropdownofdetails") -%>
+                <% } else {%>
+                  <%- include("dropdowntosignin") -%>
+                <% } %>
 
               </li>
             </div>
