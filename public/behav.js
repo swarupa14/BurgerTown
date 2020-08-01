@@ -134,6 +134,22 @@ $("#FriesModal .modal-footer button").click(function() { //Clicking the add butt
   }
 });
 
+
+var index,itemAmount;
+//NUMBER INPUT
+$(document).on('click','.quantity',function(){
+
+itemAmount=$(this).val();
+//alert(itemAmount);
+  index=($(this ).index(".quantity"));
+//alert("INDEX"+index);
+  $.post('/number', { itemAmount:itemAmount,index:index });
+  $('#carttt').load('/order .cartitems');
+$('.side-cart').load('/order .side-cart');
+
+
+});
+
 // $("#checkout .information .confirm-order-button button").click(function(){ //Clicking the confirm order button in checkout page
 //   $.get("/items",function(data){
 //     $.post('/itemz', { allItems:data.allItems });

@@ -877,9 +877,20 @@ input.col-2{
   height: 75vh;
 }
 
- #mySidenav .cd-item-remove {
+ /* #mySidenav .cd-item-remove {
   font-size: 20px;
+} */
+
+#mySidenav .cd-item-remove {
+  font-size: 20px;
+  color: red;
+  background: transparent;
+  border: none;
 }
+.idk-yet button:focus {
+    outline:0;
+}
+
 #carttt .cd-cart-items{
   height:100%;
   overflow-y: scroll;
@@ -1083,8 +1094,8 @@ color: blueviolet;
   padding-bottom: 5px;
   /* font-style: italic; */
 }
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+.stat-count input[type=number]::-webkit-inner-spin-button,
+.stat-count input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

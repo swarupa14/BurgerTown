@@ -42,6 +42,7 @@ const db = mysql.createConnection({
 let x = "Regular";
 let tempprice = 0;
 let totprice = 0;
+var itemnum = [];
 
 db.connect(function(err) {
   if (err) {
@@ -49,7 +50,8 @@ db.connect(function(err) {
   }
   console.log("MYSQL connected...");
 })
-
+var j = 0;
+var input = 0;
 app.post("/signout", function(req,res){
   user_data = {
     username: "",
@@ -65,6 +67,9 @@ app.post("/signout", function(req,res){
 
 //Get item data from behav.js by clicking add to cart button
 app.post("/item", function(req, res) {
+  input = 0;
+  flagpos = 1;
+  itemnum.push(1);
 
   allItems.push(req.body.itemData);
   if (allItems[i].type == 1) {
@@ -96,6 +101,55 @@ app.post("/item", function(req, res) {
 
   res.end();
 
+
+});
+
+//Get Number input Data
+
+var flagpos = 0;
+var donchange=0;
+
+app.post("/number", function(req, res) {
+
+  input = 1;
+
+  var n = req.body.itemAmount;
+  j = req.body.index;
+  if (itemnum[req.body.index] < n) {
+    flagpos = 1;
+    donchange=0;
+  } else if(itemnum[req.body.index] == n && n==1){
+    donchange=1;
+
+  }
+    else {
+    flagpos = 0;
+    donchange=0;
+  }
+
+  itemnum[req.body.index] = n;
+  amount = parseInt(itemnum[j]);
+
+  if (allItems[j].type == 1 ) {
+    x = allItems[j].addon.toString();
+    flag=1;
+
+  }
+  else if(allItems[j].type == 2)
+  {
+    x = allItems[j].addon.toString();
+    flag=2;
+
+  }
+  else if(allItems[j].type == 3 || allItems[j].type == 4)
+  {
+    flag=3;
+  }
+  tempprice = parseInt(allItems[j].price);
+  console.log("ITEM price" + totprice);
+
+
+  res.end();
 
 });
 
@@ -149,6 +203,7 @@ app.post("/checkout", function(req, res) {
 });
 
 
+
 //Send data back to behav js
 // app.get("/signout", function(req, res) {
 //   res.json({
@@ -159,10 +214,16 @@ app.post("/checkout", function(req, res) {
 
 //Get home page
 app.get("/", function(req, res) {
+  //TOTAL NUMBER OF ITEMS IN CART
+  var k,sum=0;
+  for(k=0;k<allItems.length;k++)
+  {
+    sum=parseInt(sum)+parseInt(itemnum[k]);
+  }
   res.render("index", {
-    itemnumber: allItems.length,
+    itemnumber: sum,
     cartitems: allItems,
-    // itemamount:itemnum,
+    itemamount:itemnum,
     addonprice: resultprice,
     totalprice: totprice,
     status_home: "active",
@@ -203,6 +264,12 @@ app.get("/:lnk", function(req, res) {
       break;
     default:
   }
+  //TOTAL NUMBER OF ITEMS IN CART
+  var k,sum=0;
+  for(k=0;k<allItems.length;k++)
+  {
+    sum=parseInt(sum)+parseInt(itemnum[k]);
+  }
 
   //Loadup Menu and Orders page from Database
   let sql = 'CALL Getmenuitems(?,?,?,?,?);';
@@ -216,27 +283,68 @@ app.get("/:lnk", function(req, res) {
         if (err) {
           console.log(err);
         } else {
+          if(donchange!=1)
+          {
+
 
           if (flag != 3 && x != "") {
-            console.log(results1[0]);
+            //Incase of number input
 
-            resultprice.push(results1[0].price);
-            console.log(flag);
-            totprice = tempprice + parseInt(totprice) + parseInt(results1[0].price);
 
-          } else if (flag == 3) {
-            resultprice.push(0);
-            totprice = tempprice + parseInt(totprice) + parseInt(0);
+            if (input == 1)
+            {
+              if (flagpos == 1)
+              {
+                //  console.log(amount);
+                totprice = parseInt(totprice) + parseInt(tempprice) + parseInt(results1[0].price);
+
+              }
+              else
+               {
+                totprice = parseInt(totprice) - parseInt(tempprice) - parseInt(results1[0].price);
+
+              }
+            }
+            //In case of addtocart
+            else
+            {
+              resultprice.push(results1[0].price);
+              totprice = parseInt(totprice) + parseInt(tempprice) + parseInt(results1[0].price);
+
+            }
+
           }
+          else if (flag == 3)
+           {
+             if (input == 1) {
+               if (flagpos == 1) {
+                 //  console.log(amount);
+                 totprice = parseInt(totprice) + parseInt(tempprice) + parseInt(0);
+
+               }
+               else
+               {
+                 totprice = parseInt(totprice) - parseInt(tempprice) - parseInt(0);
+               }
+             }
+             else
+             {
+               resultprice.push(0);
+               totprice = parseInt(totprice) + parseInt(tempprice) + parseInt(0);
+
+             }
+
+          }
+        }
 
           console.log(resultprice);
           x = "";
           flag = 0;
           tempprice = 0;
           res.render(dest, {
-            itemnumber: allItems.length,
+            itemnumber: sum,
             cartitems: allItems,
-            // itemamount:itemnum,
+            itemamount:itemnum,
             addonprice: resultprice,
             totalprice: totprice,
             status_home: status[0],
@@ -341,6 +449,7 @@ app.post("/:lnk", function(req, res) {
               default:
             }
 
+
             //Loadup Menu and Orders page from Database
             let sql = 'CALL Getmenuitems(?,?,?,?,?);';
             let query = db.query(sql, ['Signature', 'Regulars', "Chef's Special", "Fries", "Shakes"], function(err, results, fields) {
@@ -349,9 +458,9 @@ app.post("/:lnk", function(req, res) {
               } else {
                 console.log(results);
                 res.render(dest, {
-                  itemnumber: allItems.length,
+                  itemnumber: sum,
                   cartitems: allItems,
-                  // itemamount:itemnum,
+                  itemamount:itemnum,
                   addonprice: resultprice,
                   totalprice: totprice,
                   status_home: status[0],
