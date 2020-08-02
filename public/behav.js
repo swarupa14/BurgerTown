@@ -149,7 +149,17 @@ $('.side-cart').load('/order .side-cart');
 
 
 });
+//CROSSING FROM cart
 
+var crossindex;
+$(document).on('click',".cd-item-remove",function(){
+  crossindex=($(this ).index(".cd-item-remove"));
+  // alert(crossindex);
+  $.post('/cross', {crossindex: crossindex });
+  $('#carttt').load('/order .cartitems');
+$('.side-cart').load('/order .side-cart');
+
+});
 // $("#checkout .information .confirm-order-button button").click(function(){ //Clicking the confirm order button in checkout page
 //   $.get("/items",function(data){
 //     $.post('/itemz', { allItems:data.allItems });

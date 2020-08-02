@@ -42,7 +42,9 @@ const db = mysql.createConnection({
 let x = "Regular";
 let tempprice = 0;
 let totprice = 0;
+var totalpricearr=[];
 var itemnum = [];
+let crossinput=0;
 
 db.connect(function(err) {
   if (err) {
@@ -67,6 +69,7 @@ app.post("/signout", function(req,res){
 
 //Get item data from behav.js by clicking add to cart button
 app.post("/item", function(req, res) {
+  totprice=0;
   input = 0;
   flagpos = 1;
   itemnum.push(1);
@@ -107,24 +110,26 @@ app.post("/item", function(req, res) {
 //Get Number input Data
 
 var flagpos = 0;
-var donchange=0;
+
 
 app.post("/number", function(req, res) {
 
-  input = 1;
+  totprice=0;
+    input = 1;
+
 
   var n = req.body.itemAmount;
   j = req.body.index;
   if (itemnum[req.body.index] < n) {
     flagpos = 1;
-    donchange=0;
+
   } else if(itemnum[req.body.index] == n && n==1){
-    donchange=1;
+
 
   }
     else {
     flagpos = 0;
-    donchange=0;
+
   }
 
   itemnum[req.body.index] = n;
@@ -146,10 +151,27 @@ app.post("/number", function(req, res) {
     flag=3;
   }
   tempprice = parseInt(allItems[j].price);
-  console.log("ITEM price" + totprice);
+//  console.log("ITEM price" + totprice);
 
 
   res.end();
+
+});
+
+//crossing from cart
+var cross;
+
+app.post("/cross",function(req,res)
+{
+  crossinput=1;
+  totprice=0;
+  cross=req.body.crossindex;
+  allItems.splice(cross,1);
+
+   itemnum.splice(cross,1);
+
+    res.end();
+    i--;
 
 });
 
@@ -240,6 +262,9 @@ app.get("/", function(req, res) {
   });
 });
 
+totprice=0;
+var v;
+var tot_temp_price;
 var resultprice = [];
 //Get any page
 app.get("/:lnk", function(req, res) {
@@ -270,7 +295,7 @@ app.get("/:lnk", function(req, res) {
   {
     sum=parseInt(sum)+parseInt(itemnum[k]);
   }
-
+totprice=0;
   //Loadup Menu and Orders page from Database
   let sql = 'CALL Getmenuitems(?,?,?,?,?);';
   let query = db.query(sql, ['Signature', 'Regulars', "Chef's Special", "Fries", "Shakes"], function(err, results, fields) {
@@ -283,59 +308,53 @@ app.get("/:lnk", function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          if(donchange!=1)
-          {
+
+                    if (flag != 3 && x != "") {
+                      //    console.log(results1[0]);
+                     if (input != 1) {
+
+                       resultprice.push(results1[0].price);
+                        tot_temp_price = parseInt(totprice) + parseInt(tempprice) + parseInt(results1[0].price);
+                        totalpricearr.push(tot_temp_price);
+
+                       }
 
 
-          if (flag != 3 && x != "") {
-            //Incase of number input
+                    } else if (flag == 3) {
+
+                     if (input != 1) {
+
+                        resultprice.push(0);
+                        tot_temp_price = parseInt(totprice) + parseInt(tempprice) + parseInt(0);
+                          totalpricearr.push(tot_temp_price);
+
+                       }
 
 
-            if (input == 1)
-            {
-              if (flagpos == 1)
-              {
-                //  console.log(amount);
-                totprice = parseInt(totprice) + parseInt(tempprice) + parseInt(results1[0].price);
+                    }
+                    if(crossinput==1)
+                    {
+                      var p=parseInt(cross)+parseInt(1);
+                      console.log("Before slicing"+totalpricearr);
+                      totalpricearr.splice(p,1);
 
-              }
-              else
-               {
-                totprice = parseInt(totprice) - parseInt(tempprice) - parseInt(results1[0].price);
 
-              }
-            }
-            //In case of addtocart
-            else
-            {
-              resultprice.push(results1[0].price);
-              totprice = parseInt(totprice) + parseInt(tempprice) + parseInt(results1[0].price);
+                      resultprice.splice(p,1);
+                      console.log("After slicing"+totalpricearr);
+                        console.log("After slicing addonprice"+resultprice);
 
-            }
+                        crossinput=0;
 
-          }
-          else if (flag == 3)
-           {
-             if (input == 1) {
-               if (flagpos == 1) {
-                 //  console.log(amount);
-                 totprice = parseInt(totprice) + parseInt(tempprice) + parseInt(0);
+                    }
 
-               }
-               else
-               {
-                 totprice = parseInt(totprice) - parseInt(tempprice) - parseInt(0);
-               }
-             }
-             else
-             {
-               resultprice.push(0);
-               totprice = parseInt(totprice) + parseInt(tempprice) + parseInt(0);
+                    console.log("TOtal price array"+totalpricearr);
+                    console.log("Item num"+itemnum);
+                    for(v=0;v<allItems.length;v++)
+                    {
+                    //  console.log("CALCULATING TOTAL PRICE!");
+                      totprice=parseInt(totprice)+ parseInt(totalpricearr[v+1]*itemnum[v]);
+                    }
 
-             }
-
-          }
-        }
 
           console.log(resultprice);
           x = "";
