@@ -1,23 +1,26 @@
-<div class="order-status">
-  <div class="show-order">
-    <div class="item-label">
-      <p>Select date</p>
+<div class="order-stat">
+  <form class="" action="/orderstat" method="post">
+    <div class="show-order">
+      <div class="item-label">
+        <p>Select date</p>
+      </div>
+      <input type="date" name="orderDate" value="">
     </div>
-    <input type="date" name="" value="">
-  </div>
 
-  <div class="show-order">
-    <div class="item-label">
-      <p>Select status</p>
+    <div class="show-order">
+      <div class="item-label">
+        <p>Select status</p>
+      </div>
+      <input list="stat" name="stat" value="">
+      <datalist id="stat">
+        <option value="All">All</option>
+        <option value="Delivered">Delivered</option>
+        <option value="Dispatched">Dispatched</option>
+        <option value="Pending">Pending</option>
+      </datalist>
+      <button type="submit" name="button" class="btn btn-success btn-sm">GO</button>
     </div>
-    <select class="" name="">
-      <option value="All">All</option>
-      <option value="Delivered">Delivered</option>
-      <option value="Dispatched">Dispatched</option>
-      <option value="Pending">Pending</option>
-    </select>
-    <button type="button" name="button" class="btn btn-success btn-sm">GO</button>
-  </div>
+  </form>
 </div>
 <div class="status-table-div">
   <table id="show-statuss">
@@ -28,172 +31,41 @@
       <th>ADDRESS</th>
       <th>ORDER STATUS</th>
     </tr>
+    <%  orderInfo.forEach(function(val){%>
 
     <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
+      <td><%=val.orderID%></td>
+      <td><%=val.user_name%></td>
+      <td><%=val.phone%></td>
+      <td><%=val.address%></td>
+      <td><%=val.order_status%></td>
     </tr>
 
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>Dhanmondi Branch</td>
-      <td>Delivered</td>
-    </tr>
+    <%  });%>
 
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
 
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>Banani Branch</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
-
-    <tr>
-      <td>123456789</td>
-      <td>Swarupa Islam</td>
-      <td>01781234567</td>
-      <td>House 25, Road-05 , Sector-07, Uttara, Dhaka-1230</td>
-      <td>Delivered</td>
-    </tr>
 
   </table>
 
 </div>
 <div class="countt">
 
-<div class="stat-count">
-  <div class="stat">
-    <p>Delivered</p>
+  <div class="stat-count">
+    <div class="stat">
+      <p>Delivered</p>
+    </div>
+    <input type="number" name="delivered" value="<%=del%>" readonly>
   </div>
-  <input type="number" name="delivered" value="16" readonly>
-</div>
-<div class="stat-count">
-  <div class="stat">
-    <p>Dispatched</p>
+  <div class="stat-count">
+    <div class="stat">
+      <p>Dispatched</p>
+    </div>
+    <input type="number" name="dispatched" value="<%=disp%>" readonly>
   </div>
-  <input type="number" name="dispatched" value="" readonly>
-</div>
-<div class="stat-count">
-  <div class="stat">
-    <p>Pending</p>
+  <div class="stat-count">
+    <div class="stat">
+      <p>Pending</p>
+    </div>
+    <input type="number" name="pending" value="<%=pend%>" readonly>
   </div>
-  <input type="number" name="pending" value="" readonly>
-</div>
 </div>

@@ -194,8 +194,9 @@ $(document).on('click','.add-item',function(){
       $(".add-item").addClass("dash-active");
 
 });
-$(".order-status").click(function(){
+$(document).on('click','.order-status',function(){
     $('#admin-section .view-block').load('/orderstatus');
     $(".dash-items p").removeClass("dash-active");
     $(".order-status").addClass("dash-active");
+
 });

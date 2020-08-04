@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2020 at 12:28 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.7
+-- Generation Time: Aug 04, 2020 at 01:48 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,12 +26,15 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_tot_price` (IN `order_id` INT, IN `item_name` VARCHAR(255), IN `addon_name` VARCHAR(100), IN `item_price` INT, IN `item_spice` VARCHAR(20))  MODIFIES SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `calc_tot_price` (IN `item_name` VARCHAR(255), IN `addon_name` VARCHAR(100), IN `item_price` INT, IN `item_spice` VARCHAR(20), IN `quant` INT)  MODIFIES SQL DATA
 BEGIN
 DECLARE tot_price int;
 DECLARE item_id int;
 DECLARE addon_id int;
 DECLARE addon_price int;
+DECLARE order_id int;
+
+SET order_id = gen_orderid();
 
 SELECT ItemID into item_id from menu
 WHERE Name=item_name;
@@ -40,9 +44,9 @@ where name=addon_name;
 IF addon_name is NULL THEN
 SET tot_price=item_price;
 ELSE
-SET tot_price=item_price+addon_price;
+SET tot_price=(item_price+addon_price)*quant;
 END IF;
-insert into combined_order values (order_id,item_id,addon_id,item_spice,tot_price);
+insert into combined_order values (order_id,item_id,addon_id,item_spice,quant,tot_price);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Getmenuitems` (IN `input1` VARCHAR(100), IN `input2` VARCHAR(100), IN `input3` VARCHAR(100), IN `input4` VARCHAR(100), IN `input5` VARCHAR(100))  BEGIN
@@ -55,22 +59,59 @@ select * from menu where Section = input5;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_name_and_orderid` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_order_details` (IN `order_date` DATE, IN `order_stat` VARCHAR(20))  BEGIN
 
-select count(*) as Y from orders;
+select * from orders
+where date=order_date and order_status=order_stat;
+
+select count(*) as Y from orders
+where date=order_date and order_status=order_stat;
+
+select count(*) as X1 from orders
+where date=order_date and order_status="Delivered";
+
+select count(*) as X2 from orders
+where date=order_date and order_status="Dispatched";
+
+select count(*) as X3 from orders
+where date=order_date and order_status="Pending";
+
+select * from orders
+where date=order_date;
+
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_order` (IN `order_id` INT, IN `user_name` VARCHAR(100), IN `user_phone` VARCHAR(50), IN `user_address` VARCHAR(100))  MODIFIES SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_order` (IN `user_name` VARCHAR(100), IN `user_phone` VARCHAR(50), IN `user_address` VARCHAR(100))  MODIFIES SQL DATA
 BEGIN
-insert into orders values(order_id,NULL,CURRENT_DATE,user_phone,user_name,user_address);
+insert into orders values(-1,NULL,CURRENT_DATE,user_phone,user_name,user_address,"Pending");
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_order` (IN `order_id` INT)  MODIFIES SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_order` ()  MODIFIES SQL DATA
 BEGIN
 update orders 
-set total_price=(select sum(price) from combined_order where orderID=order_id) 
-where orderID=order_id;
+set total_price=(select sum(price) from combined_order where orderID=gen_orderId()) 
+where orderID=gen_orderid();
+END$$
+
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `gen_orderid` () RETURNS INT(11) BEGIN
+DECLARE o_id int;
+select count(*) into o_id 
+from orders;
+return o_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `gen_userid` () RETURNS INT(11) BEGIN
+DECLARE user_id int;
+
+select count(*) into user_id
+from user;
+
+return user_id;
+
 END$$
 
 DELIMITER ;
@@ -137,6 +178,7 @@ CREATE TABLE `combined_order` (
   `itemID` int(11) NOT NULL,
   `addonID` int(11) DEFAULT NULL,
   `spiceLvl` varchar(20) DEFAULT NULL,
+  `quant` int(11) NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -144,8 +186,32 @@ CREATE TABLE `combined_order` (
 -- Dumping data for table `combined_order`
 --
 
-INSERT INTO `combined_order` (`orderID`, `itemID`, `addonID`, `spiceLvl`, `price`) VALUES
-(0, 2, 16, 'Spicy', 340);
+INSERT INTO `combined_order` (`orderID`, `itemID`, `addonID`, `spiceLvl`, `quant`, `price`) VALUES
+(1, 2, 13, 'Spicy', 1, 260),
+(1, 16, 33, NULL, 2, 280),
+(3, 1, 5, 'Spicy', 1, 270),
+(3, 6, 5, 'Spicy', 1, 240),
+(4, 6, 5, 'Spicy', 1, 240),
+(4, 1, 2, 'Regular', 1, 270),
+(5, 1, 3, 'Spicy', 1, 300),
+(5, 3, 1, 'Extra Spicy', 1, 370),
+(6, 2, 5, 'Spicy', 2, 400),
+(7, 1, 1, 'Regular', 1, 340),
+(7, 6, NULL, 'Spicy', 2, 220),
+(8, 2, 3, 'Spicy', 1, 230),
+(9, 2, NULL, 'Regular', 1, 180),
+(10, 1, 3, 'Regular', 1, 300),
+(11, 1, 3, 'Regular', 1, 300),
+(11, 3, NULL, 'Extra Spicy', 1, 280),
+(12, 2, 3, 'Spicy', 1, 230),
+(13, 12, 5, 'Spicy', 1, 300),
+(14, 1, 1, 'Spicy', 1, 340),
+(15, 2, NULL, 'Extra Spicy', 1, 180),
+(16, 1, 1, 'Regular', 1, 340),
+(17, 1, 2, 'Regular', 1, 270),
+(18, 2, 4, 'Regular', 1, 210),
+(18, 7, 5, 'Regular', 1, 300),
+(18, 16, 34, NULL, 1, 160);
 
 -- --------------------------------------------------------
 
@@ -203,15 +269,44 @@ CREATE TABLE `orders` (
   `date` date NOT NULL,
   `phone` varchar(50) NOT NULL,
   `user_name` varchar(100) NOT NULL,
-  `address` varchar(100) NOT NULL
+  `address` varchar(100) NOT NULL,
+  `order_status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`orderID`, `total_price`, `date`, `phone`, `user_name`, `address`) VALUES
-(0, 340, '2020-07-13', '12345678903', 'Swarupa Islam', 'Akiber Basha');
+INSERT INTO `orders` (`orderID`, `total_price`, `date`, `phone`, `user_name`, `address`, `order_status`) VALUES
+(1, 0, '0000-00-00', '', '', '', 'Test'),
+(2, NULL, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(3, 510, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(4, 510, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(5, 670, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(6, 400, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(7, 560, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(8, 230, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(9, 180, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(10, 300, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(11, 580, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(12, 230, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(13, 300, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(14, 340, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(15, 180, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(16, 340, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(17, 270, '2020-08-04', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(18, 670, '2020-08-04', '12345678901', 'Akib asd', 'asds', 'Pending');
+
+--
+-- Triggers `orders`
+--
+DELIMITER $$
+CREATE TRIGGER `add_orderid` BEFORE INSERT ON `orders` FOR EACH ROW BEGIN
+SET NEW.orderId = gen_orderid()+1;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -220,6 +315,7 @@ INSERT INTO `orders` (`orderID`, `total_price`, `date`, `phone`, `user_name`, `a
 --
 
 CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
   `user_name` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
@@ -231,8 +327,24 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_name`, `email`, `address`, `phone`, `pass`) VALUES
-('Akib Khan', 'abc@gmail.com', 'Shantibag', '12345678901', 'a');
+INSERT INTO `user` (`user_id`, `user_name`, `email`, `address`, `phone`, `pass`) VALUES
+(0, 'Akib asd', 'sads@gmail.com', 'asds', '12345678901', 'asd'),
+(1, 'asg sdf', 'asd@gmia.com', 'asfa', '12345678909', 'asd');
+
+--
+-- Triggers `user`
+--
+DELIMITER $$
+CREATE TRIGGER `add_userid` BEFORE INSERT ON `user` FOR EACH ROW BEGIN
+
+
+SET NEW.user_id = gen_userid();
+
+
+
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables

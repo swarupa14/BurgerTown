@@ -19,12 +19,13 @@ var user_data = {
 };
 //let orderId=0;
 //let order_id=5;
-var i = 0;
+//var i = 0;
+let c = 0;
 var flag = 0;
 
 let addonName = [];
 let itemSpiceLvl = [];
-let user_flag=0;
+let user_flag = 0;
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
@@ -42,9 +43,9 @@ const db = mysql.createConnection({
 let x = "Regular";
 let tempprice = 0;
 let totprice = 0;
-var totalpricearr=[];
+var totalpricearr = [];
 var itemnum = [];
-let crossinput=0;
+let crossinput = 0;
 
 db.connect(function(err) {
   if (err) {
@@ -54,42 +55,58 @@ db.connect(function(err) {
 })
 var j = 0;
 var input = 0;
-app.post("/signout", function(req,res){
+app.post("/signout", function(req, res) {
   user_data = {
     username: "",
     usernumber: "",
     useraddress: ""
   };
-  user_flag=0;
-  allItems=[];
-  totprice=0;
+  user_flag = 0;
+  allItems = [];
+  totprice = 0;
+  totalpricearr = [];
+  totalpricearr.push(0);
+  resultprice = [];
+  resultprice.push(0);
+  itemnum = [];
+  addonName = [];
+  itemSpiceLvl = [];
+  x = "";
+  tempprice = 0;
+  crossinput = 0;
+  flag = 0;
+  j = 0;
+  input = 0;
+  flagpos = 0;
   res.redirect("back");
+  res.end();
 
 });
 
 //Get item data from behav.js by clicking add to cart button
 app.post("/item", function(req, res) {
-  totprice=0;
+  totprice = 0;
   input = 0;
   flagpos = 1;
   itemnum.push(1);
 
   allItems.push(req.body.itemData);
-  if (allItems[i].type == 1) {
-    addonName.push(allItems[i].addon.toString());
-    itemSpiceLvl.push(allItems[i].spiceLvl);
-    x = allItems[i].addon.toString();
+  c = allItems.length;
+  if (allItems[c - 1].type == 1) {
+    addonName.push(allItems[c - 1].addon.toString());
+    itemSpiceLvl.push(allItems[c - 1].spiceLvl);
+    x = allItems[c - 1].addon.toString();
     flag = 1;
 
 
-  } else if (allItems[i].type == 2) {
-    addonName.push(allItems[i].addon.toString());
+  } else if (allItems[c - 1].type == 2) {
+    addonName.push(allItems[c - 1].addon.toString());
     itemSpiceLvl.push(null);
-    x = allItems[i].addon.toString();
+    x = allItems[c - 1].addon.toString();
     flag = 2;
-  } else if (allItems[i].type == 4) {
+  } else if (allItems[c - 1].type == 4) {
     addonName.push(null);
-    itemSpiceLvl.push(allItems[i].spiceLvl);
+    itemSpiceLvl.push(allItems[c - 1].spiceLvl);
     flag = 3;
 
   } else {
@@ -99,8 +116,8 @@ app.post("/item", function(req, res) {
 
   }
 
-  tempprice = parseInt(allItems[i].price);
-  i++;
+  tempprice = parseInt(allItems[c - 1].price);
+
 
   res.end();
 
@@ -114,8 +131,8 @@ var flagpos = 0;
 
 app.post("/number", function(req, res) {
 
-  totprice=0;
-    input = 1;
+  totprice = 0;
+  input = 1;
 
 
   var n = req.body.itemAmount;
@@ -123,11 +140,10 @@ app.post("/number", function(req, res) {
   if (itemnum[req.body.index] < n) {
     flagpos = 1;
 
-  } else if(itemnum[req.body.index] == n && n==1){
+  } else if (itemnum[req.body.index] == n && n == 1) {
 
 
-  }
-    else {
+  } else {
     flagpos = 0;
 
   }
@@ -135,23 +151,19 @@ app.post("/number", function(req, res) {
   itemnum[req.body.index] = n;
   amount = parseInt(itemnum[j]);
 
-  if (allItems[j].type == 1 ) {
+  if (allItems[j].type == 1) {
     x = allItems[j].addon.toString();
-    flag=1;
+    flag = 1;
 
-  }
-  else if(allItems[j].type == 2)
-  {
+  } else if (allItems[j].type == 2) {
     x = allItems[j].addon.toString();
-    flag=2;
+    flag = 2;
 
-  }
-  else if(allItems[j].type == 3 || allItems[j].type == 4)
-  {
-    flag=3;
+  } else if (allItems[j].type == 3 || allItems[j].type == 4) {
+    flag = 3;
   }
   tempprice = parseInt(allItems[j].price);
-//  console.log("ITEM price" + totprice);
+  //  console.log("ITEM price" + totprice);
 
 
   res.end();
@@ -161,17 +173,16 @@ app.post("/number", function(req, res) {
 //crossing from cart
 var cross;
 
-app.post("/cross",function(req,res)
-{
-  crossinput=1;
-  totprice=0;
-  cross=req.body.crossindex;
-  allItems.splice(cross,1);
+app.post("/cross", function(req, res) {
+  crossinput = 1;
+  totprice = 0;
+  cross = req.body.crossindex;
+  allItems.splice(cross, 1);
 
-   itemnum.splice(cross,1);
+  itemnum.splice(cross, 1);
 
-    res.end();
-    i--;
+  res.end();
+  i--;
 
 });
 
@@ -181,51 +192,114 @@ app.post("/checkout", function(req, res) {
   let userName = req.body.username;
   let userPhone = req.body.usernumber;
   let userAddress = req.body.useraddress;
-  let sql6 = "CALL get_name_and_orderid();";
-  let query = db.query(sql6, function(err, results) {
-    if (err)
+  let sql5 = "CALL insert_order(?,?,?);";
+  query = db.query(sql5, [userName, userPhone, userAddress], function(err, results) {
+    if (err) {
       console.log(err);
-    else {
-      let order_id = results[0][0].Y;
-      let sql5 = "CALL insert_order(?,?,?,?);";
-      query = db.query(sql5, [order_id, userName, userPhone, userAddress], function(err, results) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("INSERT ORDER SUCCESSFUL");
-        }
-      });
-      for (var i = 0; i < allItems.length; i++) {
-        let itemName = allItems[i].name;
-        let itemPrice = allItems[i].price;
+    } else {
+      console.log("INSERT ORDER SUCCESSFUL");
+    }
+  });
+  for (var i = 0; i < allItems.length; i++) {
+    let itemName = allItems[i].name;
+    let itemPrice = allItems[i].price;
 
-        let sql3 = "CALL calc_tot_price(?,?,?,?,?);";
-        let query = db.query(sql3, [order_id, itemName, addonName[i], itemPrice, itemSpiceLvl[i]], function(err, results, fields) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log("INSERT ITEMS SUCCESSFUL");
-          }
-        });
+    let sql3 = "CALL calc_tot_price(?,?,?,?,?);";
+    let query = db.query(sql3, [itemName, addonName[i], itemPrice, itemSpiceLvl[i], itemnum[i]], function(err, results, fields) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("INSERT ITEMS SUCCESSFUL");
       }
-      let sql4 = "CALL update_order(?);";
-      query = db.query(sql4, [order_id], function(err, results) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("UPDATE ORDER SUCCESSFUL");
-        }
+    });
+  }
+  let sql6 = "CALL update_order();";
+  query = db.query(sql6, function(err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("UPDATE ORDER SUCCESSFUL");
+    }
+  });
+  allItems = [];
+  totprice = 0;
+  totalpricearr = [];
+  totalpricearr.push(0);
+  resultprice = [];
+  resultprice.push(0);
+  itemnum = [];
+  addonName = [];
+  itemSpiceLvl = [];
+  x = "";
+  tempprice = 0;
+  crossinput = 0;
+  flag = 0;
+  j = 0;
+  input = 0;
+  flagpos = 0;
+  res.redirect("/");
+  res.end();
+
+});
+let del = 0,
+  disp = 0,
+  pend = 0;
+let orderInfo = [];
+let orderDate = '0000-00-00';
+let orderStatus = 'Test';
+app.post("/orderstat", function(req, res) {
+  orderDate = req.body.orderDate;
+  orderStatus = req.body.stat;
+  console.log(orderStatus);
+  res.redirect("admin");
+});
+
+app.get("/admin", function(req, res) {
+  let sql = 'CALL get_order_details(?,?);';
+  let query = db.query(sql, [orderDate, orderStatus], function(err, results, fields) {
+    if (err) console.log(err);
+    else {
+      if (orderStatus == "") {
+        del = results[2][0].X1;
+        disp = results[3][0].X2;
+        pend = results[4][0].X3;
+        orderInfo=[];
+      } else if (orderStatus == "Delivered") {
+        del = results[1][0].Y;
+        disp =0;
+        pend=0;
+        orderInfo = results[0];
+      } else if (orderStatus == "Dispatched") {
+        disp = results[1][0].Y;
+        del=0;
+        pend=0;
+        orderInfo = results[0];
+      } else if (orderStatus == "Pending") {
+        pend = results[1][0].Y;
+        del=0;
+        disp=0;
+        orderInfo = results[0];
+      } else if (orderStatus == "All"){
+        del = results[2][0].X1;
+        disp = results[3][0].X2;
+        pend = results[4][0].X3;
+        orderInfo=results[5];
+      }
+      res.render("admin", {
+        status_home: "active",
+        status_location: "",
+        status_menu: "",
+        status_contact: "",
+        status_signup: "",
+        status_cart: "",
+        orderInfo: orderInfo,
+        del: del,
+        disp: disp,
+        pend: pend
       });
-      res.redirect("/");
-      res.end();
-      allItems=[];
-      totprice=0;
     }
   });
 });
-
-
-
 //Send data back to behav js
 // app.get("/signout", function(req, res) {
 //   res.json({
@@ -237,15 +311,14 @@ app.post("/checkout", function(req, res) {
 //Get home page
 app.get("/", function(req, res) {
   //TOTAL NUMBER OF ITEMS IN CART
-  var k,sum=0;
-  for(k=0;k<allItems.length;k++)
-  {
-    sum=parseInt(sum)+parseInt(itemnum[k]);
+  var k, sum = 0;
+  for (k = 0; k < allItems.length; k++) {
+    sum = parseInt(sum) + parseInt(itemnum[k]);
   }
   res.render("index", {
     itemnumber: sum,
     cartitems: allItems,
-    itemamount:itemnum,
+    itemamount: itemnum,
     addonprice: resultprice,
     totalprice: totprice,
     status_home: "active",
@@ -262,7 +335,7 @@ app.get("/", function(req, res) {
   });
 });
 
-totprice=0;
+totprice = 0;
 var v;
 var tot_temp_price;
 var resultprice = [];
@@ -290,12 +363,11 @@ app.get("/:lnk", function(req, res) {
     default:
   }
   //TOTAL NUMBER OF ITEMS IN CART
-  var k,sum=0;
-  for(k=0;k<allItems.length;k++)
-  {
-    sum=parseInt(sum)+parseInt(itemnum[k]);
+  var k, sum = 0;
+  for (k = 0; k < allItems.length; k++) {
+    sum = parseInt(sum) + parseInt(itemnum[k]);
   }
-totprice=0;
+  totprice = 0;
   //Loadup Menu and Orders page from Database
   let sql = 'CALL Getmenuitems(?,?,?,?,?);';
   let query = db.query(sql, ['Signature', 'Regulars', "Chef's Special", "Fries", "Shakes"], function(err, results, fields) {
@@ -309,61 +381,63 @@ totprice=0;
           console.log(err);
         } else {
 
-                    if (flag != 3 && x != "") {
-                      //    console.log(results1[0]);
-                     if (input != 1) {
+          if (flag != 3 && x != "") {
+            //    console.log(results1[0]);
+            if (input != 1) {
 
-                       resultprice.push(results1[0].price);
-                        tot_temp_price = parseInt(totprice) + parseInt(tempprice) + parseInt(results1[0].price);
-                        totalpricearr.push(tot_temp_price);
+              resultprice.push(results1[0].price);
+              tot_temp_price = parseInt(totprice) + parseInt(tempprice) + parseInt(results1[0].price);
+              totalpricearr.push(tot_temp_price);
 
-                       }
-
-
-                    } else if (flag == 3) {
-
-                     if (input != 1) {
-
-                        resultprice.push(0);
-                        tot_temp_price = parseInt(totprice) + parseInt(tempprice) + parseInt(0);
-                          totalpricearr.push(tot_temp_price);
-
-                       }
+            }
 
 
-                    }
-                    if(crossinput==1)
-                    {
-                      var p=parseInt(cross)+parseInt(1);
-                      console.log("Before slicing"+totalpricearr);
-                      totalpricearr.splice(p,1);
+          } else if (flag == 3) {
+
+            if (input != 1) {
+
+              resultprice.push(0);
+              tot_temp_price = parseInt(totprice) + parseInt(tempprice) + parseInt(0);
+              totalpricearr.push(tot_temp_price);
+
+            }
 
 
-                      resultprice.splice(p,1);
-                      console.log("After slicing"+totalpricearr);
-                        console.log("After slicing addonprice"+resultprice);
+          }
+          if (crossinput == 1) {
+            var p = parseInt(cross) + parseInt(1);
+            console.log("Before slicing" + totalpricearr);
+            totalpricearr.splice(p, 1);
 
-                        crossinput=0;
 
-                    }
+            resultprice.splice(p, 1);
+            console.log("After slicing" + totalpricearr);
+            console.log("After slicing addonprice" + resultprice);
 
-                    console.log("TOtal price array"+totalpricearr);
-                    console.log("Item num"+itemnum);
-                    for(v=0;v<allItems.length;v++)
-                    {
-                    //  console.log("CALCULATING TOTAL PRICE!");
-                      totprice=parseInt(totprice)+ parseInt(totalpricearr[v+1]*itemnum[v]);
-                    }
+            crossinput = 0;
+
+          }
+
+          console.log("TOtal price array" + totalpricearr);
+          console.log("Item num" + itemnum);
+          for (v = 0; v < allItems.length; v++) {
+            //  console.log("CALCULATING TOTAL PRICE!");
+            totprice = parseInt(totprice) + parseInt(totalpricearr[v + 1] * itemnum[v]);
+          }
 
 
           console.log(resultprice);
           x = "";
           flag = 0;
           tempprice = 0;
+          // let sql99 = 'CALL get_order_details(?,?);';
+          // let query = db.query(sql99, [orderDate, orderStatus], function(err, results99, fields) {
+          //   if (err) console.log(err);
+          //   else {
           res.render(dest, {
             itemnumber: sum,
             cartitems: allItems,
-            itemamount:itemnum,
+            itemamount: itemnum,
             addonprice: resultprice,
             totalprice: totprice,
             status_home: status[0],
@@ -380,9 +454,14 @@ totprice=0;
             username: user_data.username,
             usernumber: user_data.usernumber,
             useraddress: user_data.useraddress,
-            user_flag: user_flag
+            user_flag: user_flag,
+            orderInfo: orderInfo,
+            del: del,
+            disp: disp,
+            pend: pend
           });
-
+          //   }
+          // });
         }
       });
     }
@@ -404,8 +483,8 @@ app.post("/signup", function(req, res) {
   if (userData.user_name === "" || userData.email === "" || userData.address === "" || userData.phone.length != 11 || userData.pass === "" || req.body.c_pass === "" || req.body.agree != 'on') {
     go = 0;
   }
-  if(userData.pass != req.body.c_pass){
-    go=0;
+  if (userData.pass != req.body.c_pass) {
+    go = 0;
   }
   if (go === 1) {
     let sql1 = 'select phone from user where phone =' + mysql.escape(userData.phone);
@@ -429,6 +508,7 @@ app.post("/signup", function(req, res) {
 
 //Signin module
 app.post("/:lnk", function(req, res) {
+  let login_flag=0;
   userDataSignIn.phone = req.body.phone;
   userDataSignIn.passWord = req.body.passWord;
   let sql = 'select * from user';
@@ -437,14 +517,14 @@ app.post("/:lnk", function(req, res) {
     else {
       for (var i = 0; i < result.length; i++) {
         if ((userDataSignIn.phone === result[i].phone) && (userDataSignIn.passWord === result[i].pass)) {
-
+          login_flag=1;
           console.log("Signed in successfully");
           user_data = {
             username: result[i].user_name,
             usernumber: result[i].phone,
             useraddress: result[i].address
           };
-          user_flag=1;
+          user_flag = 1;
           app.get("/:lnk", function(req, res) {
             const dest = _.lowerCase(req.params.lnk);
             status = ["", "", "", "", "", ""];
@@ -479,7 +559,7 @@ app.post("/:lnk", function(req, res) {
                 res.render(dest, {
                   itemnumber: sum,
                   cartitems: allItems,
-                  itemamount:itemnum,
+                  itemamount: itemnum,
                   addonprice: resultprice,
                   totalprice: totprice,
                   status_home: status[0],
@@ -506,6 +586,8 @@ app.post("/:lnk", function(req, res) {
           break;
         }
       }
+      if(login_flag==0)
+        res.redirect("back");
 
     }
   });
