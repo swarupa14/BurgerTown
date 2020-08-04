@@ -1,10 +1,10 @@
 <div class="add-item-to-menu">
-  <form class="update-menu" action=" " method="post" id="menu-db">
+  <form class="update-menu" action="/admin" role="form" method="post" id="menu-db" enctype="multipart/form-data">
     <div class="update-item-block">
       <div class="item-label">
         <p>SECTION :</p>
       </div>
-      <select id="" name="" form="menu-db" placeholder="Select Section">
+      <select id="" name="itemsection" form="menu-db" placeholder="Select Section">
         <option value="Signature">Signature</option>
         <option value="Regulars">Regulars</option>
         <option value="Chef's Special">Chef's Special</option>
@@ -17,14 +17,14 @@
       <div class="item-label">
         <p>ITEM NAME : </p>
       </div>
-      <input type="text" name="" value="" placeholder="Enter item name">
+      <input type="text" name="itemname" value="" placeholder="Enter item name">
     </div>
 
     <div class="update-item-block">
       <div class="item-label">
         <p>ITEM DESCRIPTION : </p>
       </div>
-      <textarea id="" name="" rows="2" cols="50" placeholder="Add Description" ></textarea>
+      <textarea id="" name="ingredients" rows="2" cols="50" placeholder="Add Description" ></textarea>
       <!-- <input type="text" name="" value="" placeholder="Add Description"> -->
     </div>
 
@@ -32,7 +32,7 @@
       <div class="item-label">
         <p>PRICE : </p>
       </div>
-      <input type="number" name="" value="" placeholder="Enter price">
+      <input type="number" name="price" value="" placeholder="Enter price">
       <span>BDT</span>
     </div>
 
@@ -41,7 +41,7 @@
         <p>ADD IMAGE : </p>
       </div>
 
-      <input type="file" name="" value="">
+      <input type="file" name="uploaded_image" value="">
     </div>
     <div class="confirm-add d-flex justify-content-center">
       <input type="submit" value="ADD TO MENU" class="btn btn-success">

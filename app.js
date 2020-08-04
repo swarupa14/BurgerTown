@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const app = express();
 const mysql = require("mysql");
+const fileUpload = require('express-fileupload');
 const _ = require("lodash");
 let status = ["", "", "", "", "", ""];
 let allItems = [];
@@ -22,7 +23,7 @@ var user_data = {
 //var i = 0;
 let c = 0;
 var flag = 0;
-
+app.use(fileUpload());
 let addonName = [];
 let itemSpiceLvl = [];
 let user_flag = 0;
@@ -182,7 +183,7 @@ app.post("/cross", function(req, res) {
   itemnum.splice(cross, 1);
 
   res.end();
-  i--;
+//  i--;
 
 });
 
@@ -241,6 +242,28 @@ app.post("/checkout", function(req, res) {
   res.end();
 
 });
+
+
+app.post("/admin",function(req,res){
+
+  let item_name= req.body.itemname;
+  let item_section = req.body.itemsection;
+    let item_ingredients= req.body.ingredients;
+  let  item_price= req.body.price;
+    let file = req.files.uploaded_image;
+	let img_name=file.name;
+  console.log(file);
+ //file.mv('public/img/'+file.name, function(err) {
+  let sql = "CALL insert_items(?,?,?,?,?);";
+  let query = db.query(sql, [item_name,item_section,item_ingredients,item_price,img_name], (err, result) => {
+    if (err) throw err;
+    console.log(result);
+  });
+//});
+  res.redirect("/menu");
+});
+
+
 let del = 0,
   disp = 0,
   pend = 0;

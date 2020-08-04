@@ -311,6 +311,11 @@ iframe{
   text-align: center;
 }
 
+.card.menu-card img
+{
+  height: 13.5rem;
+}
+
 .card .burger{
   height:17.5rem;
 }
