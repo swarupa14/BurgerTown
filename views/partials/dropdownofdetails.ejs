@@ -1,15 +1,20 @@
 <div class="<%=username%>"></div>
 <% if(username) { %>
-<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=username[0]%></button>
+<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <div class="first-letter">
+  <%=username[0]%>
+</div></button>
 <% } %>
 <div class="dropdown-menu">
-  <p class="dropdown-item"><a href="/signup">My account</a></p>
+  <p class="dropdown-item"><a href="/myaccount">My account</a></p>
   <p class="dropdown-item"><a href="/signup">My Orders</a></p>
   <p class="dropdown-item"><a href="/signup">Payment Preference</a></p>
   <p class="dropdown-item"><a href="/signup">Change Password</a></p>
   <div class="dropdown-divider"></div>
   <form class="" action="/signout" method="post">
+    <div class="sign-out-div">
       <button type="submit" class="btn btn-success btn sign-out">Sign Out</button>
+    </div>
   </form>
 
   <!-- <button id="sign-out" class="dropdown-item"><a href="/"> <i>Sign Out</i> </a></p> -->

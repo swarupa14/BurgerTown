@@ -598,8 +598,8 @@ ul .Addons {
  color: #fff;
  background-color: #1d1919;
  opacity: .99;
-
 }
+
 .Signup-form input{
   color: #000;
 }
@@ -646,8 +646,22 @@ ul .Addons {
 
 #dropdownMenuButton.btn{
   color: rgba(255,255,255,0.5);
+  padding: .375rem !important ;
 }
-
+.first-letter{
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  background-color: #F5AA13;
+  font-weight: bold;
+  color:#000;
+  border-radius: 100%;
+  display: inline-block;
+}
+.sign-out-div{
+  text-align: right;
+  padding-right: 5%;
+}
 #dropdownMenuButton.btn:hover{
   color: rgba(255,255,255,3);
 }
@@ -1125,7 +1139,7 @@ color: blueviolet;
   padding: 3% 25% 0;
 }
 
-.show-order select,.show-order input[type="date"]{
+.show-order input,.show-order input[type="date"]{
   width: 35%;
   margin-right: 25px;
 
@@ -1184,5 +1198,72 @@ color: blueviolet;
 .stat-count{
   width: 200px;
   display: inline-block;
-    color:  #F5AA13;
+  color:  #F5AA13;
+}
+
+
+.update-order
+{
+  padding: 3% 25% 0;
+}
+.update-order input[type=number]::-webkit-inner-spin-button,
+.update-order input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.update-order hr{
+  color: #fff;
+  border: 1px;
+  border-style: solid none none;
+}
+.update-order-block{
+  text-align: left;
+    padding: 2% 10%;
+}
+.update-order-info
+{
+  padding-bottom: 1%;
+}
+.update-order-info input{
+  width: 55%;
+  text-align: left;
+  padding-left: 2%;
+}
+.update-order-info select{
+  width: 20%;
+  padding-left: 1%;
+}
+.User-form {
+ position: relative;
+ padding: 3%;
+ text-align: left !important;
+ margin: auto;
+ width: 48vw;
+ font-size: 16px;
+ font-family: 'Montserrat', sans-serif;
+ box-shadow: 3px 3px 5px #888888;
+ color: #fff;
+ background-color: #1d1919;
+ opacity: .99;
+}
+
+.update-user-info{
+  padding-bottom: 3%;
+  padding-left: 5%;
+}
+
+.update-user-info input{
+  width: 45%;
+  text-align: left !important;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 1% 2%;
+  font-family: 'Montserrat', sans-serif;
+}
+.user-save-button{
+  text-align: center;
+}
+.user-save{
+  padding: .375rem 1rem !important;
+  font-weight: bold !important;
 }
