@@ -251,7 +251,7 @@ app.post("/admin",function(req,res){
     let item_ingredients= req.body.ingredients;
   let  item_price= req.body.price;
     let file = req.files.uploaded_image;
-	let img_name=file.data;
+	let img_name=file.name;
   console.log(file);
  //file.mv('public/img/'+file.name, function(err) {
   let sql = "CALL insert_items(?,?,?,?,?);";
@@ -272,7 +272,7 @@ let orderDate = '0000-00-00';
 let orderStatus = 'Test';
 app.post("/orderstat", function(req, res) {
   orderDate = req.body.orderDate;
-  orderStatus = req.body.stat1;
+  orderStatus = req.body.stat;
   console.log(orderStatus);
   res.redirect("admin");
 });
