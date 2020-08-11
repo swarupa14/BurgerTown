@@ -313,11 +313,11 @@ iframe{
 
 .card.menu-card img
 {
-  height: 13.5rem;
+  height: 30vh;
 }
 
 .card .burger{
-  height:17.5rem;
+  height:16rem;
 }
 .menucard-height{
   height: 12rem;
@@ -542,7 +542,7 @@ ul .Addons {
 }
 
 /* SIGNUP PAGE */
-.Takeaway {
+.Takeaway , .Memo {
   position: relative;
   padding: 10%;
   text-align: center;
@@ -1266,4 +1266,75 @@ color: blueviolet;
 .user-save{
   padding: .375rem 1rem !important;
   font-weight: bold !important;
+}
+
+.Memo-form {
+ position: relative;
+ padding: 3%;
+ text-align: left !important;
+ margin: auto;
+ width: 48vw;
+ font-size: 16px;
+ font-family: 'Montserrat', sans-serif;
+ box-shadow: 3px 3px 5px #888888;
+ color: #1d1919;
+ background-color: #fff;
+}
+
+.memo-header{
+  font-family: 'Aclonica', sans-serif;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.memo-header h5{
+  padding-top: 10px;
+}
+
+.time-label{
+  /* width: 100px; */
+  display: inline-block;
+}
+.time-value{
+  display: inline-block;
+}
+.time-block{
+ padding-left: 55%;
+ font-size: 12px;
+ color: #888888;
+}
+
+.memo-label{
+  width: 32%;
+  display: inline-block;
+}
+.memo-value{
+  width: 65%;
+  display: inline-block;
+}
+.memo-block{
+ padding-left: 5%;
+}
+.cart-memo-block{
+  font-size: 13px;
+  padding-bottom: 10px;
+}
+.cart-memo-block table {
+  width: 100%;
+  text-align: center;
+  border: 1px solid #000;
+
+}
+.cart-memo-block td
+{
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+.download-memo-button{
+  text-align: right;
+}
+.memo-footer{
+  padding: 5%;
+  font-size: 12px;
+  text-align: center;
+   color: #888888;
 }
