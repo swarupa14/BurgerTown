@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2020 at 04:56 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- Generation Time: Sep 01, 2020 at 03:12 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -100,6 +100,15 @@ BEGIN
 update orders 
 set total_price=(select sum(price) from combined_order where orderID=gen_orderId()) 
 where orderID=gen_orderid();
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_user_details` (IN `new_phone` VARCHAR(50), IN `name` VARCHAR(100), IN `addr` VARCHAR(100), IN `email` VARCHAR(50), IN `old_phone` VARCHAR(50))  MODIFIES SQL DATA
+BEGIN
+
+update user 
+set user_name=name, address=addr, email=email,phone=new_phone
+where phone=old_phone;
+
 END$$
 
 --
@@ -345,7 +354,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `email`, `address`, `phone`, `pass`) VALUES
-(0, 'Akib asd', 'sads@gmail.com', 'asds', '12345678901', 'asd'),
+(0, 'Akibz Khanz', 'sad@gmail.com', 'asdsd', '02345678901', 'asd'),
 (1, 'asg sdf', 'asd@gmia.com', 'asfa', '12345678909', 'asd');
 
 --
