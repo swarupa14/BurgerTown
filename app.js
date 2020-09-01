@@ -16,8 +16,10 @@ let userDataSignIn = {
 var user_data = {
   username: "",
   usernumber: "",
-  useraddress: ""
+  useraddress: "",
+  useremail: ""
 };
+//var fname,lname;
 //let orderId=0;
 //let order_id=5;
 //var i = 0;
@@ -453,10 +455,7 @@ app.get("/:lnk", function(req, res) {
           x = "";
           flag = 0;
           tempprice = 0;
-          // let sql99 = 'CALL get_order_details(?,?);';
-          // let query = db.query(sql99, [orderDate, orderStatus], function(err, results99, fields) {
-          //   if (err) console.log(err);
-          //   else {
+          var splitUserName=user_data.username.split(" ");
           res.render(dest, {
             itemnumber: sum,
             cartitems: allItems,
@@ -477,6 +476,11 @@ app.get("/:lnk", function(req, res) {
             username: user_data.username,
             usernumber: user_data.usernumber,
             useraddress: user_data.useraddress,
+            fname: splitUserName[0],
+            lname: splitUserName[1],
+            email: user_data.useremail,
+            address: user_data.useraddress,
+            phone: user_data.usernumber,
             user_flag: user_flag,
             orderInfo: orderInfo,
             del: del,
@@ -491,6 +495,25 @@ app.get("/:lnk", function(req, res) {
   });
 });
 
+//Change account details module
+app.post("/myaccount",function(req,res){
+  let userName = req.body.fname + " " + req.body.lname;
+  let email= req.body.email;
+  let address= req.body.address;
+  let phone= req.body.phone;
+  console.log(userName,email,address,phone);
+  let sql="CALL update_user_details(?,?,?,?,?);";
+  let query=db.query(sql,[phone,userName,address,email,user_data.usernumber],(err,result)=>{
+    if(err) throw err;
+    user_data = {
+      username: userName,
+      usernumber: phone,
+      useraddress: address,
+      useremail: email
+    };
+    res.redirect("/");
+  });
+});
 
 //Signup module
 app.post("/signup", function(req, res) {
@@ -545,7 +568,8 @@ app.post("/:lnk", function(req, res) {
           user_data = {
             username: result[i].user_name,
             usernumber: result[i].phone,
-            useraddress: result[i].address
+            useraddress: result[i].address,
+            useremail: result[i].email
           };
           user_flag = 1;
           app.get("/:lnk", function(req, res) {
@@ -579,6 +603,7 @@ app.post("/:lnk", function(req, res) {
                 console.log(err);
               } else {
                 console.log(results);
+                var splitUserName=user_data.username.split(" ");
                 res.render(dest, {
                   itemnumber: sum,
                   cartitems: allItems,
@@ -599,7 +624,16 @@ app.post("/:lnk", function(req, res) {
                   username: user_data.username,
                   usernumber: user_data.usernumber,
                   useraddress: user_data.useraddress,
-                  user_flag: user_flag
+                  fname: splitUserName[0],
+                  lname: splitUserName[1],
+                  email: user_data.useremail,
+                  address: user_data.useraddress,
+                  phone: user_data.usernumber,
+                  user_flag: user_flag,
+                  orderInfo: orderInfo,
+                  del: del,
+                  disp: disp,
+                  pend: pend
                 });
 
               }
