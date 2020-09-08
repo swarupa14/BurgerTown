@@ -29,6 +29,7 @@ app.use(fileUpload());
 let addonName = [];
 let itemSpiceLvl = [];
 let user_flag = 0;
+let adminFlag=0;
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
@@ -245,9 +246,21 @@ app.post("/checkout", function(req, res) {
 
 });
 
-
+//ADMIN SECTION
+let dashAdd="dash-active";
+let dashUp="";
+let dashStat="";
+let orderIDForUpdate=0;
+let orderDetailsForUpdate={
+  uname:"",
+  unumber: "",
+  uaddress: ""
+};
 app.post("/admin",function(req,res){
-
+  adminFlag=1;
+  dashAdd="dash-active";
+  dashUp="";
+  dashStat="";
   let item_name= req.body.itemname;
   let item_section = req.body.itemsection;
     let item_ingredients= req.body.ingredients;
@@ -273,12 +286,17 @@ let orderInfo = [];
 let orderDate = '0000-00-00';
 let orderStatus = 'Test';
 app.post("/orderstat", function(req, res) {
+  adminFlag=0;
+  dashStat="dash-active";
+  dashAdd="";
+  dashUp="";
   orderDate = req.body.orderDate;
   orderStatus = req.body.stat1;
   console.log(orderStatus);
   res.redirect("admin");
 });
 
+//See order status
 app.get("/admin", function(req, res) {
   let sql = 'CALL get_order_details(?,?);';
   let query = db.query(sql, [orderDate, orderStatus], function(err, results, fields) {
@@ -320,11 +338,77 @@ app.get("/admin", function(req, res) {
         orderInfo: orderInfo,
         del: del,
         disp: disp,
-        pend: pend
+        pend: pend,
+        uname: orderDetailsForUpdate.uname,
+        unumber: orderDetailsForUpdate.unumber,
+        uaddress: orderDetailsForUpdate.uaddress,
+        admin_flag: adminFlag,
+        dash_add: dashAdd,
+        dash_up: dashUp,
+        dash_stat: dashStat
+
       });
     }
   });
 });
+
+//Update order status
+app.post("/getordid", function(req,res){
+  dashUp="dash-active";
+  dashStat="";
+  dashAdd="";
+  orderIDForUpdate=req.body.ord_id;
+  let sql="select * from orders where orderID=?";
+  let query= db.query(sql,[orderIDForUpdate],(err,result)=>{
+    if(err) console.log(err);
+    else{
+      orderDetailsForUpdate.uname=result[0].user_name;
+      orderDetailsForUpdate.unumber=result[0].phone;
+      orderDetailsForUpdate.uaddress=result[0].address;
+    }
+  });
+  res.redirect("admin");
+  adminFlag=2;
+});
+
+app.get("/admin", function(req,res){
+  res.render("admin", {
+    status_home: "active",
+    status_location: "",
+    status_menu: "",
+    status_contact: "",
+    status_signup: "",
+    status_cart: "",
+    uname: orderDetailsForUpdate.uname,
+    unumber: orderDetailsForUpdate.unumber,
+    uaddress: orderDetailsForUpdate.uaddress,
+    admin_flag: adminFlag,
+    dash_add: dashAdd,
+    dash_up: dashUp,
+    dash_stat: dashStat
+  });
+});
+let updateOrderStatus="";
+app.post("/updateorderinfo", function(req,res){
+  orderDetailsForUpdate.uname=req.body.uname;
+  orderDetailsForUpdate.unumber=req.body.unumber;
+  orderDetailsForUpdate.uaddress=req.body.uaddress;
+  updateOrderStatus=req.body.stat2;
+  let sql="CALL update_order_details(?,?,?,?,?);";
+  let query= db.query(sql,[orderIDForUpdate,orderDetailsForUpdate.uname,orderDetailsForUpdate.uaddress,orderDetailsForUpdate.unumber,
+  updateOrderStatus],(err,result)=>{
+    if(err) console.log(err);
+    else{
+      console.log("Update Successful");
+    }
+  });
+  orderDetailsForUpdate.uname="";
+  orderDetailsForUpdate.unumber="";
+  orderDetailsForUpdate.uaddress="";
+  res.redirect("admin");
+});
+
+
 //Send data back to behav js
 // app.get("/signout", function(req, res) {
 //   res.json({
@@ -485,10 +569,15 @@ app.get("/:lnk", function(req, res) {
             orderInfo: orderInfo,
             del: del,
             disp: disp,
-            pend: pend
+            pend: pend,
+            uname: orderDetailsForUpdate.uname,
+            unumber: orderDetailsForUpdate.unumber,
+            uaddress: orderDetailsForUpdate.uaddress,
+            admin_flag: adminFlag,
+            dash_add: dashAdd,
+            dash_up: dashUp,
+            dash_stat: dashStat
           });
-          //   }
-          // });
         }
       });
     }
@@ -633,7 +722,14 @@ app.post("/:lnk", function(req, res) {
                   orderInfo: orderInfo,
                   del: del,
                   disp: disp,
-                  pend: pend
+                  pend: pend,
+                  uname: orderDetailsForUpdate.uname,
+                  unumber: orderDetailsForUpdate.unumber,
+                  uaddress: orderDetailsForUpdate.uaddress,
+                  admin_flag:adminFlag,
+                  dash_add: dashAdd,
+                  dash_up: dashUp,
+                  dash_stat: dashStat
                 });
 
               }

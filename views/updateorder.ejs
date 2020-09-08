@@ -1,10 +1,10 @@
 <div class="update-order">
-  <form class="" action="" method="post">
+  <form class="" action="/getordid" method="post">
     <div class="show-order">
       <div class="item-label">
         <p>Enter Order ID </p>
       </div>
-      <input type="number" name="" value="" onkeydown="javascript: return event.keyCode === 8 ||event.keyCode === 46 ? true : !isNaN(Number(event.key))" />
+      <input type="number" name="ord_id" value="" onkeydown="javascript: return event.keyCode === 8 ||event.keyCode === 46 ? true : !isNaN(Number(event.key))" />
       <button type="submit" name="button" class="btn btn-success btn-sm">GO</button>
     </div>
     <hr>
@@ -13,33 +13,33 @@
 
 
 <div class="update-order-block">
-  <form class="order-form" action="" method="post">
+  <form class="order-form" action="/updateorderinfo" method="post">
     <div class="update-order-info">
       <div class="item-label">
         <p>Name </p>
       </div>
-      <input type="text" name="" value="">
+      <input type="text" name="uname" value="<%=uname%>" required>
     </div>
 
     <div class="update-order-info">
       <div class="item-label">
         <p>Contact Number </p>
       </div>
-      <input type="text" name="" value="">
+      <input type="text" name="unumber" value="<%=unumber%>" required>
     </div>
 
     <div class="update-order-info">
       <div class="item-label">
         <p>Delivery Address </p>
       </div>
-      <input type="text" name="" value="">
+      <input type="text" name="uaddress" value="<%=uaddress%>" required>
     </div>
 
     <div class="update-order-info">
       <div class="item-label">
         <p>Status</p>
       </div>
-      <select id="" name="" form="" placeholder="">
+      <select class="stat2" name="stat2">
         <option value=""></option>
         <option value="Pending">Pending</option>
         <option value="Dispatched">Dispatched</option>

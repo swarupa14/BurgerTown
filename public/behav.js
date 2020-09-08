@@ -200,3 +200,15 @@ $(document).on('click','.order-status',function(){
     $(".order-status").addClass("dash-active");
 
 });
+$(document).on('click','.update-ord',function(){
+    $('#admin-section .view-block').load('/updateorder');
+    $(".dash-items p").removeClass("dash-active");
+    $(".update-ord").addClass("dash-active");
+
+});
+$(document).on('click','.update-order .show-order .btn',function(){
+    $('#admin-section .view-block').load('/updateorder');
+    $(".dash-items p").removeClass("dash-active");
+    $(".update-ord").addClass("dash-active");
+
+});

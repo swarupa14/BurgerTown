@@ -77,7 +77,15 @@
 
 <section id="admin-section">
   <div class="view-block">
+    <div class="<%=admin_flag%>"></div>
+    <% if( admin_flag==0 ) { %>
     <%- include("orderstatus") -%>
+    <% } else if(admin_flag==1) {%>
+      <%- include("additemtomenu") -%>
+    <% } else {%>
+      <%- include("updateorder") -%>
+    <% } %>
+
   </div>
 
 
@@ -88,13 +96,13 @@
     <p><b><u>DASHBOARD</u></b></p>
     <div class="dash-items" class="">
       <a href="#" >
-        <p class="add-item">Add Item to Menu</p>
+        <p class="<%=dash_add%> add-item">Add Item to Menu</p>
       </a>
       <a href="#" class="">
-        <p class=" update-order">Update Order Info</p>
+        <p class="<%=dash_up%> update-ord">Update Order Info</p>
       </a>
       <a href="#" class="">
-        <p class="dash-active order-status">Order Status</p>
+        <p class="<%=dash_stat%> order-status">Order Status</p>
       </a>
     </div>
   </div>

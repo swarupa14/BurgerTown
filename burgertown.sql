@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2020 at 03:12 PM
+-- Generation Time: Sep 08, 2020 at 07:38 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -100,6 +100,15 @@ BEGIN
 update orders 
 set total_price=(select sum(price) from combined_order where orderID=gen_orderId()) 
 where orderID=gen_orderid();
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_order_details` (IN `order_id` INT, IN `name` VARCHAR(100), IN `address` VARCHAR(100), IN `phone` VARCHAR(50), IN `stat` VARCHAR(20))  MODIFIES SQL DATA
+BEGIN
+
+update orders 
+set user_name=name, address=address, phone=phone, order_status=stat
+where orderID=order_id;
+
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_user_details` (IN `new_phone` VARCHAR(50), IN `name` VARCHAR(100), IN `addr` VARCHAR(100), IN `email` VARCHAR(50), IN `old_phone` VARCHAR(50))  MODIFIES SQL DATA
@@ -308,8 +317,8 @@ INSERT INTO `orders` (`orderID`, `total_price`, `date`, `phone`, `user_name`, `a
 (2, NULL, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
 (3, 510, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
 (4, 510, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
-(5, 670, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
-(6, 400, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(5, 670, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Dispatched'),
+(6, 400, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Delivered'),
 (7, 560, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
 (8, 230, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
 (9, 180, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
