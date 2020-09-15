@@ -4,7 +4,7 @@
 <div class="Memo-form">
     <div class="memo-header">
       <img src="img/order-icon.jpg" alt="">
-      <h5>Your order number  #123456 has been confirmed</h5>
+      <h5>Your order number  #<%=order_id%> has been confirmed</h5>
     </div>
 
     <div class="time-block">
@@ -12,7 +12,7 @@
         <p>Order placed at </p>
       </div>
       <div class="time-value">
-        <p>11 August,2020 ,16:25(GMT+6) </p>
+        <p><%=dateTime%></p>
       </div>
     </div>
 
@@ -22,7 +22,7 @@
         <p>Name  :</p>
       </div>
       <div class="memo-value">
-        <p>Swarupa Islam</p>
+        <p><%=ocName%></p>
       </div>
     </div>
     <div class="memo-block">
@@ -30,7 +30,7 @@
         <p>Contact  :</p>
       </div>
       <div class="memo-value">
-        <p>01234567890</p>
+        <p><%=ocContact%></p>
       </div>
     </div>
 
@@ -39,7 +39,7 @@
         <p>Address :</p>
       </div>
       <div class="memo-value">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+        <p><%=ocAddress%></p>
       </div>
     </div>
 
@@ -50,7 +50,7 @@
         <p>Estimated delivery by :</p>
       </div>
       <div class="memo-value">
-        <p>11 August,2020 ,18:25(GMT+6) </p>
+        <p><%=estTime%></p>
       </div>
     </div>
 

@@ -190,12 +190,23 @@ app.post("/cross", function(req, res) {
 
 });
 
+
+let userName="";
+let userPhone="";
+let userAddress="";
+let orderID=0;
+var today = new Date();
+var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var estTime= today.getHours() +1+ ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = time+' '+date;
+var estDateTime=estTime+' '+date;
 //Get data from behav js through clicking confirm order button
 app.post("/checkout", function(req, res) {
   //let userPhone = userDataSignIn.phone;
-  let userName = req.body.username;
-  let userPhone = req.body.usernumber;
-  let userAddress = req.body.useraddress;
+   userName = req.body.username;
+   userPhone = req.body.usernumber;
+   userAddress = req.body.useraddress;
   let sql5 = "CALL insert_order(?,?,?);";
   query = db.query(sql5, [userName, userPhone, userAddress], function(err, results) {
     if (err) {
@@ -225,6 +236,16 @@ app.post("/checkout", function(req, res) {
       console.log("UPDATE ORDER SUCCESSFUL");
     }
   });
+  let sql9="select orderID from orders where phone="+mysql.escape(userPhone)+" order by orderID desc";
+  query = db.query(sql9, function(err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      orderID=results[0].orderID;
+      console.log(orderID);
+    }
+  });
+
   allItems = [];
   totprice = 0;
   totalpricearr = [];
@@ -241,7 +262,7 @@ app.post("/checkout", function(req, res) {
   j = 0;
   input = 0;
   flagpos = 0;
-  res.redirect("/");
+  res.redirect("orderconfirmed");
   res.end();
 
 });
@@ -409,14 +430,6 @@ app.post("/updateorderinfo", function(req,res){
 });
 
 
-//Send data back to behav js
-// app.get("/signout", function(req, res) {
-//   res.json({
-//     user_data: user_data,
-//     user_flag: user_flag
-//   });
-// });
-
 //Get home page
 app.get("/", function(req, res) {
   //TOTAL NUMBER OF ITEMS IN CART
@@ -576,7 +589,13 @@ app.get("/:lnk", function(req, res) {
             admin_flag: adminFlag,
             dash_add: dashAdd,
             dash_up: dashUp,
-            dash_stat: dashStat
+            dash_stat: dashStat,
+            ocName: userName,
+            ocContact: userPhone,
+            ocAddress: userAddress,
+            dateTime: dateTime,
+            order_id: orderID,
+            estTime: estDateTime
           });
         }
       });
@@ -729,7 +748,13 @@ app.post("/:lnk", function(req, res) {
                   admin_flag:adminFlag,
                   dash_add: dashAdd,
                   dash_up: dashUp,
-                  dash_stat: dashStat
+                  dash_stat: dashStat,
+                  ocName: userName,
+                  ocContact: userPhone,
+                  ocAddress: userAddress,
+                  dateTime: dateTime,
+                  order_id: orderID,
+                  estTime: estDateTime
                 });
 
               }
