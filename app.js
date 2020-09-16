@@ -195,6 +195,10 @@ let userName="";
 let userPhone="";
 let userAddress="";
 let orderID=0;
+let ocTotalPrice=0;
+let orderDesc=[];
+let ocItemName=[];
+let ocAddon=[];
 var today = new Date();
 var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -236,16 +240,27 @@ app.post("/checkout", function(req, res) {
       console.log("UPDATE ORDER SUCCESSFUL");
     }
   });
-  let sql9="select orderID from orders where phone="+mysql.escape(userPhone)+" order by orderID desc";
+  let sql9="select orderID,total_price from orders where phone="+mysql.escape(userPhone)+" order by orderID desc";
   query = db.query(sql9, function(err, results) {
     if (err) {
       console.log(err);
     } else {
       orderID=results[0].orderID;
+      ocTotalPrice=results[0].total_price;
       console.log(orderID);
+      let sql10="CALL order_description(?)";
+      query = db.query(sql10, [orderID],function(err, results) {
+        if (err) {
+          console.log(err);
+        } else {
+          orderDesc=results[0];
+          ocItemName=results[1];
+          ocAddon=results[2];
+          console.log(ocAddon);
+        }
+      });
     }
   });
-
   allItems = [];
   totprice = 0;
   totalpricearr = [];
@@ -262,10 +277,51 @@ app.post("/checkout", function(req, res) {
   j = 0;
   input = 0;
   flagpos = 0;
+  orderDesc=[];
+  ocItemName=[];
+  ocAddon=[];
   res.redirect("orderconfirmed");
   res.end();
 
 });
+
+let ohOrderDet=[];
+//Incomplete
+app.post("/getorderhis",function(req,res){
+  let sql9="select orderID,DATE_FORMAT(date, '%Y-%m-%d') as oDate,order_status,total_price from orders where phone="+mysql.escape(user_data.usernumber);
+  query = db.query(sql9, function(err, results) {
+    if (err) {
+      console.log(err);
+    } else {
+      ohOrderDet=results;
+        let sql10="CALL order_description(?)";
+        query = db.query(sql10, [19],function(err, res) {
+          if (err) {
+            console.log(err);
+          } else {
+            orderDesc=res[0];
+            ocItemName=res[1];
+            ocAddon=res[2];
+            console.log(ocAddon);
+          }
+        });
+        //NOTE TO NOWSHIN: INCOMPLETE
+        let sql11="CALL order_description(?)";
+        query = db.query(sql11, [20],function(err, res) {
+          if (err) {
+            console.log(err);
+          } else {
+            orderDesc=res[0];
+            ocItemName=res[1];
+            ocAddon=res[2];
+            console.log(ocAddon);
+          }
+        });
+    }
+  });
+  res.redirect("orderhistory");
+});
+
 
 //ADMIN SECTION
 let dashAdd="dash-active";
@@ -595,7 +651,12 @@ app.get("/:lnk", function(req, res) {
             ocAddress: userAddress,
             dateTime: dateTime,
             order_id: orderID,
-            estTime: estDateTime
+            estTime: estDateTime,
+            orderDesc: orderDesc,
+            ocItemName: ocItemName,
+            ocAddon: ocAddon,
+            ocTotalPrice: ocTotalPrice,
+            ohOrderDet: ohOrderDet
           });
         }
       });
@@ -754,7 +815,12 @@ app.post("/:lnk", function(req, res) {
                   ocAddress: userAddress,
                   dateTime: dateTime,
                   order_id: orderID,
-                  estTime: estDateTime
+                  estTime: estDateTime,
+                  orderDesc: orderDesc,
+                  ocItemName: ocItemName,
+                  ocAddon: ocAddon,
+                  ocTotalPrice: ocTotalPrice,
+                  ohOrderDet: ohOrderDet
                 });
 
               }

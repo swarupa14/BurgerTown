@@ -1300,11 +1300,21 @@ color: blueviolet;
 .time-block{
  padding-left: 55%;
  font-size: 12px;
- color: #888888;
 }
-
+.history-block{
+ padding-left: 3%;
+ font-size: 13px;
+}
+.history-block p
+{
+  margin-bottom: .75rem;
+}
 .memo-label{
   width: 32%;
+  display: inline-block;
+}
+.memo-label2{
+  width: 25%;
   display: inline-block;
 }
 .memo-value{
@@ -1337,4 +1347,7 @@ color: blueviolet;
   font-size: 12px;
   text-align: center;
    color: #888888;
+}
+.individual-history{
+  padding : 0 0 3% 0;
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2020 at 07:38 PM
+-- Generation Time: Sep 17, 2020 at 01:34 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -42,7 +42,7 @@ WHERE Name=item_name;
 select addonID,price into addon_id,addon_price from addon
 where name=addon_name;
 IF addon_name is NULL THEN
-SET tot_price=item_price;
+SET tot_price=item_price*quant;
 ELSE
 SET tot_price=(item_price+addon_price)*quant;
 END IF;
@@ -93,6 +93,61 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_order` (IN `user_name` VARCHAR(100), IN `user_phone` VARCHAR(50), IN `user_address` VARCHAR(100))  MODIFIES SQL DATA
 BEGIN
 insert into orders values(-1,NULL,CURRENT_DATE,user_phone,user_name,user_address,"Pending");
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `order_description` (IN `inputID` INT)  BEGIN
+ DECLARE finished int default 0;
+  DECLARE item_id_var  int;
+DECLARE addon_id_var  int;
+DECLARE item_name_var  varchar(255);
+DECLARE addon_name_var   varchar(255);
+ DECLARE get_itemID CURSOR FOR SELECT itemID from combined_order where orderID=inputID;
+ DECLARE get_addonID CURSOR FOR SELECT addonID from combined_order where orderID=inputID;
+
+ 
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+
+select spiceLvl,quant,price from combined_order where  orderID=inputID;
+
+create temporary table if not exists itemName(
+ iName varchar(255)
+);
+create temporary table if not exists addonName(
+ aName varchar(255)
+);
+
+OPEN get_itemID; 
+OPEN get_addonID; 
+
+get_item: LOOP
+
+ FETCH get_itemID INTO item_id_var;
+ FETCH get_addonID INTO addon_id_var;
+ IF finished = 1 THEN
+ LEAVE  get_item;
+ 
+ END IF;
+
+select Name into item_name_var from menu where ItemID=item_id_var;
+insert into itemName values(item_name_var);
+select name into addon_name_var from addon where addonID=addon_id_var;
+insert into addonName values(addon_name_var);
+
+SET addon_name_var="";
+ 
+ END LOOP  get_item;
+
+
+CLOSE   get_itemID;
+
+CLOSE   get_addonID;
+
+select * from itemName;
+select * from addonName;
+
+drop TEMPORARY TABLE itemName;
+drop TEMPORARY TABLE addonName;
+
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_order` ()  MODIFIES SQL DATA
@@ -237,7 +292,72 @@ INSERT INTO `combined_order` (`orderID`, `itemID`, `addonID`, `spiceLvl`, `quant
 (17, 1, 2, 'Regular', 1, 270),
 (18, 2, 4, 'Regular', 1, 210),
 (18, 7, 5, 'Regular', 1, 300),
-(18, 16, 34, NULL, 1, 160);
+(18, 16, 34, NULL, 1, 160),
+(19, 2, 3, 'Spicy', 1, 230),
+(20, 1, 2, 'Spicy', 1, 270),
+(21, 1, 1, 'Spicy', 1, 340),
+(22, 8, NULL, 'Extra Spicy', 1, 220),
+(23, 2, 3, 'Spicy', 1, 230),
+(24, 3, 5, 'Extra Spicy', 1, 300),
+(25, 5, 1, 'Regular', 1, 310),
+(26, 2, 3, 'Spicy', 1, 230),
+(27, 15, 33, NULL, 2, 180),
+(28, 2, 3, 'Spicy', 1, 230),
+(29, 2, 5, 'Spicy', 1, 200),
+(30, 1, 1, 'Regular', 1, 340),
+(30, 6, NULL, 'Spicy', 2, 220),
+(31, 6, NULL, 'Spicy', 2, 440),
+(32, 2, 2, 'Spicy', 1, 200),
+(33, 3, 5, 'Regular', 1, 300),
+(34, 1, 15, 'Spicy', 1, 300),
+(35, 3, 2, 'Spicy', 1, 300),
+(36, 2, 3, 'Spicy', 1, 230),
+(37, 3, 4, 'Spicy', 1, 310),
+(38, 2, 10, 'Spicy', 1, 250),
+(39, 2, 1, 'Spicy', 1, 270),
+(39, 8, 4, 'Regular', 1, 250),
+(40, 2, 1, 'Regular', 1, 270),
+(40, 3, 5, 'Extra Spicy', 1, 300),
+(41, 2, 1, 'Regular', 1, 270),
+(41, 4, 1, 'Spicy', 1, 340),
+(42, 1, 1, 'Regular', 1, 340),
+(42, 2, 2, 'Spicy', 1, 200),
+(43, 1, 1, 'Regular', 1, 340),
+(43, 2, 2, 'Spicy', 1, 200),
+(44, 1, 1, 'Regular', 1, 340),
+(44, 2, 2, 'Spicy', 1, 200),
+(45, 1, 1, 'Regular', 1, 340),
+(45, 2, 2, 'Spicy', 1, 200),
+(46, 1, 1, 'Regular', 1, 340),
+(46, 3, 2, 'Spicy', 1, 300),
+(47, 1, 1, 'Regular', 1, 340),
+(47, 2, 3, 'Spicy', 1, 230),
+(48, 5, 16, 'Regular', 1, 380),
+(48, 16, 34, NULL, 2, 320),
+(48, 17, NULL, NULL, 1, 150),
+(49, 1, 16, 'Regular', 1, 410),
+(49, 16, 34, NULL, 2, 320),
+(49, 17, NULL, NULL, 1, 150),
+(50, 1, 6, 'Spicy', 1, 360),
+(50, 4, 5, 'Extra Spicy', 1, 270),
+(50, 5, NULL, 'Regular', 1, 220),
+(51, 1, 6, 'Spicy', 1, 360),
+(51, 3, 1, 'Spicy', 1, 370),
+(51, 5, NULL, 'Regular', 1, 220),
+(52, 1, 1, 'Spicy', 1, 340),
+(52, 3, NULL, 'Regular', 1, 280),
+(53, 1, 2, 'Regular', 1, 270),
+(53, 3, NULL, 'Extra Spicy', 1, 280),
+(54, 1, 1, 'Regular', 1, 340),
+(54, 2, NULL, 'Extra Spicy', 1, 180),
+(55, 1, 25, 'Regular', 1, 350),
+(55, 7, 6, 'Spicy', 1, 390),
+(55, 21, NULL, NULL, 2, 320),
+(56, 11, 1, 'Spicy', 1, 420),
+(57, 1, 1, 'Regular', 1, 340),
+(57, 2, 5, 'Spicy', 1, 200),
+(58, 6, 2, 'Spicy', 1, 240),
+(59, 4, NULL, 'Extra Spicy', 1, 250);
 
 -- --------------------------------------------------------
 
@@ -330,7 +450,48 @@ INSERT INTO `orders` (`orderID`, `total_price`, `date`, `phone`, `user_name`, `a
 (15, 180, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
 (16, 340, '2020-08-03', '12345678901', 'Akib asd', 'asds', 'Pending'),
 (17, 270, '2020-08-04', '12345678901', 'Akib asd', 'asds', 'Pending'),
-(18, 670, '2020-08-04', '12345678901', 'Akib asd', 'asds', 'Pending');
+(18, 670, '2020-08-04', '12345678901', 'Akib asd', 'asds', 'Pending'),
+(19, 230, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(20, 270, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(21, 340, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(22, 220, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(23, 230, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(24, 300, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(25, 310, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(26, 230, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(27, 180, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(28, 230, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(29, 200, '2020-09-15', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(30, 560, '2020-09-16', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(31, 440, '2020-09-16', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(32, 200, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(33, 300, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(34, 300, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(35, 300, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(36, 230, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(37, 310, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(38, 250, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(39, 520, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(40, 570, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(41, 610, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(42, 540, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(43, 540, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(44, 540, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(45, 540, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(46, 640, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(47, 570, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(48, 850, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(49, 880, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(50, 850, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(51, 950, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(52, 620, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(53, 550, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(54, 520, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(55, 1060, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(56, 420, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(57, 540, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(58, 240, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending'),
+(59, 250, '2020-09-17', '12345678905', 'Akib Khan', '7/D Shantibagh', 'Pending');
 
 --
 -- Triggers `orders`
@@ -364,6 +525,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `user_name`, `email`, `address`, `phone`, `pass`) VALUES
 (0, 'Akibz Khanz', 'sad@gmail.com', 'asdsd', '02345678901', 'asd'),
+(2, 'Akib Khan', 'akib_13@yahoo.com', '7/D Shantibagh', '12345678905', 'asdf'),
 (1, 'asg sdf', 'asd@gmia.com', 'asfa', '12345678909', 'asd');
 
 --

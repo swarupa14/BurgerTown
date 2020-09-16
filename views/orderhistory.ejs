@@ -1,0 +1,81 @@
+<%- include("partials/header") -%>
+
+<section class="Memo ">
+  <div class="Memo-form">
+    <div class="memo-header">
+      <h5>MY ORDERS</h5>
+    </div>
+    <%  ohOrderDet.forEach(function(val){%>
+    <div class="individual-history">
+      <div class="history-block">
+        <div class="memo-label2">
+          <p>ORDER ID :</p>
+        </div>
+        <div class="memo-value">
+          <p><%=val.orderID%></p>
+        </div>
+      </div>
+
+      <div class="history-block">
+        <div class="memo-label2">
+          <p>DATE :</p>
+        </div>
+        <div class="memo-value">
+          <p><%=val.oDate%></p>
+        </div>
+      </div>
+
+      <div class="history-block">
+        <div class="memo-label2">
+          <p>STATUS :</p>
+        </div>
+        <div class="memo-value">
+          <p><%=val.order_status%></p>
+        </div>
+      </div>
+
+      <div class="history-block">
+        <div class="memo-label2">
+          <p>TOTAL PRICE :</p>
+        </div>
+        <div class="memo-value">
+          <p><%=val.total_price%></p>
+        </div>
+      </div>
+
+
+      <div class="history-block">
+        <div class="memo-label">
+          <p>Order Description :</p>
+        </div>
+        <div class="cart-memo-block">
+          <table>
+            <tr>
+              <th>Quantity</th>
+              <th>Item</th>
+              <th>ADD ONS</th>
+              <th>Flavor/Size</th>
+              <th>Price(BDT)</th>
+            </tr>
+            <%  for(var val1=0;val1<orderDesc.length;val1++){%>
+            <tr>
+              <td><%=orderDesc[val1].quant%></td>
+              <td><%=ocItemName[val1].iName%></td>
+              <td><%=ocAddon[val1].aName%></td>
+              <td><%=orderDesc[val1].spiceLvl%></td>
+              <td><%=orderDesc[val1].price%></td>
+            </tr>
+
+            <% }%>
+
+          </table>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <%  });%>
+
+  </div>
+</section>
+
+<%- include("partials/footer") -%>

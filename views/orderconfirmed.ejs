@@ -64,33 +64,21 @@
           <tr>
             <th>Quantity</th>
             <th>Item</th>
-            <th>ADD ONS</th>
-            <th>Flavor/Size</th>
+            <th>ADD ONS/Size</th>
+            <th>Flavor</th>
             <th>Price(BDT)</th>
           </tr>
+          <%  for(var val=0;val<orderDesc.length;val++){%>
           <tr>
-            <td>1</td>
-            <td>Double Deluxe</td>
-            <td>BBQ Sauce,Beef Bacon,Patty</td>
-            <td>Spicy</td>
-            <td>540</td>
+            <td><%=orderDesc[val].quant%></td>
+            <td><%=ocItemName[val].iName%></td>
+            <td><%=ocAddon[val].aName%></td>
+            <td><%=orderDesc[val].spiceLvl%></td>
+            <td><%=orderDesc[val].price%></td>
           </tr>
 
-          <tr>
-            <td>2</td>
-            <td>Curly Fries</td>
-            <td> - </td>
-            <td>Large</td>
-            <td>360</td>
-          </tr>
+          <% }%>
 
-          <tr>
-            <td>1</td>
-            <td>BBQ Chicken Cheese</td>
-            <td>Beef Bacon</td>
-            <td>Regular</td>
-            <td>340</td>
-          </tr>
         </table>
       </div>
     </div>
@@ -111,7 +99,7 @@
         <p>Total Price :</p>
       </div>
       <div class="memo-value">
-        <p>BDT 1300 </p>
+        <p><%= ocTotalPrice+60%> </p>
       </div>
     </div>
 
