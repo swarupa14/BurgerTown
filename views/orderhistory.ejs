@@ -5,14 +5,14 @@
     <div class="memo-header">
       <h5>MY ORDERS</h5>
     </div>
-    <%  ohOrderDet.forEach(function(val){%>
+    <%  for(var val=0;val<ohOrderDet.length;val++){%>
     <div class="individual-history">
       <div class="history-block">
         <div class="memo-label2">
           <p>ORDER ID :</p>
         </div>
         <div class="memo-value">
-          <p><%=val.orderID%></p>
+          <p><%=ohOrderDet[val].orderID%></p>
         </div>
       </div>
 
@@ -21,7 +21,7 @@
           <p>DATE :</p>
         </div>
         <div class="memo-value">
-          <p><%=val.oDate%></p>
+          <p><%=ohOrderDet[val].oDate%></p>
         </div>
       </div>
 
@@ -30,7 +30,7 @@
           <p>STATUS :</p>
         </div>
         <div class="memo-value">
-          <p><%=val.order_status%></p>
+          <p><%=ohOrderDet[val].order_status%></p>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
           <p>TOTAL PRICE :</p>
         </div>
         <div class="memo-value">
-          <p><%=val.total_price%></p>
+          <p><%=ohOrderDet[val].total_price%></p>
         </div>
       </div>
 
@@ -57,13 +57,13 @@
               <th>Flavor/Size</th>
               <th>Price(BDT)</th>
             </tr>
-            <%  for(var val1=0;val1<orderDesc.length;val1++){%>
+            <%  for(var val1=0;val1<ohOrderDesc[val].length;val1++){%>
             <tr>
-              <td><%=orderDesc[val1].quant%></td>
-              <td><%=ocItemName[val1].iName%></td>
-              <td><%=ocAddon[val1].aName%></td>
-              <td><%=orderDesc[val1].spiceLvl%></td>
-              <td><%=orderDesc[val1].price%></td>
+              <td><%=ohOrderDesc[val][val1].quant%></td>
+              <td><%=ohOcItemName[val][val1].iName%></td>
+              <td><%=ohOcAddon[val][val1].aName%></td>
+              <td><%=ohOrderDesc[val][val1].spiceLvl%></td>
+              <td><%=ohOrderDesc[val][val1].price%></td>
             </tr>
 
             <% }%>
@@ -73,7 +73,7 @@
       </div>
       <hr>
     </div>
-    <%  });%>
+    <%  }%>
 
   </div>
 </section>

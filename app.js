@@ -286,7 +286,9 @@ app.post("/checkout", function(req, res) {
 });
 
 let ohOrderDet=[];
-//Incomplete
+var ohOrderDesc=[];
+var ohOcItemName=[];
+var ohOcAddon=[];
 app.post("/getorderhis",function(req,res){
   let sql9="select orderID,DATE_FORMAT(date, '%Y-%m-%d') as oDate,order_status,total_price from orders where phone="+mysql.escape(user_data.usernumber);
   query = db.query(sql9, function(err, results) {
@@ -294,29 +296,27 @@ app.post("/getorderhis",function(req,res){
       console.log(err);
     } else {
       ohOrderDet=results;
-        let sql10="CALL order_description(?)";
-        query = db.query(sql10, [19],function(err, res) {
+      console.log(results[0].orderID);
+      let sql10;
+        for(var i=0;i<ohOrderDet.length;i++){
+        sql10="CALL order_description(?)";
+        query = db.query(sql10, [results[i].orderID],function(err, res) {
           if (err) {
             console.log(err);
           } else {
             orderDesc=res[0];
             ocItemName=res[1];
             ocAddon=res[2];
-            console.log(ocAddon);
+            //console.log(orderDesc[0].quant);
+            ohOrderDesc.push(orderDesc);
+            ohOcItemName.push(ocItemName);
+            ohOcAddon.push(ocAddon);
+            //console.log(ocAddon);
           }
         });
-        //NOTE TO NOWSHIN: INCOMPLETE
-        let sql11="CALL order_description(?)";
-        query = db.query(sql11, [20],function(err, res) {
-          if (err) {
-            console.log(err);
-          } else {
-            orderDesc=res[0];
-            ocItemName=res[1];
-            ocAddon=res[2];
-            console.log(ocAddon);
-          }
-        });
+      //  console.log(orderDesc);
+
+      }
     }
   });
   res.redirect("orderhistory");
@@ -656,7 +656,10 @@ app.get("/:lnk", function(req, res) {
             ocItemName: ocItemName,
             ocAddon: ocAddon,
             ocTotalPrice: ocTotalPrice,
-            ohOrderDet: ohOrderDet
+            ohOrderDet: ohOrderDet,
+            ohOrderDesc: ohOrderDesc,
+            ohOcItemName: ohOcItemName,
+            ohOcAddon: ohOcAddon
           });
         }
       });
@@ -820,7 +823,10 @@ app.post("/:lnk", function(req, res) {
                   ocItemName: ocItemName,
                   ocAddon: ocAddon,
                   ocTotalPrice: ocTotalPrice,
-                  ohOrderDet: ohOrderDet
+                  ohOrderDet: ohOrderDet,
+                  ohOrderDesc: ohOrderDesc,
+                  ohOcItemName: ohOcItemName,
+                  ohOcAddon: ohOcAddon
                 });
 
               }
