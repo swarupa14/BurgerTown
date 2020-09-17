@@ -1351,3 +1351,9 @@ color: blueviolet;
 .individual-history{
   padding : 0 0 3% 0;
 }
+.dropdown-item input
+{
+  background-color: transparent;
+  color: #fff;
+  border: none;
+}
