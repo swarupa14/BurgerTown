@@ -12,7 +12,6 @@ function closeNav() {
 
 
 // Order Page Activities
-//var allItems=[];
 let name = "";
 let price = 0;
 let spiceLvl = "";
@@ -46,8 +45,7 @@ $(".addtocart").click(function() //Clicking the addtocart button
 
   });
 
-// Modal JS
-
+// Modal JS activities
 $("#BurgerModal .adds button").click(function() { //Clicking the addon buttons in BurgerModal
   if ($(this).hasClass("btn-warning")) {
     $(this).removeClass("btn-warning");
@@ -136,39 +134,31 @@ $("#FriesModal .modal-footer button").click(function() { //Clicking the add butt
 
 
 var index,itemAmount;
+
 //NUMBER INPUT
 $(document).on('click','.quantity',function(){
 
-itemAmount=$(this).val();
-//alert(itemAmount);
+  itemAmount=$(this).val();
   index=($(this ).index(".quantity"));
-//alert("INDEX"+index);
   $.post('/number', { itemAmount:itemAmount,index:index });
   $('#carttt').load('/order .cartitems');
-$('.side-cart').load('/order .side-cart');
+  $('.side-cart').load('/order .side-cart');
 
 
 });
+
 //CROSSING FROM cart
 
 var crossindex;
 $(document).on('click',".cd-item-remove",function(){
   crossindex=($(this ).index(".cd-item-remove"));
-  // alert(crossindex);
   $.post('/cross', {crossindex: crossindex });
   $('#carttt').load('/order .cartitems');
-$('.side-cart').load('/order .side-cart');
-
+  $('.side-cart').load('/order .side-cart');
 });
-// $("#checkout .information .confirm-order-button button").click(function(){ //Clicking the confirm order button in checkout page
-//   $.get("/items",function(data){
-//     $.post('/itemz', { allItems:data.allItems });
-//     console.log(data.allItems);
-//   });
-// });
 
 
-// SignUp FOrm
+// SignUp Form
 
 $('input[type="checkbox"]').click(function() {
 
@@ -187,7 +177,7 @@ $(".Signup-form .sign-up").click(function() {
 
 });
 
-//ADMin
+//Admin behaviour
 $(document).on('click','.add-item',function(){
     $('#admin-section .view-block').load('/additemtomenu');
       $(".dash-items p").removeClass("dash-active");

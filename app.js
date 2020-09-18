@@ -7,6 +7,8 @@ const app = express();
 const mysql = require("mysql");
 const fileUpload = require('express-fileupload');
 const _ = require("lodash");
+
+//Global variables
 let status = ["", "", "", "", "", ""];
 let allItems = [];
 let userDataSignIn = {
@@ -19,10 +21,6 @@ var user_data = {
   useraddress: "",
   useremail: ""
 };
-//var fname,lname;
-//let orderId=0;
-//let order_id=5;
-//var i = 0;
 let c = 0;
 var flag = 0;
 app.use(fileUpload());
@@ -167,14 +165,13 @@ app.post("/number", function(req, res) {
     flag = 3;
   }
   tempprice = parseInt(allItems[j].price);
-  //  console.log("ITEM price" + totprice);
 
 
   res.end();
 
 });
 
-//crossing from cart
+//Crossing from cart
 var cross;
 
 app.post("/cross", function(req, res) {
@@ -186,7 +183,6 @@ app.post("/cross", function(req, res) {
   itemnum.splice(cross, 1);
 
   res.end();
-//  i--;
 
 });
 
@@ -205,9 +201,9 @@ var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(
 var estTime= today.getHours() +1+ ":" + today.getMinutes() + ":" + today.getSeconds();
 var dateTime = time+' '+date;
 var estDateTime=estTime+' '+date;
-//Get data from behav js through clicking confirm order button
+
+//Get order details data from behav js through clicking confirm order button
 app.post("/checkout", function(req, res) {
-  //let userPhone = userDataSignIn.phone;
    userName = req.body.username;
    userPhone = req.body.usernumber;
    userAddress = req.body.useraddress;
@@ -289,6 +285,8 @@ let ohOrderDet=[];
 var ohOrderDesc=[];
 var ohOcItemName=[];
 var ohOcAddon=[];
+
+//Get the order history from database and display on screen
 app.post("/getorderhis",function(req,res){
   let sql9="select orderID,DATE_FORMAT(date, '%Y-%m-%d') as oDate,order_status,total_price from orders where phone="+mysql.escape(user_data.usernumber);
   query = db.query(sql9, function(err, results) {
@@ -307,14 +305,11 @@ app.post("/getorderhis",function(req,res){
             orderDesc=res[0];
             ocItemName=res[1];
             ocAddon=res[2];
-            //console.log(orderDesc[0].quant);
             ohOrderDesc.push(orderDesc);
             ohOcItemName.push(ocItemName);
             ohOcAddon.push(ocAddon);
-            //console.log(ocAddon);
           }
         });
-      //  console.log(orderDesc);
 
       }
     }
@@ -336,6 +331,8 @@ let orderDetailsForUpdate={
   unumber: "",
   uaddress: ""
 };
+
+//Add item to menu
 app.post("/admin",function(req,res){
   adminFlag=1;
   dashAdd="dash-active";
@@ -348,13 +345,11 @@ app.post("/admin",function(req,res){
     let file = req.files.uploaded_image;
 	let img_name=file.data;
   console.log(file);
- //file.mv('public/img/'+file.name, function(err) {
   let sql = "CALL insert_items(?,?,?,?,?);";
   let query = db.query(sql, [item_name,item_section,item_ingredients,item_price,img_name], (err, result) => {
     if (err) throw err;
     console.log(result);
   });
-//});
   res.redirect("/menu");
 });
 
@@ -520,6 +515,7 @@ totprice = 0;
 var v;
 var tot_temp_price;
 var resultprice = [];
+
 //Get any page
 app.get("/:lnk", function(req, res) {
   const dest = _.lowerCase(req.params.lnk);
@@ -563,7 +559,6 @@ app.get("/:lnk", function(req, res) {
         } else {
 
           if (flag != 3 && x != "") {
-            //    console.log(results1[0]);
             if (input != 1) {
 
               resultprice.push(results1[0].price);
@@ -602,7 +597,6 @@ app.get("/:lnk", function(req, res) {
           console.log("TOtal price array" + totalpricearr);
           console.log("Item num" + itemnum);
           for (v = 0; v < allItems.length; v++) {
-            //  console.log("CALCULATING TOTAL PRICE!");
             totprice = parseInt(totprice) + parseInt(totalpricearr[v + 1] * itemnum[v]);
           }
 
@@ -845,7 +839,6 @@ app.post("/:lnk", function(req, res) {
     }
   });
 });
-
 
 
 //Listening to server on port 3000
