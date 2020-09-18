@@ -319,6 +319,9 @@ app.post("/getorderhis",function(req,res){
       }
     }
   });
+  ohOrderDesc=[];
+  ohOcItemName=[];
+  ohOcAddon=[];
   res.redirect("orderhistory");
 });
 
